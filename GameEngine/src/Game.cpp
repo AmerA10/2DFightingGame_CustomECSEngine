@@ -7,12 +7,12 @@ Game::Game()
 	window = NULL;
 	renderer = NULL;
 	std::cout << "Game Constructor called!" << std::endl;
+	isRunning = false;
 }
 
 
 Game::~Game() 
 {
-
 }
 
 void Game::Initialize() 
@@ -25,12 +25,17 @@ void Game::Initialize()
 		return;
 	}
 
+	SDL_DisplayMode displayMode;
+	SDL_GetCurrentDisplayMode(0, &displayMode);
+	windowWidth = displayMode.w;
+	windowHeight= displayMode.h;
+
 	window = SDL_CreateWindow(
 		NULL, 
 		SDL_WINDOWPOS_CENTERED, 
 		SDL_WINDOWPOS_CENTERED, 
-		1920, 
-		1080,
+		windowWidth,
+		windowHeight,
 		SDL_WINDOW_BORDERLESS
 	);
 
@@ -49,24 +54,58 @@ void Game::Initialize()
 		return;
 	}
 
+	SDL_SetWindowFullscreen(window, 0);
+
+	isRunning = true;
+
 }
 
 void Game::ProcessInput() 
 {
+	SDL_Event sdlEvent;
+	
+	//(Maybe) While this will provide every single event available, there are methods of filtering out
+	//The events so that only those events that are input related can be processed
+	while (SDL_PollEvent(&sdlEvent)) 
+	{
+		switch (sdlEvent.type)
+		{
+		case SDL_QUIT:
+			isRunning = false;
+			break;
 
+		case SDL_KEYDOWN:
+			if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) 
+			{
+				isRunning = false;
+			}
+			break;
+		}
+	}
 }
 
 void Game::Run() 
 {
-	while (true) 
+	while (isRunning) 
 	{
-		
+		ProcessInput();
+		Update();
+		Render();
 	}
 }
 
 void Game::Update() 
 {
 
+}
+
+void Game::Render() 
+{
+	SDL_SetRenderDrawColor(renderer, 50, 125, 150, 255);
+	
+	SDL_RenderClear(renderer);
+
+	SDL_RenderPresent(renderer);
 }
 
 void Game::Destroy() 
@@ -77,6 +116,3 @@ void Game::Destroy()
 	SDL_Quit();
 
 }
-
-
-

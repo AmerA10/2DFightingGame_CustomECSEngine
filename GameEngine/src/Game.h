@@ -12,19 +12,22 @@ class Game
 {
 	private:
 		//We can forward declare these things as it is better for performance but thats for later
+		bool isRunning;
 		SDL_Window* window;
 		SDL_Renderer* renderer;
-
 
 	public:
 		Game();
 		~Game();
-		
 		void Initialize();
 		void ProcessInput();
 		void Update();
 		void Run();
 		void Destroy();
+		void Render();
+
+		int windowWidth;
+		int windowHeight;
 
 };
 
