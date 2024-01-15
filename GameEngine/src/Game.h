@@ -6,7 +6,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-
+const int FPS = 60;
+//The time each frame is expected to take
+const int MILLISECS_PER_FRAME = 1000 / FPS;
 
 class Game
 {
@@ -15,6 +17,10 @@ class Game
 		bool isRunning;
 		SDL_Window* window;
 		SDL_Renderer* renderer;
+
+		int millisecondsPreviousFrame = 0;
+
+		double deltaTime = 0;
 
 	public:
 		Game();
@@ -25,9 +31,10 @@ class Game
 		void Run();
 		void Destroy();
 		void Render();
+		void Setup();
 
-		int windowWidth;
-		int windowHeight;
+		int windowWidth = 0;
+		int windowHeight = 0;
 
 };
 
