@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SDL_image.h>
 #include <glm/glm.hpp>
+#include "Logger.h"
 
 glm::vec2 playerPos;
 glm::vec2 playerVelocity;
@@ -10,12 +11,14 @@ Game::Game()
 {
 	window = NULL;
 	renderer = NULL;
-	std::cout << "Game Constructor called!" << std::endl;
 	isRunning = false;
 	millisecondsPreviousFrame = 0;
 	deltaTime = 0.0;
 	windowWidth = 0;
 	windowHeight = 0;
+
+	Logger::Log("game constructor is called");
+
 }
 
 
@@ -30,7 +33,7 @@ void Game::Initialize()
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
-		std::cerr << "Error Init SDL" << std::endl;
+		Logger::Err("Error Init SDL");
 		return;
 	}
 
@@ -50,7 +53,7 @@ void Game::Initialize()
 
 	if (!window) 
 	{
-		std::cerr << "Error Creating SDL Window" << std::endl;
+		Logger::Err("Error Creating SDL Window");
 		return;
 	}
 
@@ -59,7 +62,7 @@ void Game::Initialize()
 
 	if (!renderer) 
 	{
-		std::cerr << "Error Creating SDL Renderer" << std::endl;
+		Logger::Err("Error Creating SDL Renderer");
 		return;
 	}
 
@@ -140,7 +143,6 @@ void Game::Update()
 
 	}
 	deltaTime = (SDL_GetTicks64() - millisecondsPreviousFrame) / 1000.0;
-	std::cout << deltaTime << std::endl;
 
 	millisecondsPreviousFrame = SDL_GetTicks64();
 
