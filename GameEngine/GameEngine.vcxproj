@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ECS\ECS.cpp" />
     <ClCompile Include="src\logger\Logger.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="libs\glm\detail\glm.cpp" />
@@ -144,6 +145,9 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\TransformComponent.h" />
+    <ClInclude Include="src\ECS\ECS.h" />
+    <ClInclude Include="src\Systems\MovementSystem.h" />
     <ClInclude Include="src\logger\Logger.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="libs\glm\common.hpp" />

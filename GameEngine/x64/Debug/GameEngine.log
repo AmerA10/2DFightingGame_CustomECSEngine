@@ -1,5 +1,5 @@
 ﻿  Game.cpp
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(137,17): warning C4244: 'initializing': conversion from 'Uint64' to 'int', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(145,61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(147,44): warning C4244: '=': conversion from 'Uint64' to 'int', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(144,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(147,61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(149,44): warning C4244: '=': conversion from 'Uint64' to 'int', possible loss of data
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

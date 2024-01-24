@@ -2,10 +2,9 @@
 #include <iostream>
 #include <SDL_image.h>
 #include <glm/glm.hpp>
+#include "../ECS/ECS.h"
 #include "../logger/Logger.h"
 
-glm::vec2 playerPos;
-glm::vec2 playerVelocity;
 
 Game::Game() 
 {
@@ -74,8 +73,11 @@ void Game::Initialize()
 
 void Game::Setup()
 {
-	playerPos = glm::vec2(10.0, 20.0);
-	playerVelocity = glm::vec2(10.0, 20.0);
+	//TOOD:
+	//Entity Tank = registry.CreateEntity();
+	//tank.AddComponent<TrasnformComponent>();
+	//tank.AddBoxCollider>();
+	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
 
 }
 
@@ -134,7 +136,7 @@ void Game::Update()
 	{
 
 	}*/
-	int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks64() - millisecondsPreviousFrame);
+	Uint64 timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks64() - millisecondsPreviousFrame);
 
 
 	if (timeToWait > 0 && timeToWait <= MILLISECS_PER_FRAME) {
@@ -142,12 +144,14 @@ void Game::Update()
 		SDL_Delay(timeToWait);
 
 	}
-	deltaTime = (SDL_GetTicks64() - millisecondsPreviousFrame) / 1000.0;
+	deltaTime = (SDL_GetTicks64() - millisecondsPreviousFrame) / (double)1000.0;
 
 	millisecondsPreviousFrame = SDL_GetTicks64();
 
-	
-	playerPos += playerVelocity * deltaTime;
+	//TOOD:
+	// Actually probably we want something else to call update on all systems since the idea of
+	// systems can grow quite big
+	//MovementSystem.Update();
 
 }
 
@@ -156,22 +160,10 @@ void Game::Render()
 	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
 
-	//SDL_Rect player = {windowWidth/2,windowHeight/2,20,20};
-	//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-	//SDL_RenderFillRect(renderer, &player);
 
 	//Draw png texture, SDL does not know how to read png filess only bitmaps
 	//It is why we have the SDL_Image included
 
-	SDL_Surface* surface = IMG_Load("./assets/images/tank-tiger-right.png");
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
-
-	SDL_Rect dstRect = { static_cast<int>(playerPos.x), static_cast<int>(playerPos.y), 64,64 };
-
-	SDL_RenderCopy(renderer, texture, NULL, &dstRect);
-
-	SDL_DestroyTexture(texture);
 
 	SDL_RenderPresent(renderer);
 }
