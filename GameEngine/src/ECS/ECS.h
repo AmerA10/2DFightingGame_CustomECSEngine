@@ -5,6 +5,9 @@
 
 #include <bitset>;
 #include <vector>;
+#include <unordered_map>;
+#include <typeindex>;
+#include <typeinfo>;
 #include "../logger/Logger.h";
 
 const unsigned int MAX_COMPONENTS = 32;
@@ -30,19 +33,13 @@ protected:
 template<typename T>
 class Component: public IComponent {
 public:
-	inline static int count = 0;
-
-	static int GetCount() {
-		static int currentCount = count++;
-		return currentCount;
-	}
 
 	static int GetId() {
 		//Post increment
-		Logger::Log("Calling get id on:");
 		static auto id = nextId++;
 		return id;
 	}
+
 };
 
 class Entity {
@@ -90,10 +87,104 @@ public:
 	template <typename TComponent> void RequireComponent();
 
 };
+class IPool {
+public:
+	//By forcing the destructor to be pure virtual, it means that no type
+	//IPool object can be instantiated
+	//Example: Ipool poolObj; will give a compilerError
+	virtual ~IPool() = 0;
+};
 
+/// <summary>
+/// A pool is just a vector (contiguous data) of objects of Type T
+/// </summary>
+template <typename T>
+class Pool: public IPool {
+	private:
+		std::vector<T> data;
+
+	public:
+		Pool(int size = 100) {
+			data.resize(size);
+		}
+
+		virtual ~Pool() = default;
+
+		bool isEmpty() {
+			return data.empty();
+		}
+		int GetSize() {
+			return data.size();
+		}
+		void Resize(int n) {
+			data.resize(n);
+		}
+		void Clear() {
+			data.clear();
+		}
+
+		void Add(T object) {
+			data.push_back(object);
+		}
+		void Set(int index, T object) {
+			data[index] = object;
+		}
+
+		T& Get(int index) {
+			//To make sure we return the correct datatype
+			return static_cast<T&>(data[index]);
+		}
+
+		T& operator [] (unsigned int index) {
+			return data[index];
+		}
+};
+
+/// <summary>
+/// Registry Class, responsible for creation and destruction of entities,Systems, and components
+/// It is also responsible for housing the components and entities and systems
+/// </summary>
 class Registry {
 
+	private:
+		int numEntities = 0;
+	
+		/// <summary>
+		/// Vector component of pools, each pool contains all the data for a certain component
+		/// Where each vector index is the component type id
+		/// and the pool index is the entity id
+		/// </summary>
+		std::vector<IPool*> componentPools;
+		
+		/// <summary>
+		/// Vector compnent of signatures
+		/// the signatures let us know which components are turned "on" for an entity
+		/// where the vector index = entity id
+		/// </summary>
+		std::vector<Signature> entityComponentSignatures;
+
+		/// <summary>
+		/// a map of keys and values that is not ordered in memory
+		/// </summary>
+		std::unordered_map<std::type_index, System*> Systems;
+
+	public:
+		//TODO:
+		//CreateEntit();
+		//KilEntity();
+		//
+		//AddComponent(Entity entity);
+		//RemoveComponent(Entity entity);
+		//HasComponent(Entity entity);
+		//
+		//AddSystem();
+		//RemoveSystem();
+		//HasSystem();
+		//GetSystem();
+
 };
+
+
 
 template <typename TComponent>
 void System::RequireComponent() {

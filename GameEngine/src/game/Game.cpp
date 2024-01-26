@@ -80,7 +80,6 @@ void Game::Setup()
 	//tank.AddBoxCollider>();
 	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
 
-
 }
 
 void Game::ProcessInput() 
