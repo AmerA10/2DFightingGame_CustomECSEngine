@@ -4,14 +4,16 @@
 #define MOVEMENTSYSTEM_H
 
 #include "../ECS/ECS.h"
+#include "../Components/TransformComponent.h";
 
 class MovementSystem : public System {
 
 public:
 	MovementSystem() {
 		//We need to grab entities that the system is interested in
-		//TODO: Require Component <TransformComponent>
+		RequireComponent<TransformComponent>();
 		//
+
 	}
 
 	void Update() {

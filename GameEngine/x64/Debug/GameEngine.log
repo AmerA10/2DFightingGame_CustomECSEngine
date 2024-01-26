@@ -1,5 +1,18 @@
-﻿  Game.cpp
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(144,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(147,61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(149,44): warning C4244: '=': conversion from 'Uint64' to 'int', possible loss of data
+﻿  ECS.cpp
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Game.cpp
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\MovementSystem.h(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(84,17): warning C4101: 'c1': unreferenced local variable
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(86,17): warning C4101: 'c3': unreferenced local variable
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(85,19): warning C4101: 'c2': unreferenced local variable
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(156,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(159,61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(161,44): warning C4244: '=': conversion from 'Uint64' to 'int', possible loss of data
+  Generating Code...
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

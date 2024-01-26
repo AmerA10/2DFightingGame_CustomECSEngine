@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include "../ECS/ECS.h"
 #include "../logger/Logger.h"
+#include "../Systems/MovementSystem.h";
 
 
 Game::Game() 
@@ -78,6 +79,7 @@ void Game::Setup()
 	//tank.AddComponent<TrasnformComponent>();
 	//tank.AddBoxCollider>();
 	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
+
 
 }
 
