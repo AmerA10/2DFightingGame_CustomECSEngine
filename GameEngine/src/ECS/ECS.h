@@ -8,6 +8,7 @@
 #include <unordered_map>;
 #include <typeindex>;
 #include <typeinfo>;
+#include <set>;
 #include "../logger/Logger.h";
 
 const unsigned int MAX_COMPONENTS = 32;
@@ -148,6 +149,11 @@ class Registry {
 
 	private:
 		int numEntities = 0;
+		
+		//Set of entities that are flagged to be added or removed
+		//In the next registry update
+		std::set<Entity> entitiesToBeAdded;
+		std::set<Entity> entitiesToBeKilled;
 	
 		/// <summary>
 		/// Vector component of pools, each pool contains all the data for a certain component
@@ -170,7 +176,14 @@ class Registry {
 
 	public:
 		//TODO:
-		//CreateEntit();
+
+		void Update();
+
+		Entity CreateEntity();
+
+		//We only add an entity to a given system if the component signature 
+		//of the system and the entity matches 
+		void AddEntityToSystem(Entity entity);
 		//KilEntity();
 		//
 		//AddComponent(Entity entity);
