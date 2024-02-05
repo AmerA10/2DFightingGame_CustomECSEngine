@@ -1,17 +1,19 @@
 ﻿  ECS.cpp
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(9,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(10,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(11,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(12,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(13,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Game.cpp
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(9,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(10,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(11,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(12,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(13,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\MovementSystem.h(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(145,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data

@@ -5,6 +5,7 @@
 
 #include <bitset>;
 #include <vector>;
+#include <memory>
 #include <unordered_map>;
 #include <typeindex>;
 #include <typeinfo>;
@@ -14,7 +15,7 @@
 const unsigned int MAX_COMPONENTS = 32;
 
 /// <summary>
-/// We use a bitset (1s and 0s) to track of which compoentsn an entity has 
+/// We use a bitset (1s and 0s) to track of which components an entity has 
 /// also helps keep track of which entities a system is interested in
 /// </summary>
 typedef std::bitset<MAX_COMPONENTS> Signature;
@@ -23,6 +24,7 @@ typedef std::bitset<MAX_COMPONENTS> Signature;
 struct IComponent {
 protected:
 	static int nextId;
+
 };
 
 //We have a template class, used to assign a unique Id to a component type
@@ -88,6 +90,7 @@ public:
 	template <typename TComponent> void RequireComponent();
 
 };
+
 class IPool {
 public:
 	//By forcing the destructor to be pure virtual, it means that no type
@@ -159,6 +162,7 @@ class Registry {
 		/// Vector component of pools, each pool contains all the data for a certain component
 		/// Where each vector index is the component type id
 		/// and the pool index is the entity id
+		/// This connects the entities to the components
 		/// </summary>
 		std::vector<IPool*> componentPools;
 		
@@ -172,32 +176,147 @@ class Registry {
 		/// <summary>
 		/// a map of keys and values that is not ordered in memory
 		/// </summary>
-		std::unordered_map<std::type_index, System*> Systems;
+		std::unordered_map<std::type_index, System*> systemsMap;
 
 	public:
 		//TODO:
 
 		void Update();
 
+		//Entity Management
+		//
 		Entity CreateEntity();
-
-		//We only add an entity to a given system if the component signature 
-		//of the system and the entity matches 
-		void AddEntityToSystem(Entity entity);
 		//KilEntity();
+
+		//Component Management
 		//
-		//AddComponent(Entity entity);
-		//RemoveComponent(Entity entity);
-		//HasComponent(Entity entity);
+		//We only add an entity to a given system if the component signature 
+		//of the system and the entity matches
+		template<typename TComponent, typename ...TArgs>
+		void AddComponent(Entity entity, TArgs&& ... args);
+		
+		template<typename TComponent>
+		void RemoveComponent(Entity entity);
+		
+		template<typename TComponent>
+		bool HasComponent(Entity entity);
+
+		//System Management
 		//
-		//AddSystem();
-		//RemoveSystem();
-		//HasSystem();
-		//GetSystem();
+		template<typename TSystem, typename ...TArgs>
+		void AddSystem(TArgs&& ...args);
+		template<typename TSystem>
+		void RemoveSystem();
+		template<typename TSystem>
+		bool HasSystem() const;
+		template <typename TSystem>
+		TSystem& GetSystem() const;
+
+		//check the component signature of the entity
+		//add the entity to the systems that are interested in it
+		void AddEntityToSystems(Entity entity);
 
 };
 
+template<typename TSystem, typename ...TArgs>
+void Registry::AddSystem(TArgs&& ...args) {
+	//Creat the system we want to add fowrwarding the parameters 
+	//Same thing as saying Tsystem* newwSystem = new TSystem(std::forward<TArgs>(args)...);
+	TSystem* newSystem(new TSystem(std::forward<TArgs>(args)...));
 
+	//Create a new key pair value and add it to the 
+	//There is also other syntaxes I can use but now this works
+	systemsMap.insert(std::make_pair(std::type_index(typeid(TSystem)), newSystem));
+}
+
+template<typename TSystem>
+void Registry::RemoveSystem() {
+
+	auto system = systemsMap.find(std::type_index(typeid(TSystem)));
+
+	systemsMap.erase(system);
+}
+
+template<typename TSystem>
+bool Registry::HasSystem() const {
+
+	//if the pointer returned is different from the end pointer then we have found the system
+	return systemsMap.find(std::type_index(typeid(TSystem))) != systemsMap.end();
+}
+
+template<typename TSystem>
+TSystem& Registry::GetSystem() const {
+
+	auto system = systemsMap.find(std::type_index(typeid(TSystem)));
+	//the map returns a system* but we want a TSystem then we want to dereference it from a pointer then returned as a reference
+	return *(std::static_pointer_cast<TSystem>(system->second));
+}
+
+//Registry Templates
+template<typename TComponent, typename ...TArgs>
+void Registry::AddComponent(Entity entity, TArgs&& ...args) {
+	const auto componentId = Component<TComponent>::GetId();
+	const auto entityId = entity.GetId();
+
+	//need to resize the component pool if the id of the component is bigger than the size
+	//As the componentIds increase by one for each unique component type
+	if (componentId >= componentPools.size()) {
+		componentPools.resize(componentId + 1, nullptr);
+	}
+
+	//if we do not have a pool for the component type
+	if (!componentPools[componentId]) {
+		Pool<TComponent>* newComponentPool = new Pool<TComponent>();
+
+		//we could potentially do a Move semantics thing here but im not sure
+		componentPools[componentId] = newComponentPool;
+	}
+
+	Pool<TComponent>* componentPool = componentPools[componentId];
+
+	if (entityId >= componentPool->GetSize()) {
+		componentPool->Resize(numEntities);
+	}
+
+	//Forward the multiple param
+	TComponent newComponent(std::forward<TArgs>(args)...);
+
+	componentPool->Set(entityId, newComponent);
+
+	entityComponentSignatures[entityId].set(componentId);
+
+}
+
+template<typename TComponent>
+bool Registry::HasComponent(Entity entity) {
+	const auto componentId = Component<TComponent>::GetId();
+	const auto entityId = entity.GetId();
+
+	//Can do this but
+	//return entityComponentSignatures[entityId][componentId] == 1 ? true : false;
+
+	//This function already returns true or false
+	return entityComponentSignatures[entityId].test(componentId);
+
+}
+
+template<typename TComponent>
+void Registry::RemoveComponent(Entity entity) {
+	const auto componentId = Component<TComponent>::GetId();
+	const auto entityId = entity.GetId();
+
+	//We do need to remove the it from the pool but that will be later
+
+	/// <summary>
+	///for now all we have to do is set the signature bit at that component id
+	//For that vector of signatures at the entity to false
+	//saying that the entity with entity Id does not have the component at the comp
+	//Component id
+	/// </summary>
+	/// <typeparam name="TComponent"></typeparam>
+	/// <param name="entity"></param>
+	entityComponentSignatures[entityId].set(componentId, false);
+}
 
 template <typename TComponent>
 void System::RequireComponent() {

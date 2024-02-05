@@ -52,11 +52,33 @@ Entity Registry::CreateEntity() {
 	return entity;
 }
 
+void Registry::AddEntityToSystems(Entity entity) {
+	const int entityId = entity.GetId();
+	const Signature& entitySignature = entityComponentSignatures[entityId];
+
+	//Try to match the system the components that the system
+	//Requires to the components that the entity has
+	//Loop through all the systems in the sysytems map and match the signature
+	//Between the entity and the system
+
+	for (std::pair<const std::type_index,System*>& system : systemsMap) {
+		const Signature& systemComponentSignature = system.second->GetComponentSignature();
+
+		//we can perform a bitwise comparison to see if those two signatures are the same
+		//if they are the same then they are the same as the systemComponentSignature
+		bool IsInterested = (entitySignature & systemComponentSignature) == systemComponentSignature;
+
+		if (IsInterested) {
+			system.second->AddEntity(entity);
+		}
+
+
+	}
+
+}
+
 
 void Registry::Update() {
 
-
-}
-void Registry::AddEntityToSystem(Entity entity) {
 
 }
