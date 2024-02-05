@@ -45,6 +45,11 @@ Entity Registry::CreateEntity() {
 
 	Entity entity(entityId);
 
+	//Make sure that the entityComponentSignatures vector can house this entity signatures
+	if (entityId >= entityComponentSignatures.size()) {
+		entityComponentSignatures.resize(entityId + 1);
+	}
+
 	entitiesToBeAdded.insert(entity);
 	
 	Logger::Log("Entity Created with id= " + std::to_string(entity.GetId()));
@@ -71,14 +76,17 @@ void Registry::AddEntityToSystems(Entity entity) {
 		if (IsInterested) {
 			system.second->AddEntity(entity);
 		}
-
-
 	}
-
 }
 
 
 void Registry::Update() {
+	for (Entity entity : entitiesToBeAdded) {
+		AddEntityToSystems(entity);
+	}
+	entitiesToBeAdded.clear();
 
+
+	//TODO: remove the entities that need to be removed
 
 }

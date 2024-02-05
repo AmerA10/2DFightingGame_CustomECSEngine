@@ -16,15 +16,24 @@ Game::Game()
 	deltaTime = 0.0;
 	windowWidth = 0;
 	windowHeight = 0;
-
+	registry = new Registry();
 	Logger::Log("game constructor is called");
 
 }
 
-
-Game::~Game() 
+void Game::Setup()
 {
+	//TOOD:
+	//Entity Tank = registry.CreateEntity();
+	//tank.AddComponent<TrasnformComponent>();
+	//tank.AddBoxCollider>();
+	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
+	Entity tank = registry->CreateEntity();
+	Entity truck = registry->CreateEntity();
+
+
 }
+
 
 void Game::Initialize() 
 {
@@ -72,15 +81,7 @@ void Game::Initialize()
 
 }
 
-void Game::Setup()
-{
-	//TOOD:
-	//Entity Tank = registry.CreateEntity();
-	//tank.AddComponent<TrasnformComponent>();
-	//tank.AddBoxCollider>();
-	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
 
-}
 
 void Game::ProcessInput() 
 {
@@ -176,6 +177,11 @@ void Game::Destroy()
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 
+	//avoide memory leak
+	delete registry;
 	Logger::Log("game destructor called");
 
+}
+Game::~Game()
+{
 }

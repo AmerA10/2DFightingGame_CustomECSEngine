@@ -1,10 +1,12 @@
 #pragma once
-#include <SDL.h>
-
 //This is protectin as we want to include this file in other places
 //This will make the preprocessor include the header file only once
 #ifndef GAME_H
 #define GAME_H
+
+#include <SDL.h>
+#include "../ECS/ECS.h"
+
 
 const int FPS = 60;
 //The time each frame is expected to take
@@ -21,6 +23,8 @@ class Game
 		int millisecondsPreviousFrame = 0;
 
 		float deltaTime = 0;
+
+		Registry* registry;
 
 	public:
 		Game();
