@@ -6,6 +6,7 @@
 
 #include <SDL.h>
 #include "../ECS/ECS.h"
+#include <memory>
 
 
 const int FPS = 60;
@@ -17,6 +18,13 @@ class Game
 	private:
 		//We can forward declare these things as it is better for performance but thats for later
 		bool isRunning;
+
+		//Why did we replace the Registry pointer with a smart pointer
+		//but not these two? well SDL is a c library so it expects
+		//raw c pointers, SDL and pointers are opaque in a way
+		//We do not know how to creat them and instead
+		//we use functions to create them, ex: window is created with sdl_creaateWindow function
+		//Mixing the smart and raw pointers will be a bad idea
 		SDL_Window* window;
 		SDL_Renderer* renderer;
 
@@ -24,7 +32,7 @@ class Game
 
 		float deltaTime = 0;
 
-		Registry* registry;
+		std::unique_ptr<Registry> registry;
 
 	public:
 		Game();

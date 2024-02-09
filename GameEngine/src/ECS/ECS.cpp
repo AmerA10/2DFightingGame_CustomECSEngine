@@ -66,7 +66,7 @@ void Registry::AddEntityToSystems(Entity entity) {
 	//Loop through all the systems in the sysytems map and match the signature
 	//Between the entity and the system
 
-	for (std::pair<const std::type_index,System*>& system : systemsMap) {
+	for (std::pair<const std::type_index,std::shared_ptr<System>>& system : systemsMap) {
 		const Signature& systemComponentSignature = system.second->GetComponentSignature();
 
 		//we can perform a bitwise comparison to see if those two signatures are the same

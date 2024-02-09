@@ -16,7 +16,7 @@ Game::Game()
 	deltaTime = 0.0;
 	windowWidth = 0;
 	windowHeight = 0;
-	registry = new Registry();
+	registry = std::make_unique<Registry>();
 	Logger::Log("game constructor is called");
 
 }
@@ -178,7 +178,7 @@ void Game::Destroy()
 	SDL_Quit();
 
 	//avoide memory leak
-	delete registry;
+	//delete registry;
 	Logger::Log("game destructor called");
 
 }

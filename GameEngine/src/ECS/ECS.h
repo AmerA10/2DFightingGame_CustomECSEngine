@@ -164,8 +164,7 @@ class Registry {
 		/// and the pool index is the entity id
 		/// This connects the entities to the components
 		/// </summary>
-		std::vector<IPool*> componentPools;
-		
+		std::vector<std::shared_ptr<IPool>> componentPools;
 		/// <summary>
 		/// Vector compnent of signatures
 		/// the signatures let us know which components are turned "on" for an entity
@@ -176,9 +175,17 @@ class Registry {
 		/// <summary>
 		/// a map of keys and values that is not ordered in memory
 		/// </summary>
-		std::unordered_map<std::type_index, System*> systemsMap;
+		std::unordered_map<std::type_index, std::shared_ptr<System>> systemsMap;
 
 	public:
+
+		Registry() {
+			Logger::Log("Registry Constructor Called");
+		}
+		~Registry()
+		{
+			Logger::Log("Registry Destructor Called");
+		}
 		//TODO:
 
 		void Update();
@@ -218,11 +225,18 @@ class Registry {
 
 };
 
+///////Template Function Implementations
+
+
 template<typename TSystem, typename ...TArgs>
 void Registry::AddSystem(TArgs&& ...args) {
 	//Creat the system we want to add fowrwarding the parameters 
 	//Same thing as saying Tsystem* newwSystem = new TSystem(std::forward<TArgs>(args)...);
-	TSystem* newSystem(new TSystem(std::forward<TArgs>(args)...));
+	
+	//We are creating a new system and inserting it into a new map 
+	//so this is probably not a unique pointer as multiple different
+	//places will probably need it
+	std::shared_ptr<TSystem> newSystem = std::make_shared<TSystem>(std::forward<TArgs>(args)...);
 
 	//Create a new key pair value and add it to the 
 	//There is also other syntaxes I can use but now this works
@@ -266,13 +280,13 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
 
 	//if we do not have a pool for the component type
 	if (!componentPools[componentId]) {
-		Pool<TComponent>* newComponentPool = new Pool<TComponent>();
+		std::shared_ptr<Pool<TComponent>> newComponentPool = std::make_shared<Pool<TComponent>>(Pool<TComponent>());
 
 		//we could potentially do a Move semantics thing here but im not sure
 		componentPools[componentId] = newComponentPool;
 	}
 
-	Pool<TComponent>* componentPool = componentPools[componentId];
+	std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
 
 	if (entityId >= componentPool->GetSize()) {
 		componentPool->Resize(numEntities);
