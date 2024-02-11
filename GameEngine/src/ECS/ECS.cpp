@@ -44,7 +44,7 @@ Entity Registry::CreateEntity() {
 	entityId = numEntities++;
 
 	Entity entity(entityId);
-
+	entity.registry = this;
 	//Make sure that the entityComponentSignatures vector can house this entity signatures
 	if (entityId >= entityComponentSignatures.size()) {
 		entityComponentSignatures.resize(entityId + 1);

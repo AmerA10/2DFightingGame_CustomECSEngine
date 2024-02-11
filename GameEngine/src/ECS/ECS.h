@@ -3,14 +3,14 @@
 
 #define ECS_H
 
-#include <bitset>;
-#include <vector>;
+#include <bitset>
+#include <vector>
 #include <memory>
-#include <unordered_map>;
-#include <typeindex>;
-#include <typeinfo>;
-#include <set>;
-#include "../logger/Logger.h";
+#include <unordered_map>
+#include <typeindex>
+#include <typeinfo>
+#include <set>
+#include "../logger/Logger.h"
 
 const unsigned int MAX_COMPONENTS = 32;
 
@@ -36,7 +36,6 @@ protected:
 template<typename T>
 class Component: public IComponent {
 public:
-
 	static int GetId() {
 		//Post increment
 		static auto id = nextId++;
@@ -44,6 +43,9 @@ public:
 	}
 
 };
+
+//Forward declare the registry class
+class Registry;
 
 class Entity {
 private:
@@ -65,6 +67,17 @@ public:
 	bool operator > (const Entity& other) const {return id > other.id;}
 	bool operator < (const Entity& other) const {return id < other.id; }
 
+	//Hold a pointer to the entity's owner registry
+	//can't make this a weak pointer I don't think
+	//This cretes a cyclical dependency so Idk why the prof decided to do this tbh
+	//There is probabl a better way of handing this, an interface or something
+	//This pointer is also not deleted when this entity is deleted
+	Registry* registry;
+
+	template<typename TComponent, typename ...TArgs> void AddComponent(TArgs&& ...args);
+	template<typename TComponent> void RemoveComponent();
+	template<typename TComponent> bool HasComponent() const;
+	template<typename TComponent> TComponent& GetComponent() const;
 
 };
 
@@ -96,7 +109,8 @@ public:
 	//By forcing the destructor to be pure virtual, it means that no type
 	//IPool object can be instantiated
 	//Example: Ipool poolObj; will give a compilerError
-	virtual ~IPool() = 0;
+	//This is not pure virtual but it can be
+	virtual ~IPool() {};
 };
 
 /// <summary>
@@ -112,13 +126,13 @@ class Pool: public IPool {
 			data.resize(size);
 		}
 
-		virtual ~Pool() = default;
+		 ~Pool() = default;
 
 		bool isEmpty() {
 			return data.empty();
 		}
 		int GetSize() {
-			return data.size();
+			return static_cast<int>(data.size());
 		}
 		void Resize(int n) {
 			data.resize(n);
@@ -206,7 +220,10 @@ class Registry {
 		void RemoveComponent(Entity entity);
 		
 		template<typename TComponent>
-		bool HasComponent(Entity entity);
+		bool HasComponent(Entity entity) const;
+
+		template<typename TComponent>
+		TComponent& GetComponent(Entity entity) const;
 
 		//System Management
 		//
@@ -225,7 +242,7 @@ class Registry {
 
 };
 
-///////Template Function Implementations
+///////Template Function Implementations REGISTRY
 
 
 template<typename TSystem, typename ...TArgs>
@@ -299,10 +316,12 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
 
 	entityComponentSignatures[entityId].set(componentId);
 
+	Logger::Log("Adding Component - Component ID = " + std::to_string(componentId) + " added to the Entity with ID: " + std::to_string(entityId));
+
 }
 
 template<typename TComponent>
-bool Registry::HasComponent(Entity entity) {
+bool Registry::HasComponent(Entity entity) const {
 	const auto componentId = Component<TComponent>::GetId();
 	const auto entityId = entity.GetId();
 
@@ -331,6 +350,43 @@ void Registry::RemoveComponent(Entity entity) {
 	/// <param name="entity"></param>
 	entityComponentSignatures[entityId].set(componentId, false);
 }
+
+template<typename TComponent>
+TComponent& Registry::GetComponent(Entity entity) const {
+	const auto componentId = Component<TComponent>::GetId();
+	const auto entityId = entity.GetId();
+
+	Pool<TComponent>* componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
+	
+	return componentPool->Get(entityId);
+
+}
+
+
+//Template Function Implementations ENTITY
+
+
+template<typename TComponent, typename ...TArgs>
+void Entity::AddComponent(TArgs&& ...args) {
+	registry->AddComponent<TComponent>(*this, std::forward<TArgs&&>(args)...);
+}
+
+template<typename TComponent>
+void Entity::RemoveComponent() {
+	registry->RemoveComponent<TComponent>(*this);
+}
+
+template<typename TComponent>
+bool Entity::HasComponent() const {
+	return registry->HasComponent<TComponent>(*this);
+}
+
+template<typename TComponent>
+TComponent& Entity::GetComponent() const {
+	return registry->GetComponent<TComponent>(*this);
+}
+
+//Template Function Implementations SYSTEM
 
 template <typename TComponent>
 void System::RequireComponent() {

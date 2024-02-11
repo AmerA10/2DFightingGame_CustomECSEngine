@@ -4,7 +4,7 @@
 #define MOVEMENTSYSTEM_H
 
 #include "../ECS/ECS.h"
-#include "../Components/TransformComponent.h";
+#include "../Components/TransformComponent.h"
 
 class MovementSystem : public System {
 

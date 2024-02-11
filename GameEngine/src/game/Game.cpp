@@ -4,7 +4,9 @@
 #include <glm/glm.hpp>
 #include "../ECS/ECS.h"
 #include "../logger/Logger.h"
-#include "../Systems/MovementSystem.h";
+#include "../Components/TransformComponent.h"
+#include "../Components/RigidBodyComponent.h"
+#include "../Systems/MovementSystem.h"
 
 
 Game::Game() 
@@ -29,8 +31,15 @@ void Game::Setup()
 	//tank.AddBoxCollider>();
 	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
 	Entity tank = registry->CreateEntity();
-	Entity truck = registry->CreateEntity();
+	tank.AddComponent<TransformComponent>(glm::vec2(10.0, 30.0), glm::vec2(1.0, 1.0), 0.0);
+	tank.AddComponent<RigidBodyComponent>(glm::vec2(50.0, 0.0));
+	tank.HasComponent<TransformComponent>();
+	
+	Entity AnotherTank = registry->CreateEntity();
 
+	//This shows that even constructor with default variables
+	AnotherTank.AddComponent<TransformComponent>();
+	AnotherTank.AddComponent<RigidBodyComponent>();
 
 }
 
@@ -125,11 +134,8 @@ void Game::Update()
 	//Each frame should take
 	//Another thing is that this isnt the best solution, it is quite simple and there are better approaches 
 	//That exist that are more robust
-	
 	//calculate time elapsed since last frame in terms of seconds
-
 	//This is how many milliseconds since initialization of SDL
-
 
 	//check if the amount of time passed since the last frame
 	//is greater than the current time + the time each frame should take
@@ -146,9 +152,9 @@ void Game::Update()
 		SDL_Delay(timeToWait);
 
 	}
-	deltaTime = (SDL_GetTicks64() - millisecondsPreviousFrame) / (double)1000.0;
+	deltaTime = (float)(SDL_GetTicks64() - millisecondsPreviousFrame) / 1000.0f;
 
-	millisecondsPreviousFrame = SDL_GetTicks64();
+	millisecondsPreviousFrame = (int)SDL_GetTicks64();
 
 	//TOOD:
 	// Actually probably we want something else to call update on all systems since the idea of
