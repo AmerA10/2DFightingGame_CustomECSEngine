@@ -165,7 +165,7 @@ void Game::Update()
 	// Actually probably we want something else to call update on all systems since the idea of
 	// systems can grow quite big
 	//I do not like this I want to call registry->Update() instead
-	registry->GetSystem<MovementSystem>().Update();
+	registry->GetSystem<MovementSystem>().Update(deltaTime);
 
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();

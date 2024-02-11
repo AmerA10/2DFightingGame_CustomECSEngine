@@ -18,7 +18,7 @@ public:
 
 	}
 
-	void Update() {
+	void Update(float deltaTime) {
 		//TOOD:
 		//Loop all entities that the system is interested in
 		//Here auto automatically gets the type of entity
@@ -29,8 +29,8 @@ public:
 			const RigidBodyComponent& rigidBody = entity.GetComponent <RigidBodyComponent>();
 			
 			//Need delta time
-			transform.position.x += rigidBody.velocity.x;
-			transform.position.y += rigidBody.velocity.y;
+			transform.position.x += rigidBody.velocity.x * deltaTime;
+			transform.position.y += rigidBody.velocity.y * deltaTime;
 
 			Logger::Log("Entity id = " + std::to_string(entity.GetId()) + " position is now (" + std::to_string(transform.position.x) + " ," + std::to_string(transform.position.y) + ")");
 		
