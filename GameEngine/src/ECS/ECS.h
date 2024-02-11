@@ -356,7 +356,7 @@ TComponent& Registry::GetComponent(Entity entity) const {
 	const auto componentId = Component<TComponent>::GetId();
 	const auto entityId = entity.GetId();
 
-	Pool<TComponent>* componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
+	std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
 	
 	return componentPool->Get(entityId);
 
@@ -392,6 +392,8 @@ template <typename TComponent>
 void System::RequireComponent() {
 	const auto componentId = Component<TComponent>::GetId();
 	componentSignature.set(componentId);
+	Logger::Log("System Needs component signature of :" + componentSignature.to_string());
+
 }
 
 #endif

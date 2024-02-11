@@ -30,6 +30,11 @@ void Game::Setup()
 	//tank.AddComponent<TrasnformComponent>();
 	//tank.AddBoxCollider>();
 	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
+
+	//Add systems that need to be processed in our game
+	registry->AddSystem<MovementSystem>();
+
+
 	Entity tank = registry->CreateEntity();
 	tank.AddComponent<TransformComponent>(glm::vec2(10.0, 30.0), glm::vec2(1.0, 1.0), 0.0);
 	tank.AddComponent<RigidBodyComponent>(glm::vec2(50.0, 0.0));
@@ -159,7 +164,11 @@ void Game::Update()
 	//TOOD:
 	// Actually probably we want something else to call update on all systems since the idea of
 	// systems can grow quite big
-	//MovementSystem.Update();
+	//I do not like this I want to call registry->Update() instead
+	registry->GetSystem<MovementSystem>().Update();
+
+	//Update the registry to process the entities that are waiting to be created/deleted
+	registry->Update();
 
 }
 
