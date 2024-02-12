@@ -1,3 +1,5 @@
 ﻿  Game.cpp
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(157,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(35,1): warning C4305: 'argument': truncation from 'int' to 'Uint8'
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(35,52): warning C4309: 'argument': truncation of constant value
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(164,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

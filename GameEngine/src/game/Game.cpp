@@ -6,7 +6,9 @@
 #include "../logger/Logger.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/RigidBodyComponent.h"
+#include "../Components/SpriteComponent.h"
 #include "../Systems/MovementSystem.h"
+#include "../Systems/RenderSystem.h"
 
 
 Game::Game() 
@@ -33,11 +35,13 @@ void Game::Setup()
 
 	//Add systems that need to be processed in our game
 	registry->AddSystem<MovementSystem>();
+	registry->AddSystem<RenderSystem>();
 
 
 	Entity tank = registry->CreateEntity();
 	tank.AddComponent<TransformComponent>(glm::vec2(10.0, 30.0), glm::vec2(1.0, 1.0), 0.0);
-	tank.AddComponent<RigidBodyComponent>(glm::vec2(50.0, 0.0));
+	tank.AddComponent<RigidBodyComponent>(glm::vec2(50.0, 300.0));
+	tank.AddComponent<SpriteComponent>(50, 50);
 	tank.HasComponent<TransformComponent>();
 	
 	Entity AnotherTank = registry->CreateEntity();
@@ -45,6 +49,7 @@ void Game::Setup()
 	//This shows that even constructor with default variables
 	AnotherTank.AddComponent<TransformComponent>();
 	AnotherTank.AddComponent<RigidBodyComponent>();
+	AnotherTank.AddComponent<SpriteComponent>(25, 300);
 
 }
 
@@ -117,7 +122,9 @@ void Game::ProcessInput()
 				isRunning = false;
 			}
 			break;
+
 		}
+		
 	}
 }
 
@@ -165,6 +172,8 @@ void Game::Update()
 	// Actually probably we want something else to call update on all systems since the idea of
 	// systems can grow quite big
 	//I do not like this I want to call registry->Update() instead
+	//Having a get in the update is maybe not good just cache it if its gonna be updated 
+	//every damn frame
 	registry->GetSystem<MovementSystem>().Update(deltaTime);
 
 	//Update the registry to process the entities that are waiting to be created/deleted
@@ -181,7 +190,7 @@ void Game::Render()
 	//Draw png texture, SDL does not know how to read png filess only bitmaps
 	//It is why we have the SDL_Image included
 
-
+	registry->GetSystem<RenderSystem>().Update(renderer);
 	SDL_RenderPresent(renderer);
 }
 
