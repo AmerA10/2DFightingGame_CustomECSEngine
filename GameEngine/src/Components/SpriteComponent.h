@@ -10,10 +10,12 @@ struct SpriteComponent {
 
 	int width;
 	int height;
+	std::string assetId;
 
-	SpriteComponent(int width = 20, int height = 20) {
+	SpriteComponent(const std::string& assetId = "", int width = 20, int height = 20) {
 		this->width = width;
 		this->height = height;
+		this->assetId = assetId;
 	}
 
 };

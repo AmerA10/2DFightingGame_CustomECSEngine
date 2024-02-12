@@ -7,6 +7,7 @@
 #include <SDL.h>
 #include "../ECS/ECS.h"
 #include <memory>
+#include "../AssetStore/AssetStore.h"
 
 
 const int FPS = 60;
@@ -33,6 +34,7 @@ class Game
 		float deltaTime = 0;
 
 		std::unique_ptr<Registry> registry;
+		std::unique_ptr<AssetStore> assetStore;
 
 	public:
 		Game();

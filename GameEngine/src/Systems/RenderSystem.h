@@ -29,11 +29,9 @@ public:
 			const TransformComponent& transform = entity.GetComponent<TransformComponent>();
 			SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
-			SDL_Rect objRect;
-			objRect = {static_cast<int>(transform.position.x), static_cast<int>(transform.position.y), sprite.width, sprite.height };
-
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 2555);
-			SDL_RenderFillRect(renderer, &objRect);
+			//TODO: Draw the png texture based on sprite ID
+			
+			
 		}
 
 	}

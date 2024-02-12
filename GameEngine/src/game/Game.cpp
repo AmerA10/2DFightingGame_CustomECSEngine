@@ -21,6 +21,7 @@ Game::Game()
 	windowWidth = 0;
 	windowHeight = 0;
 	registry = std::make_unique<Registry>();
+	assetStore = std::make_unique<AssetStore>();
 	Logger::Log("game constructor is called");
 
 }
@@ -33,6 +34,9 @@ void Game::Setup()
 	//tank.AddBoxCollider>();
 	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
 
+	assetStore->AddTexture(renderer,"tank-image", "./assets/images/tank-panther-right.png");
+	assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-down.png");
+
 	//Add systems that need to be processed in our game
 	registry->AddSystem<MovementSystem>();
 	registry->AddSystem<RenderSystem>();
@@ -41,7 +45,7 @@ void Game::Setup()
 	Entity tank = registry->CreateEntity();
 	tank.AddComponent<TransformComponent>(glm::vec2(10.0, 30.0), glm::vec2(1.0, 1.0), 0.0);
 	tank.AddComponent<RigidBodyComponent>(glm::vec2(50.0, 300.0));
-	tank.AddComponent<SpriteComponent>(50, 50);
+	tank.AddComponent<SpriteComponent>("tank-image", 50, 50);
 	tank.HasComponent<TransformComponent>();
 	
 	Entity AnotherTank = registry->CreateEntity();
@@ -49,7 +53,7 @@ void Game::Setup()
 	//This shows that even constructor with default variables
 	AnotherTank.AddComponent<TransformComponent>();
 	AnotherTank.AddComponent<RigidBodyComponent>();
-	AnotherTank.AddComponent<SpriteComponent>(25, 300);
+	AnotherTank.AddComponent<SpriteComponent>("truck-image", 50, 50);
 
 }
 
