@@ -46,6 +46,8 @@ class Game
 		void Destroy();
 		void Render();
 		void Setup();
+		void LoadLevel(int level);
+		void LoadTileMap(const std::string& mapPath, const std::string& texturePath);
 
 		int windowWidth = 0;
 		int windowHeight = 0;

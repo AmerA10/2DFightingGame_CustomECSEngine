@@ -4,7 +4,6 @@
 
 AssetStore::AssetStore() {
 	Logger::Log("Asset Store Constructor");
-
 }
 
 AssetStore::~AssetStore() {
@@ -24,6 +23,11 @@ void AssetStore::AddTexture(SDL_Renderer* renderer, const std::string& assetId, 
 	//Add texture to the map
 	textures.emplace(assetId, texture);
 }
+
+//Probably would want to add this at somepoint
+//void AssetStore::AddTileMap(const std::string& mapPath, const std::string& texturePath, int tileWidth, int tileHeight) {
+//
+//}
 
 void AssetStore::ClearTextures() {
 	//cannot do just this we got SDL pointers

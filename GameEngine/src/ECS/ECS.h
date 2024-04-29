@@ -68,7 +68,7 @@ public:
 	bool operator < (const Entity& other) const {return id < other.id; }
 
 	//Hold a pointer to the entity's owner registry
-	//can't make this a weak pointer I don't think
+	//can't make this a weak pointer I don't think, actually it probably should be a weak pointer
 	//This cretes a cyclical dependency so Idk why the prof decided to do this tbh
 	//There is probabl a better way of handing this, an interface or something
 	//This pointer is also not deleted when this entity is deleted
@@ -229,10 +229,13 @@ class Registry {
 		//
 		template<typename TSystem, typename ...TArgs>
 		void AddSystem(TArgs&& ...args);
+
 		template<typename TSystem>
 		void RemoveSystem();
+
 		template<typename TSystem>
 		bool HasSystem() const;
+		
 		template <typename TSystem>
 		TSystem& GetSystem() const;
 
@@ -247,7 +250,7 @@ class Registry {
 
 template<typename TSystem, typename ...TArgs>
 void Registry::AddSystem(TArgs&& ...args) {
-	//Creat the system we want to add fowrwarding the parameters 
+	//Create the system we want to add fowrwarding the parameters 
 	//Same thing as saying Tsystem* newwSystem = new TSystem(std::forward<TArgs>(args)...);
 	
 	//We are creating a new system and inserting it into a new map 

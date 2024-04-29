@@ -1,23 +1,23 @@
 ﻿  Game.cpp
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(37,18): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(50,18): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
           with
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(37,18): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(50,18): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(38,19): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(51,19): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
           with
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(38,19): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\RenderSystem.h(51,19): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(168,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(230,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

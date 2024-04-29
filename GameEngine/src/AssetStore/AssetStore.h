@@ -5,6 +5,8 @@
 #include <string>
 #include <SDL.h>
 
+//This class is responsible for storing and managing our assets
+
 class AssetStore {
 public:
 	
@@ -19,8 +21,7 @@ public:
 private:
 	std::map<std::string, SDL_Texture*> textures;
 	
-
-
+	
 
 };
 

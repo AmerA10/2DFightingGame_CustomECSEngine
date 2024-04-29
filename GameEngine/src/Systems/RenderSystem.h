@@ -8,6 +8,8 @@
 #include "../Components/TransformComponent.h"
 #include "../Components/SpriteComponent.h"
 #include <SDL.h>
+#include <algorithm>
+#include <vector> 
 
 class RenderSystem : public System {
 
@@ -25,7 +27,18 @@ public:
 		//Loop all entities that the system is interested in
 		//Here auto automatically gets the type of entity
 		//Update entity position based on velocity in every frame of the game loop
-		for (auto& entity : GetSystemEntities()) {
+		
+		//TODO: Sort all the entities of our system by z-index. This is a horrible way of doing this every single frame
+		// but we do this here for now
+
+		std::vector<Entity> sortedEntities = GetSystemEntities();
+
+		std::sort(sortedEntities.begin(), sortedEntities.end(), [](const Entity& a, const Entity& b) {
+				return a.GetComponent<SpriteComponent>().zIndex < b.GetComponent<SpriteComponent>().zIndex;
+			
+		});
+		
+		for (auto& entity : sortedEntities) {
 			const TransformComponent& transform = entity.GetComponent<TransformComponent>();
 			SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
