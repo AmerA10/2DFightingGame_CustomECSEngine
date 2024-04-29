@@ -7,8 +7,10 @@
 #include "../Components/TransformComponent.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
+#include "../Components/AnimationComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
+#include "../Systems/AnimationSystem.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -76,11 +78,13 @@ void Game::LoadLevel(int level)
 
 	assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
 	assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-down.png");
+	assetStore->AddTexture(renderer, "chopper-image", "./assets/images/chopper.png");
+	assetStore->AddTexture(renderer, "radar-image", "./assets/images/radar.png");
 
 	//Add systems that need to be processed in our game
 	registry->AddSystem<MovementSystem>();
 	registry->AddSystem<RenderSystem>();
-
+	registry->AddSystem<AnimationSystem>();
 
 	Entity tank = registry->CreateEntity();
 	tank.AddComponent<TransformComponent>(glm::vec2(10.0, 20.0), glm::vec2(2.0, 2.0), 0.0f);
@@ -104,6 +108,18 @@ void Game::LoadLevel(int level)
 	AnotherTank.AddComponent<TransformComponent>();
 	AnotherTank.AddComponent<RigidBodyComponent>(glm::vec2(51,0.0));
 	AnotherTank.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
+
+	Entity chopper = registry->CreateEntity();
+	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 10.0), glm::vec2(2.0, 2.0), 0.0);
+	chopper.AddComponent<RigidBodyComponent>(glm::vec2(0.0, 0.0));
+	chopper.AddComponent<SpriteComponent>("chopper-image", 32, 32, 1);
+	chopper.AddComponent<AnimationComponent>(2,20,true);
+
+	Entity radar = registry->CreateEntity();
+	radar.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
+	radar.AddComponent<RigidBodyComponent>();
+	radar.AddComponent<SpriteComponent>("radar-image", 64, 64, 3);
+	radar.AddComponent<AnimationComponent>(8, 3, true);
 }
 
 void Game::Setup()
@@ -241,6 +257,7 @@ void Game::Update()
 	//Having a get in the update is maybe not good just cache it if its gonna be updated 
 	//every damn frame
 	registry->GetSystem<MovementSystem>().Update(deltaTime);
+	registry->GetSystem<AnimationSystem>().Update();
 
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
