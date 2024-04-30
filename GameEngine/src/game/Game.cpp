@@ -8,9 +8,12 @@
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
 #include "../Components/AnimationComponent.h"
+#include "../Components/BoxColliderComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
+#include "../Systems/CollisionSystem.h"
+#include "../Systems/RenderDebugSystem.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -22,6 +25,7 @@ Game::Game()
 	window = NULL;
 	renderer = NULL;
 	isRunning = false;
+	drawDebug = true;
 	millisecondsPreviousFrame = 0;
 	deltaTime = 0.0;
 	windowWidth = 0;
@@ -85,14 +89,17 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<MovementSystem>();
 	registry->AddSystem<RenderSystem>();
 	registry->AddSystem<AnimationSystem>();
+	registry->AddSystem<CollisionSystem>();
+	registry->AddSystem<RenderDebugSystem>();
+
 
 	Entity tank = registry->CreateEntity();
-	tank.AddComponent<TransformComponent>(glm::vec2(10.0, 20.0), glm::vec2(2.0, 2.0), 0.0f);
-	tank.AddComponent<RigidBodyComponent>(glm::vec2(50.0, 0.0));
+	tank.AddComponent<TransformComponent>(glm::vec2(20.0, 20.0), glm::vec2(2.0, 2.0), 0.0f);
+	tank.AddComponent<RigidBodyComponent>(glm::vec2(0.0, 0.0));
 	tank.AddComponent<SpriteComponent>("tank-image", 32, 32,2);
-	tank.HasComponent<TransformComponent>();
+	tank.AddComponent<BoxColliderComponent>(32,32, tank.GetComponent<TransformComponent>().scale);
 
-	Entity AnotherTank = registry->CreateEntity();
+	Entity truck = registry->CreateEntity();
 
 	/*
 		TODO: 
@@ -105,15 +112,17 @@ void Game::LoadLevel(int level)
 
 
 	//This shows that even constructor with default variables
-	AnotherTank.AddComponent<TransformComponent>();
-	AnotherTank.AddComponent<RigidBodyComponent>(glm::vec2(51,0.0));
-	AnotherTank.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
+	truck.AddComponent<TransformComponent>(glm::vec2(500.0,500.0));
+	truck.AddComponent<RigidBodyComponent>(glm::vec2(-40.0,-40.0));
+	truck.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
+	truck.AddComponent<BoxColliderComponent>(64,64,truck.GetComponent<TransformComponent>().scale);
 
 	Entity chopper = registry->CreateEntity();
-	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 10.0), glm::vec2(2.0, 2.0), 0.0);
-	chopper.AddComponent<RigidBodyComponent>(glm::vec2(0.0, 0.0));
+	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
+	chopper.AddComponent<RigidBodyComponent>(glm::vec2(0.0, -50.0));
 	chopper.AddComponent<SpriteComponent>("chopper-image", 32, 32, 1);
 	chopper.AddComponent<AnimationComponent>(2,20,true);
+	chopper.AddComponent<BoxColliderComponent>(32, 32, chopper.GetComponent<TransformComponent>().scale);
 
 	Entity radar = registry->CreateEntity();
 	radar.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
@@ -203,6 +212,10 @@ void Game::ProcessInput()
 			{
 				isRunning = false;
 			}
+			if (sdlEvent.key.keysym.sym == SDLK_k) 
+			{
+				drawDebug = !drawDebug;
+			}
 			break;
 
 		}
@@ -256,9 +269,10 @@ void Game::Update()
 	//I do not like this I want to call registry->Update() instead
 	//Having a get in the update is maybe not good just cache it if its gonna be updated 
 	//every damn frame
+	
 	registry->GetSystem<MovementSystem>().Update(deltaTime);
 	registry->GetSystem<AnimationSystem>().Update();
-
+	registry->GetSystem<CollisionSystem>().Update();
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
 
@@ -272,8 +286,12 @@ void Game::Render()
 
 	//Draw png texture, SDL does not know how to read png filess only bitmaps
 	//It is why we have the SDL_Image included
-
 	registry->GetSystem<RenderSystem>().Update(renderer, assetStore);
+
+	if (drawDebug) {
+		registry->GetSystem<RenderDebugSystem>().Update(renderer);
+	}
+
 	SDL_RenderPresent(renderer);
 }
 

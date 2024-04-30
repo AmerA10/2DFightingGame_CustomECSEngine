@@ -20,6 +20,8 @@ class Game
 		//We can forward declare these things as it is better for performance but thats for later
 		bool isRunning;
 
+		bool drawDebug;
+
 		//Why did we replace the Registry pointer with a smart pointer
 		//but not these two? well SDL is a c library so it expects
 		//raw c pointers, SDL and pointers are opaque in a way
