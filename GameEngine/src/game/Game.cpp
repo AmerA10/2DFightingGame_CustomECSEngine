@@ -14,6 +14,7 @@
 #include "../Systems/AnimationSystem.h"
 #include "../Systems/CollisionSystem.h"
 #include "../Systems/RenderDebugSystem.h"
+#include "../Systems/DamageSystem.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -32,6 +33,7 @@ Game::Game()
 	windowHeight = 0;
 	registry = std::make_unique<Registry>();
 	assetStore = std::make_unique<AssetStore>();
+	eventBus = std::make_unique<EventBus>();
 	Logger::Log("game constructor is called");
 
 }
@@ -72,8 +74,6 @@ void Game::LoadTileMap(const std::string& mapPath, const std::string& texturePat
 	mapFile.close();
 
 
-	
-
 }
 
 void Game::LoadLevel(int level) 
@@ -91,6 +91,7 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<AnimationSystem>();
 	registry->AddSystem<CollisionSystem>();
 	registry->AddSystem<RenderDebugSystem>();
+	registry->AddSystem<DamageSystem>(eventBus);
 
 
 	Entity tank = registry->CreateEntity();
@@ -136,7 +137,7 @@ void Game::LoadLevel(int level)
 
 	Entity newRader = registry->CreateEntity();
 	newRader.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
-	//The issue is that the component pools of the registry are not cleared of the components
+
 
 }
 
@@ -282,7 +283,7 @@ void Game::Update()
 	
 	registry->GetSystem<MovementSystem>().Update(deltaTime);
 	registry->GetSystem<AnimationSystem>().Update();
-	registry->GetSystem<CollisionSystem>().Update();
+	registry->GetSystem<CollisionSystem>().Update(eventBus);
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
 

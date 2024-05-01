@@ -4,6 +4,8 @@
 #include "../ECS/ECS.h"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/TransformComponent.h"
+#include "../EventBus/EventBus.h"
+#include "../Events/CollisionEvent.h"
 
 class CollisionSystem : public System {
 
@@ -16,7 +18,7 @@ public:
 
 	}
 
-	void Update() 
+	void Update(std::unique_ptr<EventBus>& eventBus) 
 	{
 		//TODO:
 		//Check all entities that have a box collider to see if they are colliding with each other
@@ -48,15 +50,16 @@ public:
 				const TransformComponent& transB = entityB.GetComponent<TransformComponent>();
 				BoxColliderComponent& boxB = entityB.GetComponent<BoxColliderComponent>();
 
-				bool collisionEvent = checkAABBCollision(transA.position.x + boxA.offset.x, transA.position.y + boxA.offset.y, boxA.width, boxA.height, transB.position.x + boxB.offset.x, transB.position.y + boxB.offset.y, boxB.width, boxB.height);
+				bool didCollision = checkAABBCollision(transA.position.x + boxA.offset.x, transA.position.y + boxA.offset.y, boxA.width, boxA.height, transB.position.x + boxB.offset.x, transB.position.y + boxB.offset.y, boxB.width, boxB.height);
 
-				if (collisionEvent)
+				if (didCollision)
 				{
 					boxA.isCollliding = true;
 					boxB.isCollliding = true;
 					Logger::Log(std::to_string(entityA.GetId()) + " Collided with: " + std::to_string(entityB.GetId()));
 					
-					//Emmit an event in the future
+					//Emmit an event 
+					eventBus->EmitEvent<CollisionEvent>(entityA, entityB);
 				} 
 
 

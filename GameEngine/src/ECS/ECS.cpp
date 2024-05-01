@@ -128,6 +128,7 @@ void Registry::Update() {
 		freeIds.push_back(entity.GetId());
 		Logger::Log("new free id: " + std::to_string(entity.GetId()));
 		entityComponentSignatures[entity.GetId()].reset();
+
 	}
 	entitiesToBeKilled.clear();
 

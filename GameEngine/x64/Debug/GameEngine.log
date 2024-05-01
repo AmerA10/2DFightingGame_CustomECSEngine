@@ -1,4 +1,5 @@
-﻿  Game.cpp
+﻿  Main.cpp
+  Game.cpp
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Components\BoxColliderComponent.h(14,23): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
@@ -29,5 +30,6 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(275,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(272,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+  Generating Code...
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe
