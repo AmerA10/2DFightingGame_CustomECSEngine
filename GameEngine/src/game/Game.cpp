@@ -15,6 +15,7 @@
 #include "../Systems/CollisionSystem.h"
 #include "../Systems/RenderDebugSystem.h"
 #include "../Systems/DamageSystem.h"
+#include "../Systems/KeyboardInputSystem.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -91,7 +92,8 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<AnimationSystem>();
 	registry->AddSystem<CollisionSystem>();
 	registry->AddSystem<RenderDebugSystem>();
-	registry->AddSystem<DamageSystem>(eventBus);
+	registry->AddSystem<DamageSystem>();
+	registry->AddSystem<KeyboardInputSystem>();
 
 
 	Entity tank = registry->CreateEntity();
@@ -218,6 +220,9 @@ void Game::ProcessInput()
 			break;
 
 		case SDL_KEYDOWN:
+
+			eventBus->EmitEvent<KeyboardInputEvent>(sdlEvent.key.keysym.sym);
+
 			if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) 
 			{
 				isRunning = false;
@@ -274,19 +279,22 @@ void Game::Update()
 
 	millisecondsPreviousFrame = (int)SDL_GetTicks64();
 
-	//TOOD:
-	// Actually probably we want something else to call update on all systems since the idea of
-	// systems can grow quite big
-	//I do not like this I want to call registry->Update() instead
-	//Having a get in the update is maybe not good just cache it if its gonna be updated 
-	//every damn frame
+	//I Do not like the idea of reseting the subscribers and constantly 
+	//Subscribing and reseting the event bus subscribers
+	//But currently we have to do this because there is no way
+	//Of the subscibing events or systems that have subscribed to events
+	//in the event bus class
+
+	eventBus->Reset();
 	
-	registry->GetSystem<MovementSystem>().Update(deltaTime);
-	registry->GetSystem<AnimationSystem>().Update();
-	registry->GetSystem<CollisionSystem>().Update(eventBus);
+	registry->GetSystem<DamageSystem>().SubscriberToEvents(eventBus);
+	registry->GetSystem<KeyboardInputSystem>().SubscribeToKeyInputEvent(eventBus);
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
 
+	registry->GetSystem<CollisionSystem>().Update(eventBus);
+	registry->GetSystem<MovementSystem>().Update(deltaTime);
+	registry->GetSystem<AnimationSystem>().Update();
 }
 
 void Game::Render() 

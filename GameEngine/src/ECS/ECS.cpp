@@ -125,9 +125,10 @@ void Registry::Update() {
 
 		//Make entity available for reuse
 
-		freeIds.push_back(entity.GetId());
 		Logger::Log("new free id: " + std::to_string(entity.GetId()));
 		entityComponentSignatures[entity.GetId()].reset();
+		
+		freeIds.push_back(entity.GetId());
 
 	}
 	entitiesToBeKilled.clear();

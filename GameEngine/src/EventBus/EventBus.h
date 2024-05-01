@@ -68,6 +68,12 @@ class EventBus {
 
 		}
 
+		//Clear subscriber lst
+		void Reset() 
+		{
+			subscribers.clear();
+		}
+
 		/// <summary>
 		/// Subscribe to an event type <T>
 		/// In the implementation a lisitener subscribes to an event as so

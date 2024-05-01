@@ -37,9 +37,13 @@ public:
 		}
 
 
-		for (Entity& entityA : entities) {
+		for (auto i = entities.begin(); i != entities.end(); i++) {
+			Entity entityA = *i;
 
-			for (Entity& entityB : entities) {
+			//Make sure we start where i starts otherwise we collide few times too many
+			for (auto j = i; j != entities.end(); j++) {
+
+				Entity entityB = *j;
 
 				if (entityA.GetId() == entityB.GetId()) {
 					continue;

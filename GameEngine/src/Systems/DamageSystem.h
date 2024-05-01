@@ -24,6 +24,8 @@ class DamageSystem : public System
 		void onCollision(CollisionEvent& event)
 		{
 			Logger::Log("Collision Event ");
+			event.a.Kill();
+			event.b.Kill();
 		}
 
 		void Update() 
