@@ -8,6 +8,10 @@ int Entity::GetId() const {
 	return id;
 }
 
+void Entity::Kill() {
+	registry->KillEntity(*this);
+}
+
 void System::AddEntity(Entity entity) {
 	entities.push_back(entity);
 }
@@ -38,18 +42,29 @@ const Signature& System::GetComponentSignature() const
 	return componentSignature;
 }
 
-Entity Registry::CreateEntity() {
+Entity Registry::CreateEntity() 
+{
 	int entityId;
 
-	entityId = numEntities++;
+	//check and use an id from the freeIds deque
+
+	if (freeIds.empty()) 
+	{
+		entityId = numEntities++;
+		if (entityId >= entityComponentSignatures.size()) {
+			entityComponentSignatures.resize(entityId + 1);
+		}
+	}
+	else 
+	{
+		//Reuse the id from the freeIds
+		entityId = freeIds.front();
+		freeIds.pop_front();
+	}
 
 	Entity entity(entityId);
 	entity.registry = this;
 	//Make sure that the entityComponentSignatures vector can house this entity signatures
-	if (entityId >= entityComponentSignatures.size()) {
-		entityComponentSignatures.resize(entityId + 1);
-	}
-
 	entitiesToBeAdded.insert(entity);
 	
 	Logger::Log("Entity Created with id= " + std::to_string(entity.GetId()));
@@ -57,7 +72,13 @@ Entity Registry::CreateEntity() {
 	return entity;
 }
 
-void Registry::AddEntityToSystems(Entity entity) {
+void Registry::KillEntity(Entity entity) 
+{
+	entitiesToBeKilled.insert(entity);
+}
+
+void Registry::AddEntityToSystems(Entity entity) 
+{
 	const int entityId = entity.GetId();
 	const Signature& entitySignature = entityComponentSignatures[entityId];
 
@@ -79,8 +100,19 @@ void Registry::AddEntityToSystems(Entity entity) {
 	}
 }
 
+void Registry::RemoveEntityFromSystems(Entity entity) 
+{
+
+	for (auto system : systemsMap)
+	{
+		system.second->RemoveEntity(entity);
+	}
+
+
+}
 
 void Registry::Update() {
+	//Process entities waiting to be created
 	for (Entity entity : entitiesToBeAdded) {
 		AddEntityToSystems(entity);
 	}
@@ -88,5 +120,16 @@ void Registry::Update() {
 
 
 	//TODO: remove the entities that need to be removed
+	for (Entity entity : entitiesToBeKilled) {
+		RemoveEntityFromSystems(entity);
+
+		//Make entity available for reuse
+
+		freeIds.push_back(entity.GetId());
+		Logger::Log("new free id: " + std::to_string(entity.GetId()));
+		entityComponentSignatures[entity.GetId()].reset();
+	}
+	entitiesToBeKilled.clear();
+
 
 }

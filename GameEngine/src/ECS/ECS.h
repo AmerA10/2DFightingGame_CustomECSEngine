@@ -10,6 +10,7 @@
 #include <typeindex>
 #include <typeinfo>
 #include <set>
+#include <deque>
 #include "../logger/Logger.h"
 
 const unsigned int MAX_COMPONENTS = 32;
@@ -58,6 +59,8 @@ public:
 
 	//This constructor will use the overloaded assignmenet operator
 	Entity(const Entity& entity) =default;
+
+	void Kill();
 
 	//Default assignment overloading operator
 	Entity& operator =(const Entity& other) = default;
@@ -191,6 +194,9 @@ class Registry {
 		/// </summary>
 		std::unordered_map<std::type_index, std::shared_ptr<System>> systemsMap;
 
+		//This is a double ended que used to reuse the ids of entities that were previously removed
+		std::deque<int> freeIds;
+
 	public:
 
 		Registry() {
@@ -206,8 +212,10 @@ class Registry {
 
 		//Entity Management
 		//
+		
 		Entity CreateEntity();
 		//KilEntity();
+		void KillEntity(Entity entity);
 
 		//Component Management
 		//
@@ -242,6 +250,8 @@ class Registry {
 		//check the component signature of the entity
 		//add the entity to the systems that are interested in it
 		void AddEntityToSystems(Entity entity);
+
+		void RemoveEntityFromSystems(Entity entity);
 
 };
 

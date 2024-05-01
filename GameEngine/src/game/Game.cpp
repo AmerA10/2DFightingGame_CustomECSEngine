@@ -129,6 +129,15 @@ void Game::LoadLevel(int level)
 	radar.AddComponent<RigidBodyComponent>();
 	radar.AddComponent<SpriteComponent>("radar-image", 64, 64, 3);
 	radar.AddComponent<AnimationComponent>(8, 3, true);
+	radar.Kill();
+
+	//This won't use the same ID as above simply because its all happening in one frame, you need the death
+	//and creation to be on different frames, Frame in between the death and creation
+
+	Entity newRader = registry->CreateEntity();
+	newRader.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
+	//The issue is that the component pools of the registry are not cleared of the components
+
 }
 
 void Game::Setup()
@@ -216,6 +225,7 @@ void Game::ProcessInput()
 			{
 				drawDebug = !drawDebug;
 			}
+
 			break;
 
 		}
