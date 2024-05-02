@@ -6,10 +6,12 @@
 class KeyboardInputEvent : public Event
 {
 	public:
-		std::string keyname;
+		std::string keyName;
+		SDL_Keycode keyCode;
 
-		KeyboardInputEvent(SDL_Keycode sym)
+		KeyboardInputEvent(SDL_Keycode keyCode)
 		{
-			keyname = SDL_GetKeyName(sym);
+			keyName = SDL_GetKeyName(keyCode);
+			this->keyCode = keyCode;
 		}
 };
