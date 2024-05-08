@@ -4,19 +4,43 @@
 int IComponent::nextId = 0;
 
 //TODO: implement all the functions from ECS.h
-int Entity::GetId() const {
+int Entity::GetId() const 
+{
 	return id;
 }
 
-void Entity::Kill() {
+void Entity::Kill() 
+{
 	registry->KillEntity(*this);
 }
 
-void System::AddEntity(Entity entity) {
+void Entity::Tag(const std::string& tag) 
+{
+	registry->TagEntity(*this, tag);
+}
+
+void Entity::Group(const std::string& group)
+{
+	registry->GroupEntity(*this, group);
+}
+
+bool Entity::HasTag(const std::string& tag) const
+{
+	return registry->EntityHasTag(*this, tag);
+}
+
+bool Entity::BelongsToGroup(const std::string& group) const
+{
+	return registry->EntityBelongsToGroup(*this, group);
+}
+
+void System::AddEntity(Entity entity) 
+{
 	entities.push_back(entity);
 }
 
-void System::RemoveEntity(Entity entity) {
+void System::RemoveEntity(Entity entity) 
+{
 
 	//You could do a for loop however there is a better way
 	//This will be using an iterator and an anynomous function
@@ -24,14 +48,16 @@ void System::RemoveEntity(Entity entity) {
 	
 	//The advantages of using erase however is that it is compatible with any std container
 	//Map, unordered map etc..
-	entities.erase(std::remove_if(entities.begin(), entities.end(), [&entity](Entity other) {
+	entities.erase(std::remove_if(entities.begin(), entities.end(), [&entity](Entity other) 
+		{
 			return entity == other;
 		}
 	),entities.end());
 
 }
 
-std::vector<Entity> System::GetSystemEntities() const {
+std::vector<Entity> System::GetSystemEntities() const 
+{
 
 	return entities;
 
@@ -133,5 +159,150 @@ void Registry::Update() {
 	}
 	entitiesToBeKilled.clear();
 
+}
 
+void Registry::TagEntity(Entity entity, const std::string& tag)
+{
+
+	//If it already exists in both then return
+	if (entityPerTag.find(tag) != entityPerTag.end() && tagPerEntity.find(entity.GetId()) != tagPerEntity.end())
+	{
+		return;
+	}
+
+	entityPerTag.emplace(tag, entity);
+	tagPerEntity.emplace(entity.GetId(), tag);
+}
+
+Entity Registry::GetEntityByTag(const std::string& tag) const
+{
+	if (entityPerTag.find(tag) != entityPerTag.end())
+	{
+		return entityPerTag.at(tag);
+	}
+	return NULL;
+}
+
+void Registry::RemoveEntityTag(Entity entity)
+{
+	//if it does not exist then just get out
+	if (tagPerEntity.find(entity.GetId()) == tagPerEntity.end())
+	{
+		return;
+	}
+
+	tagPerEntity.erase(entity.GetId());
+	const std::string& entityTag = tagPerEntity.at(entity.GetId());
+
+	if (entityPerTag.find(entityTag) == entityPerTag.end())
+	{
+		return;
+	}
+
+	entityPerTag.erase(entityTag);
+
+
+
+}
+
+void Registry::GroupEntity(Entity entity, const std::string& group)
+{
+	//already exists
+	if (groupPerEntity.find(entity.GetId()) != groupPerEntity.end())
+	{
+		return;
+	}
+
+	
+	//No set exists
+	if (entitiesPerGroup.find(group) == entitiesPerGroup.end())
+	{
+		entitiesPerGroup.emplace(group, std::set<Entity>());
+
+	}
+
+	//a set does exist and the entity already has it
+	if (entitiesPerGroup.at(group).find(entity) != entitiesPerGroup.at(group).end())
+	{
+		return;
+	}
+
+	//a set may have existed but not entity exists within the set and the other map
+	entitiesPerGroup.at(group).emplace(entity);
+	groupPerEntity.emplace(entity.GetId(), group);
+	
+}
+
+bool Registry::EntityHasTag(Entity entity, const std::string& tag) const
+{
+	if (tagPerEntity.find(entity.GetId()) == tagPerEntity.end())
+	{
+		return false;
+	}
+
+	//make sure that both of them have them
+	return entityPerTag.find(tag)->second == entity;
+}
+bool Registry::EntityBelongsToGroup(Entity entity, const std::string& group) const
+{
+	//does not exist because no group exists
+	if (entitiesPerGroup.find(group) == entitiesPerGroup.end())
+	{
+		return false;
+
+	}
+
+	std::set<Entity> entities = entitiesPerGroup.at(group);
+
+	//if it does not equal end then it does exist
+	return entities.find(entity) != entities.end();
+
+}
+
+std::vector<Entity> Registry::GetEntitiesByGroup(const std::string& group) const
+{
+	if (entitiesPerGroup.find(group) == entitiesPerGroup.end())
+	{
+		//return empty vector
+		return std::vector<Entity>();
+	}
+	std::set<Entity> entities = entitiesPerGroup.at(group);
+	return std::vector<Entity>(entities.begin(), entities.end());
+}
+
+void Registry::RemoveEntityGroup(Entity entity)
+{
+
+	//if it does not exist the just return
+	if (groupPerEntity.find(entity.GetId()) == groupPerEntity.end())
+	{
+		return;
+	
+	}
+
+
+
+	const std::string& group = groupPerEntity.at(entity.GetId());
+
+	groupPerEntity.erase(entity.GetId());
+
+	//Need to remove from above first
+
+	//no group here either so just return? Yes
+	if (entitiesPerGroup.find(group) == entitiesPerGroup.end())
+	{
+		return;
+	}
+
+	//Get the group
+	std::set<Entity> entities = entitiesPerGroup.at(group);
+
+	//does not exist in this group
+	if (entities.find(entity) == entities.end())
+	{
+		return;
+	}
+
+	//remove from the group
+	entities.erase(entity);
 }

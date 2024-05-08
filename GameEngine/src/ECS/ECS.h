@@ -82,6 +82,12 @@ public:
 	template<typename TComponent> bool HasComponent() const;
 	template<typename TComponent> TComponent& GetComponent() const;
 
+	//Manage entity tags and Groups
+	void Tag(const std::string& tag);
+	bool HasTag(const std::string& tag)const;
+	void Group(const std::string& group);
+	bool BelongsToGroup(const std::string& group)const;
+
 };
 
 /// <summary>
@@ -194,8 +200,19 @@ class Registry {
 		/// </summary>
 		std::unordered_map<std::type_index, std::shared_ptr<System>> systemsMap;
 
+
 		//This is a double ended que used to reuse the ids of entities that were previously removed
 		std::deque<int> freeIds;
+
+		//Maps of Entity Tags, one gives the entity from the tag
+		//the other gives the tag from the entity ID
+		std::unordered_map<std::string, Entity> entityPerTag;
+		std::unordered_map<int, std::string> tagPerEntity;
+
+		//Maps of Group 
+		std::unordered_map<std::string, std::set<Entity>> entitiesPerGroup;
+		std::unordered_map<int, std::string> groupPerEntity;
+
 
 	public:
 
@@ -252,6 +269,18 @@ class Registry {
 		void AddEntityToSystems(Entity entity);
 
 		void RemoveEntityFromSystems(Entity entity);
+
+		//Tag Functions
+		void TagEntity(Entity entity, const std::string& tag);
+		bool EntityHasTag(Entity entity, const std::string& tag)const;
+		Entity GetEntityByTag(const std::string& tag) const;
+		void RemoveEntityTag(Entity entity);
+
+		//Group Functions
+		void GroupEntity(Entity entity, const std::string& group);
+		bool EntityBelongsToGroup(Entity entity, const std::string& group) const;
+		std::vector<Entity> GetEntitiesByGroup(const std::string& group) const;
+		void RemoveEntityGroup(Entity entity);
 
 };
 
