@@ -10,6 +10,8 @@
 #include "../Components/AnimationComponent.h"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/KeyboardControlledComponent.h"
+#include "../Components/CameraFollowComponent.h"
+#include "../Components/ProjectileEmitterComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
@@ -17,11 +19,17 @@
 #include "../Systems/RenderDebugSystem.h"
 #include "../Systems/DamageSystem.h"
 #include "../Systems/KeyboardInputSystem.h"
+#include "../Systems/CameraMovementSystem.h"
+#include "../Systems/ProjectileEmitterSystem.h"
 #include <fstream>
-#include <iostream>
 #include <sstream>
 #include <array>
 #include <streambuf>
+
+int Game::windowWidth;
+int Game::windowHeight;
+int Game::mapWidth;
+int Game::mapHeight;
 
 Game::Game() 
 {
@@ -52,7 +60,7 @@ void Game::LoadTileMap(const std::string& mapPath, const std::string& texturePat
 
 	// Load the tilemap
 	int tileSize = 32;
-	double tileScale = 3.0;
+	double tileScale = 5.0;
 	int mapNumCols = 25;
 	int mapNumRows = 20;
 
@@ -70,11 +78,13 @@ void Game::LoadTileMap(const std::string& mapPath, const std::string& texturePat
 
 			Entity tile = registry->CreateEntity();
 			tile.AddComponent<TransformComponent>(glm::vec2(x * (tileScale * tileSize), y * (tileScale * tileSize)), glm::vec2(tileScale, tileScale), 0.0);
-			tile.AddComponent<SpriteComponent>("tilemap-image", tileSize, tileSize, 0, srcRectX, srcRectY);
+			tile.AddComponent<SpriteComponent>("tilemap-image", tileSize, tileSize, 0,false, srcRectX, srcRectY);
 		}
 	}
 	mapFile.close();
 
+	mapWidth = mapNumCols * tileSize * tileScale;;
+	mapHeight = mapNumRows * tileSize * tileScale;
 
 }
 
@@ -86,6 +96,7 @@ void Game::LoadLevel(int level)
 	assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-down.png");
 	assetStore->AddTexture(renderer, "chopper-image", "./assets/images/chopper-spritesheet.png");
 	assetStore->AddTexture(renderer, "radar-image", "./assets/images/radar.png");
+	assetStore->AddTexture(renderer, "bullet-image", "./assets/images/bullet.png");
 
 	//Add systems that need to be processed in our game
 	registry->AddSystem<MovementSystem>();
@@ -95,24 +106,17 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<RenderDebugSystem>();
 	registry->AddSystem<DamageSystem>();
 	registry->AddSystem<KeyboardInputSystem>();
+	registry->AddSystem<CameraMovementSystem>();
+	registry->AddSystem<ProjectilEmitterSystem>();
 
 
 	Entity tank = registry->CreateEntity();
-	tank.AddComponent<TransformComponent>(glm::vec2(20.0, 20.0), glm::vec2(2.0, 2.0), 0.0f);
+	tank.AddComponent<TransformComponent>(glm::vec2(200.0, 200.0), glm::vec2(2.0, 2.0), 0.0f);
 	tank.AddComponent<RigidBodyComponent>(glm::vec2(0.0, 0.0));
 	tank.AddComponent<SpriteComponent>("tank-image", 32, 32,2);
 	tank.AddComponent<BoxColliderComponent>(32,32, tank.GetComponent<TransformComponent>().scale);
 
 	Entity truck = registry->CreateEntity();
-
-	/*
-		TODO: 
-		Load the tile map
-		We need to load the tilemap texture from ./assets/tilemaps/jungle.png
-		we need to load the file ./assets /tilemaps/jungle.map
-		Tip: Use the idea of the source rectanlge and consider creating oe entity per tile
-	*/
-
 
 
 	//This shows that even constructor with default variables
@@ -127,20 +131,21 @@ void Game::LoadLevel(int level)
 	chopper.AddComponent<SpriteComponent>("chopper-image", 32, 32, 1);
 	chopper.AddComponent<AnimationComponent>(2,20,true);
 	chopper.AddComponent<BoxColliderComponent>(32, 32, chopper.GetComponent<TransformComponent>().scale);
-	chopper.AddComponent<KeyboardControlledComponent>(glm::vec2(0,-20), glm::vec2(20, 0), glm::vec2(0, 20), glm::vec2(-20, 0));
+	chopper.AddComponent<KeyboardControlledComponent>(glm::vec2(0,-400), glm::vec2(400, 0), glm::vec2(0, 400), glm::vec2(-400, 0));
+	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(100,0),1000,5000,5,true);
+	chopper.AddComponent<CameraFollowComponent>();
 
 	Entity radar = registry->CreateEntity();
-	radar.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
+	radar.AddComponent<TransformComponent>(glm::vec2(windowWidth - 200, 50), glm::vec2(2.0, 2.0), 0.0);
 	radar.AddComponent<RigidBodyComponent>();
-	radar.AddComponent<SpriteComponent>("radar-image", 64, 64, 3);
+	radar.AddComponent<SpriteComponent>("radar-image", 64, 64, 3, true);
 	radar.AddComponent<AnimationComponent>(8, 3, true);
-	radar.Kill();
 
 	//This won't use the same ID as above simply because its all happening in one frame, you need the death
 	//and creation to be on different frames, Frame in between the death and creation
 
-	Entity newRader = registry->CreateEntity();
-	newRader.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
+	//Entity newRader = registry->CreateEntity();
+	//newRader.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
 
 
 }
@@ -197,6 +202,15 @@ void Game::Initialize()
 		Logger::Err("Error Creating SDL Renderer");
 		return;
 	}
+
+
+	//Our camera needs a main entity to follow
+	camera.x = 0;
+	camera.y = 0;
+	camera.w = windowWidth;
+	camera.h = windowHeight;
+
+
 
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
@@ -297,6 +311,8 @@ void Game::Update()
 	registry->GetSystem<CollisionSystem>().Update(eventBus);
 	registry->GetSystem<MovementSystem>().Update(deltaTime);
 	registry->GetSystem<AnimationSystem>().Update();
+	registry->GetSystem<CameraMovementSystem>().Update(camera);
+	registry->GetSystem<ProjectilEmitterSystem>().Update(registry);
 }
 
 void Game::Render() 
@@ -307,10 +323,10 @@ void Game::Render()
 
 	//Draw png texture, SDL does not know how to read png filess only bitmaps
 	//It is why we have the SDL_Image included
-	registry->GetSystem<RenderSystem>().Update(renderer, assetStore);
+	registry->GetSystem<RenderSystem>().Update(renderer, assetStore,camera);
 
 	if (drawDebug) {
-		registry->GetSystem<RenderDebugSystem>().Update(renderer);
+		registry->GetSystem<RenderDebugSystem>().Update(renderer,camera);
 	}
 
 	SDL_RenderPresent(renderer);

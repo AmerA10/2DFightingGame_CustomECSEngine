@@ -22,7 +22,7 @@ public:
 
 	}
 
-	void Update(SDL_Renderer* renderer, const std::unique_ptr<AssetStore>& assetStore) {
+	void Update(SDL_Renderer* renderer, const std::unique_ptr<AssetStore>& assetStore, const SDL_Rect& camera) {
 		//TOOD:
 		//Loop all entities that the system is interested in
 		//Here auto automatically gets the type of entity
@@ -37,18 +37,23 @@ public:
 				return a.GetComponent<SpriteComponent>().zIndex < b.GetComponent<SpriteComponent>().zIndex;
 			
 		});
+
+		//we can probably add a check to see if the position of the entity is within the camera rect or not and decide
+		//to render it or not based on that
 		
-		for (auto& entity : sortedEntities) {
+		for (auto& entity : sortedEntities) 
+		{
 			const TransformComponent& transform = entity.GetComponent<TransformComponent>();
 			SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
 			//Set the source rectangle of our original sprite texture
+
 			SDL_Rect srcRect = sprite.srcRect;
 			SDL_Rect dstRect = { 
-				static_cast<int>(transform.position.x),
-				static_cast<int>(transform.position.y),
-				sprite.width * transform.scale.x, 
-				sprite.height * transform.scale.y };
+				static_cast<int>(transform.position.x - (sprite.isFixed ? 0 : camera.x)),
+				static_cast<int>(transform.position.y - (sprite.isFixed ? 0 : camera.y)),
+				static_cast<int>(sprite.width * transform.scale.x),
+				static_cast<int>(sprite.height * transform.scale.y )};
 
 			
 			//Draw the png texture based on sprite ID

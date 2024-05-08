@@ -2,6 +2,13 @@
 
 #include <glm/glm.hpp>
 
+/// <summary>
+/// Width: box width def = 0 
+/// Height: box height def = 0
+/// scale: width is multiplied by scale.x
+/// scale: height is multiplied by scale.y
+/// offset: Offset vec2 def = 0,0
+/// </summary>
 struct BoxColliderComponent {
 	
 	int width;

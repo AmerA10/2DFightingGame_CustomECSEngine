@@ -31,6 +31,7 @@ class Game
 		//Mixing the smart and raw pointers will be a bad idea
 		SDL_Window* window;
 		SDL_Renderer* renderer;
+		SDL_Rect camera;
 
 		int millisecondsPreviousFrame = 0;
 
@@ -53,8 +54,10 @@ class Game
 		void LoadLevel(int level);
 		void LoadTileMap(const std::string& mapPath, const std::string& texturePath);
 
-		int windowWidth = 0;
-		int windowHeight = 0;
+		static int windowWidth;
+		static int windowHeight;
+		static int mapWidth;
+		static int mapHeight;
 
 };
 
