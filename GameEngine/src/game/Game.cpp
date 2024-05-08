@@ -11,6 +11,7 @@
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/KeyboardControlledComponent.h"
 #include "../Components/CameraFollowComponent.h"
+#include "../Components/HealthComponent.h"
 #include "../Components/ProjectileEmitterComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
@@ -21,6 +22,7 @@
 #include "../Systems/KeyboardInputSystem.h"
 #include "../Systems/CameraMovementSystem.h"
 #include "../Systems/ProjectileEmitterSystem.h"
+#include "../Systems/ProjectileLifeCycleSystem.h"
 #include <fstream>
 #include <sstream>
 #include <array>
@@ -108,6 +110,7 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<KeyboardInputSystem>();
 	registry->AddSystem<CameraMovementSystem>();
 	registry->AddSystem<ProjectilEmitterSystem>();
+	registry->AddSystem<ProjectileLifeCycleSystem>();
 
 
 	Entity tank = registry->CreateEntity();
@@ -124,6 +127,7 @@ void Game::LoadLevel(int level)
 	truck.AddComponent<RigidBodyComponent>(glm::vec2(-40.0,-40.0));
 	truck.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
 	truck.AddComponent<BoxColliderComponent>(64,64,truck.GetComponent<TransformComponent>().scale);
+	truck.AddComponent<HealthComponent>(100);
 
 	Entity chopper = registry->CreateEntity();
 	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
@@ -132,7 +136,7 @@ void Game::LoadLevel(int level)
 	chopper.AddComponent<AnimationComponent>(2,20,true);
 	chopper.AddComponent<BoxColliderComponent>(32, 32, chopper.GetComponent<TransformComponent>().scale);
 	chopper.AddComponent<KeyboardControlledComponent>(glm::vec2(0,-400), glm::vec2(400, 0), glm::vec2(0, 400), glm::vec2(-400, 0));
-	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(100,0),1000,5000,5,true);
+	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(100,0),1000,5000,5,true, 80,false);
 	chopper.AddComponent<CameraFollowComponent>();
 
 	Entity radar = registry->CreateEntity();
@@ -305,6 +309,7 @@ void Game::Update()
 	
 	registry->GetSystem<DamageSystem>().SubscriberToEvents(eventBus);
 	registry->GetSystem<KeyboardInputSystem>().SubscribeToKeyInputEvent(eventBus);
+	registry->GetSystem<ProjectilEmitterSystem>().SubscribeToKeyInputEvent(eventBus);
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
 
@@ -313,6 +318,7 @@ void Game::Update()
 	registry->GetSystem<AnimationSystem>().Update();
 	registry->GetSystem<CameraMovementSystem>().Update(camera);
 	registry->GetSystem<ProjectilEmitterSystem>().Update(registry);
+	registry->GetSystem<ProjectileLifeCycleSystem>().Update();
 }
 
 void Game::Render() 
