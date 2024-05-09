@@ -120,16 +120,18 @@ void Game::LoadLevel(int level)
 	tank.AddComponent<BoxColliderComponent>(32,32, tank.GetComponent<TransformComponent>().scale);
 	tank.Group("Enemies");
 	Entity truck = registry->CreateEntity();
+	tank.AddComponent<HealthComponent>(50);
 
 
 	//This shows that even constructor with default variables
 	truck.AddComponent<TransformComponent>(glm::vec2(500.0,500.0));
-	truck.AddComponent<RigidBodyComponent>(glm::vec2(-40.0,-40.0));
+	truck.AddComponent<RigidBodyComponent>(glm::vec2(0.0,0.0));
 	truck.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
 	truck.AddComponent<BoxColliderComponent>(64,64,truck.GetComponent<TransformComponent>().scale);
 	truck.AddComponent<HealthComponent>(100);
 	truck.Group("Enemies");
 	truck.AddComponent<ProjectileEmitterComponent>(glm::vec2(0, -100), 1000, 7000, 10, false, 80, true);
+	truck.AddComponent<HealthComponent>(50);
 
 	Entity chopper = registry->CreateEntity();
 	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
@@ -138,10 +140,11 @@ void Game::LoadLevel(int level)
 	chopper.AddComponent<AnimationComponent>(2,20,true);
 	chopper.AddComponent<BoxColliderComponent>(32, 32, chopper.GetComponent<TransformComponent>().scale);
 	chopper.AddComponent<KeyboardControlledComponent>(glm::vec2(0,-400), glm::vec2(400, 0), glm::vec2(0, 400), glm::vec2(-400, 0));
-	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(100,0),1000,5000,5,true, 80,false);
+	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(100,0),1000,5000,5,true, 200,false);
 	chopper.AddComponent<CameraFollowComponent>();
 	chopper.Tag("Player");
 	chopper.Group("Military");
+	chopper.AddComponent<HealthComponent>(20);
 
 	Entity radar = registry->CreateEntity();
 	radar.AddComponent<TransformComponent>(glm::vec2(windowWidth - 200, 50), glm::vec2(2.0, 2.0), 0.0);
