@@ -64,6 +64,7 @@ public:
 					
 					//Emmit an event 
 					eventBus->EmitEvent<CollisionEvent>(entityA, entityB);
+
 				} 
 
 

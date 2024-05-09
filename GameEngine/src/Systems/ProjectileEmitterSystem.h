@@ -48,7 +48,7 @@ public:
 			if (entity.HasComponent<SpriteComponent>())
 			{
 				const SpriteComponent spriteComp = entity.GetComponent<SpriteComponent>();
-				projectileOrigin.x += (transform.scale.x *spriteComp.width )/ 2;
+				projectileOrigin.x += (transform.scale.x * spriteComp.width )/ 2;
 				projectileOrigin.y += (transform.scale.y * spriteComp.height)/ 2;
 
 			}
@@ -58,14 +58,16 @@ public:
 			if (SDL_GetTicks() - projEmitter.lastEmissionTime > projEmitter.repeatFrequency)
 			{
 				Entity projectile = registry->CreateEntity();
-				projectile.AddComponent<TransformComponent>(projectileOrigin,glm::vec2(1.0,1.0), 0.0);
+				projectile.AddComponent<TransformComponent>(projectileOrigin,glm::vec2(4.0,4.0), 0.0);
 				projectile.AddComponent<RigidBodyComponent>(projEmitter.projectileVelocity);
 				projectile.AddComponent<SpriteComponent>("bullet-image", 4, 4, 4);
-				projectile.AddComponent<BoxColliderComponent>(4, 4);
+				projectile.AddComponent<BoxColliderComponent>(4, 4, glm::vec2(4,4));
 				projectile.AddComponent<ProjectileComponent>(projEmitter.isFriendly, projEmitter.hitPercentDamage, projEmitter.projectileDuration);
 				//
 				projEmitter.lastEmissionTime = SDL_GetTicks();
 				
+				projectile.Group("Projectile");
+
 ;			}
 
 		}
@@ -98,11 +100,12 @@ public:
 					glm::vec2 projVel = glm::normalize(vel);
 					projVel = projVel * (float)pec.projSpeed;
 					
-					projectile.AddComponent<TransformComponent>(projectileOrigin, glm::vec2(1.0, 1.0), 0.0);
+					projectile.AddComponent<TransformComponent>(projectileOrigin, glm::vec2(6.0, 6.0), 0.0);
 					projectile.AddComponent<RigidBodyComponent>(projVel);
 					projectile.AddComponent<SpriteComponent>("bullet-image", 4, 4, 4);
-					projectile.AddComponent<BoxColliderComponent>(4, 4);
+					projectile.AddComponent<BoxColliderComponent>(4, 4, glm::vec2(6,6));
 					projectile.AddComponent<ProjectileComponent>(pec.isFriendly, pec.hitPercentDamage, pec.projectileDuration);
+					projectile.Group("Projectile");
 
 
 				}

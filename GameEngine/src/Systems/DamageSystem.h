@@ -23,9 +23,29 @@ class DamageSystem : public System
 
 		void onCollision(CollisionEvent& event)
 		{
-			Logger::Log("Collision Event ");
-			//event.a.Kill();
-			//event.b.Kill();
+			Entity a = event.a;
+			Entity b = event.b;
+			Logger::Log("Collision Event: " + std::to_string(a.GetId())  +  " With: " + std::to_string(b.GetId()));
+			
+			if (a.BelongsToGroup("Projectile") && b.HasTag("Player"))
+			{
+				Logger::Log("Projectile Hit a Player");
+
+			}
+			if (b.BelongsToGroup("Projectile") && a.HasTag("Player"))
+			{
+				Logger::Log("Player Hit a Projectile");
+
+			}
+			if (a.BelongsToGroup("Projectile") && b.BelongsToGroup("Enemies"))
+			{
+				Logger::Log("Projectile Hit an enemy");
+			}
+			if (b.BelongsToGroup("Projectile") && a.BelongsToGroup("Enemies"))
+			{
+				Logger::Log("Projectile Hit a enemy");
+			}
+		
 		}
 
 		void Update() 

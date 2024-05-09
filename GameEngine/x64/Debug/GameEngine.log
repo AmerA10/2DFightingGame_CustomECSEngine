@@ -1,5 +1,4 @@
-﻿  ECS.cpp
-  Game.cpp
+﻿  Game.cpp
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Components\BoxColliderComponent.h(21,23): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
@@ -24,7 +23,5 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileLifeCycleSystem.h(21,50): warning C4018: '>': signed/unsigned mismatch
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(88,35): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(89,36): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(295,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
-  Main.cpp
-  Generating Code...
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(301,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

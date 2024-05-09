@@ -5,14 +5,16 @@
 #include <SDL.h>
 //This component is very flexible this is just an example created to beef up the engine examples I guess
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="vel"></param>
-/// <param name="repeatFrequency"></param>
-// <param name="projectileDuration"></param>
-/// <param name="hitPercentDamage"></param>
-/// <param name="isFriendly"></param>
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="vel"></param>
+	/// <param name="repeatFrequency"></param>
+	/// <param name="projectileDuration"></param>
+	/// <param name="hitPercentDamage"></param>
+	/// <param name="isFriendly"></param>
+	/// <param name="projSpeed"></param>
+	/// <param name="useFrequency"></param>
 struct ProjectileEmitterComponent 
 {
 	glm::vec2 projectileVelocity;

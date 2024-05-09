@@ -118,7 +118,7 @@ void Game::LoadLevel(int level)
 	tank.AddComponent<RigidBodyComponent>(glm::vec2(0.0, 0.0));
 	tank.AddComponent<SpriteComponent>("tank-image", 32, 32,2);
 	tank.AddComponent<BoxColliderComponent>(32,32, tank.GetComponent<TransformComponent>().scale);
-
+	tank.Group("Enemies");
 	Entity truck = registry->CreateEntity();
 
 
@@ -128,6 +128,8 @@ void Game::LoadLevel(int level)
 	truck.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
 	truck.AddComponent<BoxColliderComponent>(64,64,truck.GetComponent<TransformComponent>().scale);
 	truck.AddComponent<HealthComponent>(100);
+	truck.Group("Enemies");
+	truck.AddComponent<ProjectileEmitterComponent>(glm::vec2(0, -100), 1000, 7000, 10, false, 80, true);
 
 	Entity chopper = registry->CreateEntity();
 	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
@@ -138,12 +140,16 @@ void Game::LoadLevel(int level)
 	chopper.AddComponent<KeyboardControlledComponent>(glm::vec2(0,-400), glm::vec2(400, 0), glm::vec2(0, 400), glm::vec2(-400, 0));
 	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(100,0),1000,5000,5,true, 80,false);
 	chopper.AddComponent<CameraFollowComponent>();
+	chopper.Tag("Player");
+	chopper.Group("Military");
 
 	Entity radar = registry->CreateEntity();
 	radar.AddComponent<TransformComponent>(glm::vec2(windowWidth - 200, 50), glm::vec2(2.0, 2.0), 0.0);
 	radar.AddComponent<RigidBodyComponent>();
 	radar.AddComponent<SpriteComponent>("radar-image", 64, 64, 3, true);
 	radar.AddComponent<AnimationComponent>(8, 3, true);
+	radar.Group("UI");
+	
 
 	//This won't use the same ID as above simply because its all happening in one frame, you need the death
 	//and creation to be on different frames, Frame in between the death and creation

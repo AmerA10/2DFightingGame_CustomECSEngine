@@ -58,9 +58,7 @@ void System::RemoveEntity(Entity entity)
 
 std::vector<Entity> System::GetSystemEntities() const 
 {
-
 	return entities;
-
 }
 
 const Signature& System::GetComponentSignature() const
@@ -128,13 +126,10 @@ void Registry::AddEntityToSystems(Entity entity)
 
 void Registry::RemoveEntityFromSystems(Entity entity) 
 {
-
 	for (auto system : systemsMap)
 	{
 		system.second->RemoveEntity(entity);
 	}
-
-
 }
 
 void Registry::Update() {
@@ -143,8 +138,7 @@ void Registry::Update() {
 		AddEntityToSystems(entity);
 	}
 	entitiesToBeAdded.clear();
-
-
+	
 	//TODO: remove the entities that need to be removed
 	for (Entity entity : entitiesToBeKilled) {
 		RemoveEntityFromSystems(entity);
@@ -158,12 +152,10 @@ void Registry::Update() {
 
 	}
 	entitiesToBeKilled.clear();
-
 }
 
 void Registry::TagEntity(Entity entity, const std::string& tag)
 {
-
 	//If it already exists in both then return
 	if (entityPerTag.find(tag) != entityPerTag.end() && tagPerEntity.find(entity.GetId()) != tagPerEntity.end())
 	{
@@ -200,9 +192,6 @@ void Registry::RemoveEntityTag(Entity entity)
 	}
 
 	entityPerTag.erase(entityTag);
-
-
-
 }
 
 void Registry::GroupEntity(Entity entity, const std::string& group)
@@ -218,7 +207,6 @@ void Registry::GroupEntity(Entity entity, const std::string& group)
 	if (entitiesPerGroup.find(group) == entitiesPerGroup.end())
 	{
 		entitiesPerGroup.emplace(group, std::set<Entity>());
-
 	}
 
 	//a set does exist and the entity already has it
@@ -249,14 +237,12 @@ bool Registry::EntityBelongsToGroup(Entity entity, const std::string& group) con
 	if (entitiesPerGroup.find(group) == entitiesPerGroup.end())
 	{
 		return false;
-
 	}
 
 	std::set<Entity> entities = entitiesPerGroup.at(group);
 
 	//if it does not equal end then it does exist
 	return entities.find(entity) != entities.end();
-
 }
 
 std::vector<Entity> Registry::GetEntitiesByGroup(const std::string& group) const
@@ -279,8 +265,6 @@ void Registry::RemoveEntityGroup(Entity entity)
 		return;
 	
 	}
-
-
 
 	const std::string& group = groupPerEntity.at(entity.GetId());
 
