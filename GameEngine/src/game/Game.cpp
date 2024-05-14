@@ -13,6 +13,7 @@
 #include "../Components/CameraFollowComponent.h"
 #include "../Components/HealthComponent.h"
 #include "../Components/ProjectileEmitterComponent.h"
+#include "../Components/TextLabelComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
@@ -23,6 +24,7 @@
 #include "../Systems/CameraMovementSystem.h"
 #include "../Systems/ProjectileEmitterSystem.h"
 #include "../Systems/ProjectileLifeCycleSystem.h"
+#include "../Systems/RenderTextSystem.h"
 #include <fstream>
 #include <sstream>
 #include <array>
@@ -99,6 +101,8 @@ void Game::LoadLevel(int level)
 	assetStore->AddTexture(renderer, "chopper-image", "./assets/images/chopper-spritesheet.png");
 	assetStore->AddTexture(renderer, "radar-image", "./assets/images/radar.png");
 	assetStore->AddTexture(renderer, "bullet-image", "./assets/images/bullet.png");
+	assetStore->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 30);
+	assetStore->AddFont("arial-font", "./assets/fonts/arial.ttf", 30);
 
 	//Add systems that need to be processed in our game
 	registry->AddSystem<MovementSystem>();
@@ -111,6 +115,7 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<CameraMovementSystem>();
 	registry->AddSystem<ProjectilEmitterSystem>();
 	registry->AddSystem<ProjectileLifeCycleSystem>();
+	registry->AddSystem<RenderTextSystem>();
 
 
 	Entity tank = registry->CreateEntity();
@@ -160,20 +165,20 @@ void Game::LoadLevel(int level)
 	//Entity newRader = registry->CreateEntity();
 	//newRader.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
 
+	Entity label1 = registry->CreateEntity();
+	SDL_Color white = { 255,255,255 };
+	label1.AddComponent<TextLabelComponent>("charriot-font", "Sample Text 1", glm::vec2(500,50), white);
+
+	Entity label2 = registry->CreateEntity();
+	SDL_Color purple = { 255,0,255 };
+	label2.AddComponent<TextLabelComponent>("arial-font", "Sample Text 2", glm::vec2(500, 100), purple);
 
 }
 
 void Game::Setup()
 {
-	//TOOD:
-	//Entity Tank = registry.CreateEntity();
-	//tank.AddComponent<TrasnformComponent>();
-	//tank.AddBoxCollider>();
-	//tank.AddComponent<SpriteComponent>("./assets/images/tank.png");
 
 	LoadLevel(1);
-
-
 }
 
 
@@ -185,6 +190,12 @@ void Game::Initialize()
 	{
 		Logger::Err("Error Init SDL");
 		return;
+	}
+
+	//Need to intialize SDL_TTF
+	if (TTF_Init() != 0)
+	{
+		Logger::Err("Error Intitializing SDL TTF");
 	}
 
 	SDL_DisplayMode displayMode;
@@ -339,6 +350,7 @@ void Game::Render()
 	//Draw png texture, SDL does not know how to read png filess only bitmaps
 	//It is why we have the SDL_Image included
 	registry->GetSystem<RenderSystem>().Update(renderer, assetStore,camera);
+	registry->GetSystem<RenderTextSystem>().Update(renderer, assetStore, camera);
 
 	if (drawDebug) {
 		registry->GetSystem<RenderDebugSystem>().Update(renderer,camera);
