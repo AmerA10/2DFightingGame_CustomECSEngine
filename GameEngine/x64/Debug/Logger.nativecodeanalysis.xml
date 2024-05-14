@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\logger\</FILEPATH>
+      <FILENAME>Logger.h</FILENAME>
+      <LINE>20</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'LogEntry::type' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>LogEntry::{ctor}</FUNCTION>
+    <DECORATED>??0LogEntry@@QEAA@XZ</DECORATED>
+    <FUNCLINE>20</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>LogEntry::type</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

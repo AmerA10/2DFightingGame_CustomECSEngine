@@ -120,6 +120,8 @@ public:
 	//Example: Ipool poolObj; will give a compilerError
 	//This is not pure virtual but it can be
 	virtual ~IPool() {};
+
+	virtual void RemoveEntityFromPool(int entityId) = 0;
 };
 
 /// <summary>
@@ -129,36 +131,103 @@ template <typename T>
 class Pool: public IPool {
 	private:
 		std::vector<T> data;
+		int size;
+
+		std::unordered_map<int, int> entityIdToIndex;
+		std::unordered_map<int, int> indexToEntityId;
 
 	public:
-		Pool(int size = 100) {
-			data.resize(size);
+		Pool(int capacity = 100) {
+			size = 0;
+			data.resize(capacity);
 		}
 
 		 ~Pool() = default;
 
-		bool isEmpty() {
-			return data.empty();
+		bool IsEmpty() {
+			return size == 0;
 		}
 		int GetSize() {
-			return static_cast<int>(data.size());
+			return size;
 		}
 		void Resize(int n) {
 			data.resize(n);
 		}
 		void Clear() {
 			data.clear();
+			size = 0;
+			entityIdToIndex.clear();
+			indexToEntityId.clear();
 		}
 
 		void Add(T object) {
 			data.push_back(object);
 		}
-		void Set(int index, T object) {
-			data[index] = object;
+
+		void Set(int entityId, T object) {
+
+			//the entity already has an object in this pool so we just have to replace it
+			if (entityIdToIndex.find(entityId) != entityIdToIndex.end())
+			{
+				int index = entityIdToIndex[entityId];
+				data[index] = object;
+			}
+
+			else 
+			{
+				int index = size;
+				entityIdToIndex.emplace(entityId, index);
+				indexToEntityId.emplace(index, entityId);
+
+				if (size >= data.size())
+				{
+					data.resize(size * 2);
+				}
+				data[index] = object;
+				size++;
+
+			}
 		}
 
-		T& Get(int index) {
+		void Remove(int entityId)
+		{
+			//no such entityId to remove just get out then
+			if (entityIdToIndex.find(entityId) == entityIdToIndex.end())
+			{
+				return;
+			}
+
+			int indexOfRemoved = entityIdToIndex[entityId];
+			int indexOfLast = size - 1;
+
+			//Switched removed with the last
+			//Ok but what if our removed is our last? that should be dealt with to be honest
+			data[indexOfRemoved] = data[indexOfLast];
+
+			//update the index-entity mapps to point to the correct elements
+			int entityIdOfLastElement = indexToEntityId[indexOfLast];
+			entityIdToIndex[entityIdOfLastElement] = indexOfRemoved;
+			indexToEntityId[indexOfRemoved] = entityIdOfLastElement;
+
+			entityIdToIndex.erase(entityId);
+			indexToEntityId.erase(indexOfLast);
+
+			size--;
+
+		}
+
+		void RemoveEntityFromPool(int entityId) override
+		{
+			if (entityIdToIndex.find(entityId) != entityIdToIndex.end())
+			{
+				Remove(entityId);
+			}
+		
+		}
+
+		T& Get(int entityId) {
 			//To make sure we return the correct datatype
+			int index = entityIdToIndex[entityId];
 			return static_cast<T&>(data[index]);
 		}
 
@@ -347,9 +416,10 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
 
 	std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
 
-	if (entityId >= componentPool->GetSize()) {
-		componentPool->Resize(numEntities);
-	}
+	//Not needed anymore
+	//if (entityId >= componentPool->GetSize()) {
+	//	componentPool->Resize(numEntities);
+	//}
 
 	//Forward the multiple param
 	TComponent newComponent(std::forward<TArgs>(args)...);
@@ -360,6 +430,7 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
 
 	Logger::Log("Adding Component - Component ID = " + std::to_string(componentId) + " added to the Entity with ID: " + std::to_string(entityId));
 
+	Logger::Log("New Pool size: " + std::to_string(componentPool->GetSize()));
 }
 
 template<typename TComponent>
@@ -379,17 +450,13 @@ template<typename TComponent>
 void Registry::RemoveComponent(Entity entity) {
 	const auto componentId = Component<TComponent>::GetId();
 	const auto entityId = entity.GetId();
+	std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
 
-	//We do need to remove the it from the pool but that will be later
 
-	/// <summary>
-	///for now all we have to do is set the signature bit at that component id
-	//For that vector of signatures at the entity to false
-	//saying that the entity with entity Id does not have the component at the comp
-	//Component id
-	/// </summary>
-	/// <typeparam name="TComponent"></typeparam>
-	/// <param name="entity"></param>
+	//We do need to remove the it from the pool 
+	componentPool->Remove(entityId);
+
+	//Set component signature ID to false
 	entityComponentSignatures[entityId].set(componentId, false);
 }
 

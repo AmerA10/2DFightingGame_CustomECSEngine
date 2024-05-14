@@ -1,4 +1,7 @@
-﻿  Game.cpp
+﻿  AssetStore.cpp
+  ECS.cpp
+  Logger.cpp
+  Game.cpp
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Components\BoxColliderComponent.h(21,23): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
@@ -24,4 +27,12 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(88,35): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(89,36): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(304,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+  glm.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_sdl.cpp
+  imgui_widgets.cpp
+  Main.cpp
+  Generating Code...
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

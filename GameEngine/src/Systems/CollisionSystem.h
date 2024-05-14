@@ -15,7 +15,6 @@ public:
 	{
 		RequireComponent<BoxColliderComponent>();
 		RequireComponent<TransformComponent>();
-
 	}
 
 	void Update(std::unique_ptr<EventBus>& eventBus) 

@@ -147,8 +147,23 @@ void Registry::Update() {
 
 		Logger::Log("new free id: " + std::to_string(entity.GetId()));
 		entityComponentSignatures[entity.GetId()].reset();
+
+
+		for (auto pool : componentPools)
+		{
+			if (pool)
+			{
+				pool->RemoveEntityFromPool(entity.GetId());
+			}
+		}
 		
 		freeIds.push_back(entity.GetId());
+		RemoveEntityTag(entity);
+		RemoveEntityGroup(entity);
+		//Need to remove the entity from the component pools
+
+
+
 
 	}
 	entitiesToBeKilled.clear();
@@ -177,30 +192,16 @@ Entity Registry::GetEntityByTag(const std::string& tag) const
 
 void Registry::RemoveEntityTag(Entity entity)
 {
-	//if it does not exist then just get out
-	if (tagPerEntity.find(entity.GetId()) == tagPerEntity.end())
-	{
-		return;
+	auto taggedEntity = tagPerEntity.find(entity.GetId());
+	if (taggedEntity != tagPerEntity.end()) {
+		auto tag = taggedEntity->second;
+		entityPerTag.erase(tag);
+		tagPerEntity.erase(taggedEntity);
 	}
-
-	tagPerEntity.erase(entity.GetId());
-	const std::string& entityTag = tagPerEntity.at(entity.GetId());
-
-	if (entityPerTag.find(entityTag) == entityPerTag.end())
-	{
-		return;
-	}
-
-	entityPerTag.erase(entityTag);
 }
 
 void Registry::GroupEntity(Entity entity, const std::string& group)
 {
-	//already exists
-	if (groupPerEntity.find(entity.GetId()) != groupPerEntity.end())
-	{
-		return;
-	}
 
 	
 	//No set exists
@@ -259,34 +260,15 @@ std::vector<Entity> Registry::GetEntitiesByGroup(const std::string& group) const
 void Registry::RemoveEntityGroup(Entity entity)
 {
 
-	//if it does not exist the just return
-	if (groupPerEntity.find(entity.GetId()) == groupPerEntity.end())
-	{
-		return;
-	
+	auto groupedEntity = groupPerEntity.find(entity.GetId());
+	if (groupedEntity != groupPerEntity.end()) {
+		auto group = entitiesPerGroup.find(groupedEntity->second);
+		if (group != entitiesPerGroup.end()) {
+			auto entityInGroup = group->second.find(entity);
+			if (entityInGroup != group->second.end()) {
+				group->second.erase(entityInGroup);
+			}
+		}
+		groupPerEntity.erase(groupedEntity);
 	}
-
-	const std::string& group = groupPerEntity.at(entity.GetId());
-
-	groupPerEntity.erase(entity.GetId());
-
-	//Need to remove from above first
-
-	//no group here either so just return? Yes
-	if (entitiesPerGroup.find(group) == entitiesPerGroup.end())
-	{
-		return;
-	}
-
-	//Get the group
-	std::set<Entity> entities = entitiesPerGroup.at(group);
-
-	//does not exist in this group
-	if (entities.find(entity) == entities.end())
-	{
-		return;
-	}
-
-	//remove from the group
-	entities.erase(entity);
 }
