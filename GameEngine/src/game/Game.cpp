@@ -25,10 +25,16 @@
 #include "../Systems/ProjectileEmitterSystem.h"
 #include "../Systems/ProjectileLifeCycleSystem.h"
 #include "../Systems/RenderTextSystem.h"
+#include "../Systems/HealthDisplaySystem.h"
+#include "../Systems/RenderGUISystem.h"
 #include <fstream>
 #include <sstream>
 #include <array>
 #include <streambuf>
+
+#include <imgui/imgui_impl_sdl2.h>
+#include <imgui/imgui_impl_sdlrenderer2.h>
+
 
 int Game::windowWidth;
 int Game::windowHeight;
@@ -116,7 +122,10 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<ProjectilEmitterSystem>();
 	registry->AddSystem<ProjectileLifeCycleSystem>();
 	registry->AddSystem<RenderTextSystem>();
+	registry->AddSystem<HealthDisplaySystem>();
+	registry->AddSystem<RenderGUISystem>();
 
+	SDL_Color startColor = { 10,255,10 };
 
 	Entity tank = registry->CreateEntity();
 	tank.AddComponent<TransformComponent>(glm::vec2(200.0, 200.0), glm::vec2(2.0, 2.0), 0.0f);
@@ -124,9 +133,10 @@ void Game::LoadLevel(int level)
 	tank.AddComponent<SpriteComponent>("tank-image", 32, 32,2);
 	tank.AddComponent<BoxColliderComponent>(32,32, tank.GetComponent<TransformComponent>().scale);
 	tank.Group("Enemies");
-	Entity truck = registry->CreateEntity();
-	tank.AddComponent<HealthComponent>(50);
+	tank.AddComponent<HealthComponent>(100);
+	tank.AddComponent<TextLabelComponent>("charriot-font", std::to_string(tank.GetComponent<HealthComponent>().health), tank.GetComponent<TransformComponent>().position, startColor,false);
 
+	Entity truck = registry->CreateEntity();
 
 	//This shows that even constructor with default variables
 	truck.AddComponent<TransformComponent>(glm::vec2(500.0,500.0));
@@ -136,7 +146,7 @@ void Game::LoadLevel(int level)
 	truck.AddComponent<HealthComponent>(100);
 	truck.Group("Enemies");
 	truck.AddComponent<ProjectileEmitterComponent>(glm::vec2(0, -100), 1000, 7000, 10, false, 80, true);
-	truck.AddComponent<HealthComponent>(50);
+	truck.AddComponent<TextLabelComponent>("charriot-font", std::to_string(truck.GetComponent<HealthComponent>().health), truck.GetComponent<TransformComponent>().position, startColor, false);
 
 	Entity chopper = registry->CreateEntity();
 	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
@@ -149,7 +159,10 @@ void Game::LoadLevel(int level)
 	chopper.AddComponent<CameraFollowComponent>();
 	chopper.Tag("Player");
 	chopper.Group("Military");
-	chopper.AddComponent<HealthComponent>(20);
+	chopper.AddComponent<HealthComponent>(100);
+	glm::vec2 textPos = chopper.GetComponent<TransformComponent>().position;
+	
+	chopper.AddComponent<TextLabelComponent>("charriot-font", std::to_string(chopper.GetComponent<HealthComponent>().health), textPos, startColor, false);
 
 	Entity radar = registry->CreateEntity();
 	radar.AddComponent<TransformComponent>(glm::vec2(windowWidth - 200, 50), glm::vec2(2.0, 2.0), 0.0);
@@ -226,7 +239,7 @@ void Game::Initialize()
 		Logger::Err("Error Creating SDL Renderer");
 		return;
 	}
-
+	
 
 	//Our camera needs a main entity to follow
 	camera.x = 0;
@@ -238,8 +251,19 @@ void Game::Initialize()
 
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
+	//Initialize the imGUI context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+	ImGui_ImplSDLRenderer2_Init(renderer);
+
+	io = ImGui::GetIO();
+
 	isRunning = true;
 	Logger::Log("game init success");
+
+
+
 
 }
 
@@ -253,6 +277,16 @@ void Game::ProcessInput()
 	//The events so that only those events that are input related can be processed
 	while (SDL_PollEvent(&sdlEvent)) 
 	{
+		ImGui_ImplSDL2_ProcessEvent(&sdlEvent);
+
+		int mouseX, mouseY;
+		const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+
+		io.MousePos = ImVec2(mouseX, mouseY);
+		//bit wise operations with the button returned
+		io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+		io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+
 		switch (sdlEvent.type)
 		{
 		case SDL_QUIT:
@@ -339,6 +373,7 @@ void Game::Update()
 	registry->GetSystem<CameraMovementSystem>().Update(camera);
 	registry->GetSystem<ProjectilEmitterSystem>().Update(registry);
 	registry->GetSystem<ProjectileLifeCycleSystem>().Update();
+
 }
 
 void Game::Render() 
@@ -351,16 +386,26 @@ void Game::Render()
 	//It is why we have the SDL_Image included
 	registry->GetSystem<RenderSystem>().Update(renderer, assetStore,camera);
 	registry->GetSystem<RenderTextSystem>().Update(renderer, assetStore, camera);
-
+	registry->GetSystem<HealthDisplaySystem>().Update(renderer, camera);
 	if (drawDebug) {
 		registry->GetSystem<RenderDebugSystem>().Update(renderer,camera);
+
+		//We want to creat e asystem responsible for creating
+		//ImGUI widgets
+		registry->GetSystem<RenderGUISystem>().Update(registry);
+
 	}
+
 
 	SDL_RenderPresent(renderer);
 }
 
 void Game::Destroy() 
 {
+
+	ImGui_ImplSDLRenderer2_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);

@@ -4,7 +4,7 @@ struct HealthComponent
 {
 	int health;
 
-	HealthComponent(int health = 10)
+	HealthComponent(int health = 100)
 	{
 		this->health = health;
 	}

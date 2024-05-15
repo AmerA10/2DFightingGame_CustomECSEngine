@@ -141,6 +141,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\imgui\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="libs\imgui\imgui_impl_sdlrenderer2.cpp" />
+    <ClCompile Include="libs\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\AssetStore\AssetStore.cpp" />
     <ClCompile Include="src\ECS\ECS.cpp" />
     <ClCompile Include="src\logger\Logger.cpp" />
@@ -149,11 +152,12 @@
     <ClCompile Include="libs\imgui\imgui.cpp" />
     <ClCompile Include="libs\imgui\imgui_demo.cpp" />
     <ClCompile Include="libs\imgui\imgui_draw.cpp" />
-    <ClCompile Include="libs\imgui\imgui_sdl.cpp" />
     <ClCompile Include="libs\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\imgui\imgui_impl_sdl2.h" />
+    <ClInclude Include="libs\imgui\imgui_impl_sdlrenderer2.h" />
     <ClInclude Include="src\AssetStore\AssetStore.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
     <ClInclude Include="src\Components\BoxColliderComponent.h" />
@@ -170,11 +174,13 @@
     <ClInclude Include="src\EventBus\Event.h" />
     <ClInclude Include="src\EventBus\EventBus.h" />
     <ClInclude Include="src\Events\CollisionEvent.h" />
+    <ClInclude Include="src\Events\HealthUpdatedEvent.h" />
     <ClInclude Include="src\Events\KeyboardInputEvent.h" />
     <ClInclude Include="src\Systems\AnimationSystem.h" />
     <ClInclude Include="src\Systems\CameraMovementSystem.h" />
     <ClInclude Include="src\Systems\CollisionSystem.h" />
     <ClInclude Include="src\Systems\DamageSystem.h" />
+    <ClInclude Include="src\Systems\HealthDisplaySystem.h" />
     <ClInclude Include="src\Systems\KeyboardInputSystem.h" />
     <ClInclude Include="src\Systems\MovementSystem.h" />
     <ClInclude Include="src\logger\Logger.h" />
@@ -423,7 +429,6 @@
     <ClInclude Include="libs\imgui\imconfig.h" />
     <ClInclude Include="libs\imgui\imgui.h" />
     <ClInclude Include="libs\imgui\imgui_internal.h" />
-    <ClInclude Include="libs\imgui\imgui_sdl.h" />
     <ClInclude Include="libs\imgui\imstb_rectpack.h" />
     <ClInclude Include="libs\imgui\imstb_textedit.h" />
     <ClInclude Include="libs\imgui\imstb_truetype.h" />
@@ -436,6 +441,7 @@
     <ClInclude Include="src\Systems\ProjectileEmitterSystem.h" />
     <ClInclude Include="src\Systems\ProjectileLifeCycleSystem.h" />
     <ClInclude Include="src\Systems\RenderDebugSystem.h" />
+    <ClInclude Include="src\Systems\RenderGUISystem.h" />
     <ClInclude Include="src\Systems\RenderSystem.h" />
     <ClInclude Include="src\Systems\RenderTextSystem.h" />
   </ItemGroup>

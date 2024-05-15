@@ -9,11 +9,12 @@
 #include <memory>
 #include "../AssetStore/AssetStore.h"
 #include "../EventBus/EventBus.h"
-
+#include <imgui/imgui.h>
 
 const int FPS = 60;
 //The time each frame is expected to take
 const int MILLISECS_PER_FRAME = 1000 / FPS;
+
 
 class Game
 {
@@ -41,6 +42,8 @@ class Game
 		std::unique_ptr<AssetStore> assetStore;
 		std::unique_ptr<EventBus> eventBus;
 
+		
+
 	public:
 		Game();
 		~Game();
@@ -58,6 +61,8 @@ class Game
 		static int windowHeight;
 		static int mapWidth;
 		static int mapHeight;
+
+		ImGuiIO io;
 
 };
 

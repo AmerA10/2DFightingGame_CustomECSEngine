@@ -21,7 +21,10 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
           ]
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileEmitterSystem.h(58,54): warning C4018: '>': signed/unsigned mismatch
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileLifeCycleSystem.h(21,50): warning C4018: '>': signed/unsigned mismatch
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(90,35): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(91,36): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(315,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\HealthDisplaySystem.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(96,35): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(97,36): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(285,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(285,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(349,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

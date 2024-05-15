@@ -5,6 +5,13 @@
 
 #include <glm/glm.hpp>
 
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="pos"></param>
+/// <param name="scale"></param>
+/// <param name="rotation"></param>
 struct TransformComponent {
 
 	glm::vec2 position;

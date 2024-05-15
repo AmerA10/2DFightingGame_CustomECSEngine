@@ -40,7 +40,6 @@ public:
 
 			SDL_RenderDrawRect(renderer, &collisionRect);
 			
-
 		}
 	}
 

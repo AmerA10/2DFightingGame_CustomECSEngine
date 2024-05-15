@@ -179,7 +179,7 @@ class Pool: public IPool {
 				entityIdToIndex.emplace(entityId, index);
 				indexToEntityId.emplace(index, entityId);
 
-				if (size >= data.size())
+				if (size >= data.capacity())
 				{
 					data.resize(size * 2);
 				}
@@ -192,10 +192,10 @@ class Pool: public IPool {
 		void Remove(int entityId)
 		{
 			//no such entityId to remove just get out then
-			if (entityIdToIndex.find(entityId) == entityIdToIndex.end())
-			{
-				return;
-			}
+			//if (entityIdToIndex.find(entityId) == entityIdToIndex.end())
+			//{
+			//	return;
+			//}
 
 			int indexOfRemoved = entityIdToIndex[entityId];
 			int indexOfLast = size - 1;

@@ -4,8 +4,10 @@
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/ProjectileComponent.h"
 #include "../Components/HealthComponent.h"
+#include "../Components/TextLabelComponent.h"
 #include "../EventBus/EventBus.h"
 #include "../Events/CollisionEvent.h"
+#include "../Events/HealthUpdatedEvent.h"
 
 class DamageSystem : public System 
 {
@@ -52,14 +54,14 @@ class DamageSystem : public System
 				OnProjectileHitsEnemy(b, a);
 
 			}
-
 		
 		}
+
 
 		void OnProjectileHitsPlayer(Entity projectile, Entity player)
 		{
 			const ProjectileComponent projComp = projectile.GetComponent<ProjectileComponent>();
-
+			
 
 			if (!player.HasComponent<HealthComponent>())
 			{
@@ -98,7 +100,6 @@ class DamageSystem : public System
 			if (projComp.isFriendly == true)
 			{
 				enemyHealthComp.health -= projComp.hitPercentDamage;
-
 				if (enemyHealthComp.health <= 0)
 				{
 					enemy.Kill();
@@ -108,5 +109,6 @@ class DamageSystem : public System
 
 			
 		}
+		
 
 };
