@@ -1334,6 +1334,7 @@
     <None Include="libs\lua\LICENCE" />
     <None Include="libs\sol\LICENCE" />
     <None Include="libs\glm\LICENSE" />
+    <None Include="assets\scripts\myscript.lua" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lua\liblua53.a" />

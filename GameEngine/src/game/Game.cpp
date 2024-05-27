@@ -93,7 +93,7 @@ void Game::LoadTileMap(const std::string& mapPath, const std::string& texturePat
 	}
 	mapFile.close();
 
-	mapWidth = mapNumCols * tileSize * tileScale;;
+	mapWidth = mapNumCols * tileSize * tileScale;
 	mapHeight = mapNumRows * tileSize * tileScale;
 
 }
@@ -109,6 +109,7 @@ void Game::LoadLevel(int level)
 	assetStore->AddTexture(renderer, "bullet-image", "./assets/images/bullet.png");
 	assetStore->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 30);
 	assetStore->AddFont("arial-font", "./assets/fonts/arial.ttf", 30);
+	assetStore->AddTexture(renderer, "tree-image", "./assets/images/tree.png");
 
 	//Add systems that need to be processed in our game
 	registry->AddSystem<MovementSystem>();
@@ -145,7 +146,7 @@ void Game::LoadLevel(int level)
 	truck.AddComponent<BoxColliderComponent>(64,64,truck.GetComponent<TransformComponent>().scale);
 	truck.AddComponent<HealthComponent>(100);
 	truck.Group("Enemies");
-	truck.AddComponent<ProjectileEmitterComponent>(glm::vec2(0, -100), 1000, 7000, 10, false, 80, true);
+	truck.AddComponent<ProjectileEmitterComponent>(glm::vec2(0, 100), 1000, 7000, 10, false, 80, true);
 	truck.AddComponent<TextLabelComponent>("charriot-font", std::to_string(truck.GetComponent<HealthComponent>().health), truck.GetComponent<TransformComponent>().position, startColor, false);
 
 	Entity chopper = registry->CreateEntity();
@@ -155,7 +156,7 @@ void Game::LoadLevel(int level)
 	chopper.AddComponent<AnimationComponent>(2,20,true);
 	chopper.AddComponent<BoxColliderComponent>(32, 32, chopper.GetComponent<TransformComponent>().scale);
 	chopper.AddComponent<KeyboardControlledComponent>(glm::vec2(0,-400), glm::vec2(400, 0), glm::vec2(0, 400), glm::vec2(-400, 0));
-	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(100,0),1000,5000,5,true, 200,false);
+	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(-100,0),1000,5000,5,true, 200,false);
 	chopper.AddComponent<CameraFollowComponent>();
 	chopper.Tag("Player");
 	chopper.Group("Military");
@@ -186,6 +187,21 @@ void Game::LoadLevel(int level)
 	SDL_Color purple = { 255,0,255 };
 	label2.AddComponent<TextLabelComponent>("arial-font", "Sample Text 2", glm::vec2(500, 100), purple);
 
+	Entity tree = registry->CreateEntity();
+	tree.Group("obstacles");
+	tree.AddComponent<TransformComponent>(glm::vec2(50, 100), glm::vec2(2, 2), 0);
+	tree.AddComponent<BoxColliderComponent>(16,32,tree.GetComponent<TransformComponent>().scale);
+	tree.AddComponent<SpriteComponent>("tree-image", 16, 32, 2, false);
+
+	Entity anotherTruck = registry->CreateEntity();
+
+	//This shows that even constructor with default variables
+	anotherTruck.AddComponent<TransformComponent>(glm::vec2(500, 100));
+	anotherTruck.AddComponent<RigidBodyComponent>(glm::vec2(-40, 0.0));
+	anotherTruck.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
+	anotherTruck.AddComponent<BoxColliderComponent>(64, 64, anotherTruck.GetComponent<TransformComponent>().scale);
+	anotherTruck.AddComponent<HealthComponent>(100);
+	anotherTruck.Group("enemies");
 }
 
 void Game::Setup()
@@ -361,6 +377,7 @@ void Game::Update()
 
 	eventBus->Reset();
 	
+	registry->GetSystem<MovementSystem>().SubscribeToEvents(eventBus);
 	registry->GetSystem<DamageSystem>().SubscriberToEvents(eventBus);
 	registry->GetSystem<KeyboardInputSystem>().SubscribeToKeyInputEvent(eventBus);
 	registry->GetSystem<ProjectilEmitterSystem>().SubscribeToKeyInputEvent(eventBus);
