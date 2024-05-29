@@ -54,7 +54,7 @@ private:
 
 public:
 	//method will not modify the state of the class, intiallize member id
-	Entity(int id) : id(id) {};
+	Entity(int id) : id(id) {}
 	int GetId() const;
 
 	//This constructor will use the overloaded assignmenet operator

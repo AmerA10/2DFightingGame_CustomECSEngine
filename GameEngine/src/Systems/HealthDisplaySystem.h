@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../ECS/ECS.h"
-#include "../Components/HealthComponent.h";
+#include "../Components/HealthComponent.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/TextLabelComponent.h"
 

@@ -1,3 +1,14 @@
+-- we want to load a different tilemap image depending on system time
+local current_system_hour = os.date("*t").hour
+
+local map_texture_asset_id
+
+if current_system_hour >= 9 and current_system_hour < 18 then
+    map_texture_asset_id = "tilemap-texture-night"
+else
+    map_texture_asset_id = "tilemap-texture-day"
+end
+
 -- Define a table with the values of the first level
 Level = {
     ----------------------------------------------------
@@ -5,11 +16,13 @@ Level = {
     ----------------------------------------------------
     assets = {
         [0] =
-        { type = "texture", id = "tilemap-texture", file = "./assets/tilemaps/jungle.png" },
+        { type = "texture", id = "tilemap-texture-day", file = "./assets/tilemaps/jungle.png" },
+        { type = "texture", id = "tilemap-texture-night", file = "./assets/tilemaps/jungle-night.png" },
         { type = "texture", id = "chopper-texture", file = "./assets/images/chopper-spritesheet.png" },
         { type = "texture", id = "tank-texture",    file = "./assets/images/tank-tiger-up.png" },
         { type = "texture", id = "truck-texture",    file = "./assets/images/truck-ford-up.png" },
         { type = "texture", id = "bullet-texture",  file = "./assets/images/bullet.png" },
+        { type = "texture", id = "fw190-texture",  file = "./assets/images/fw190-spritesheet.png" },
         { type = "font"   , id = "arial-font",    file = "./assets/fonts/arial.ttf", font_size = 20 },
         { type = "font"   , id = "charriot-font",   file = "./assets/fonts/charriot.ttf", font_size = 20 }
     },
@@ -19,7 +32,7 @@ Level = {
     ----------------------------------------------------
     tilemap = {
         map_file = "./assets/tilemaps/jungle.map",
-        texture_asset_id = "tilemap-texture",
+        texture_asset_id = map_texture_asset_id,
         num_rows = 20,
         num_cols = 25,
         tile_size = 32,
@@ -36,7 +49,7 @@ Level = {
             tag = "Player",
             components = {
                 transform = {
-                    position = { x = 242, y = 110 },
+                    position = { x = math.random(10,200), y = 110 },
                     scale = { x = 2.0, y = 2.0 },
                     rotation = 0.0, -- degrees
                 },
@@ -132,7 +145,65 @@ Level = {
                     color = { r = 150, g = 250, b = 50},
                     is_fixed = false
                 }
+            } 
+        },
+        {
+             -- Fw190
+            group = "Enemies",
+            components = {
+                transform = {
+                    position = { x = math.random(200,300), y = math.random(200,500) },
+                    scale = { x = 2.0, y = 2.0 },
+                    rotation = 0.0, -- degrees
+                },
+                sprite = {
+                    texture_asset_id = "fw190-texture",
+                    width = 32,
+                    height = 32,
+                    z_index = 2
+                },
+                boxcollider = {
+                    width = 32,
+                    height = 32,
+                    scale = { x = 2.0, y = 2.0},
+                    offset = { x = 0, y = 0 }
+                },
+                health = {
+                    health_percentage = 100
+                },
+                projectile_emitter = {
+                    projectile_velocity = { x = 100, y = 0 },
+                    projectile_duration = 2, -- seconds
+                    repeat_frequency = 1, -- seconds
+                    hit_percentage_damage = 20,
+                    friendly = false,
+                    projectile_speed = 200,
+                    use_frequency = true
+                },
+                text_label = {
+                    font_asset_id = "charriot-font",
+                    text = "",
+                    color = { r = 150, g = 250, b = 50},
+                    is_fixed = false
+                },
+                animation = {
+                    num_frames = 3,
+                    speed_rate = 10 -- fps
+                },
+                on_update_script = {
+                    [0] = 
+                    function (entity, delta_time, ellapsed_time)
+                        local position_x, position_y = get_position(entity)
+                        local new_x = ellapsed_time * 0.09
+                        local new_y = 200 + (math.sin(ellapsed_time * 0.001) * 50)
+                        set_position(entity,new_x,new_y)
+
+                    end
+                }
             }
         }
     }
 }
+
+map_width = Level.tilemap.tile_size * Level.tilemap.num_cols * Level.tilemap.scale
+map_height = Level.tilemap.tile_size * Level.tilemap.num_rows * Level.tilemap.scale

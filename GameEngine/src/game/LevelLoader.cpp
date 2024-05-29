@@ -11,6 +11,7 @@
 #include "../Components/HealthComponent.h"
 #include "../Components/ProjectileEmitterComponent.h"
 #include "../Components/TextLabelComponent.h"
+#include "../Components/ScriptComponent.h"
 #include "./Game.h"
 #include <sol/sol.hpp>
 
@@ -316,6 +317,13 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					entity["components"]["text_label"]["is_fixed"].get_or(true)
 
 					);
+			}
+
+			sol::optional<sol::table> updateScriptComp = entity["components"]["on_update_script"];
+			if (updateScriptComp != sol::nullopt)
+			{
+				sol::function func = entity["components"]["on_update_script"][0];
+				newEntity.AddComponent<ScriptComponent>(func);
 			}
 		}
 		
