@@ -1,19 +1,10 @@
 #include "Game.h"
+#include "LevelLoader.h"
 #include <iostream>
 #include <SDL_image.h>
 #include <glm/glm.hpp>
 #include "../ECS/ECS.h"
 #include "../logger/Logger.h"
-#include "../Components/TransformComponent.h"
-#include "../Components/RigidBodyComponent.h"
-#include "../Components/SpriteComponent.h"
-#include "../Components/AnimationComponent.h"
-#include "../Components/BoxColliderComponent.h"
-#include "../Components/KeyboardControlledComponent.h"
-#include "../Components/CameraFollowComponent.h"
-#include "../Components/HealthComponent.h"
-#include "../Components/ProjectileEmitterComponent.h"
-#include "../Components/TextLabelComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
@@ -27,11 +18,6 @@
 #include "../Systems/RenderTextSystem.h"
 #include "../Systems/HealthDisplaySystem.h"
 #include "../Systems/RenderGUISystem.h"
-#include <fstream>
-#include <sstream>
-#include <array>
-#include <streambuf>
-
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
 
@@ -58,59 +44,9 @@ Game::Game()
 
 }
 
-void Game::LoadTileMap(const std::string& mapPath, const std::string& texturePath) {
 
-	assetStore->AddTexture(renderer, "tile-Image", texturePath);
-
-	int tileWidth = 32;
-	int tileHeight = 32;
-
-	
-	assetStore->AddTexture(renderer, "tilemap-image", "./assets/tilemaps/jungle.png");
-
-	// Load the tilemap
-	int tileSize = 32;
-	double tileScale = 5.0;
-	int mapNumCols = 25;
-	int mapNumRows = 20;
-
-	std::fstream mapFile;
-	mapFile.open("./assets/tilemaps/jungle.map");
-
-	for (int y = 0; y < mapNumRows; y++) {
-		for (int x = 0; x < mapNumCols; x++) {
-			char ch;
-			mapFile.get(ch);
-			int srcRectY = std::atoi(&ch) * tileSize;
-			mapFile.get(ch);
-			int srcRectX = std::atoi(&ch) * tileSize;
-			mapFile.ignore();
-
-			Entity tile = registry->CreateEntity();
-			tile.AddComponent<TransformComponent>(glm::vec2(x * (tileScale * tileSize), y * (tileScale * tileSize)), glm::vec2(tileScale, tileScale), 0.0);
-			tile.AddComponent<SpriteComponent>("tilemap-image", tileSize, tileSize, 0,false, srcRectX, srcRectY);
-		}
-	}
-	mapFile.close();
-
-	mapWidth = mapNumCols * tileSize * tileScale;
-	mapHeight = mapNumRows * tileSize * tileScale;
-
-}
-
-void Game::LoadLevel(int level) 
+void Game::Setup()
 {
-	LoadTileMap("./assets/tilemaps/jungle.map", "./assets/tilemaps/jungle.png");
-
-	assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
-	assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-down.png");
-	assetStore->AddTexture(renderer, "chopper-image", "./assets/images/chopper-spritesheet.png");
-	assetStore->AddTexture(renderer, "radar-image", "./assets/images/radar.png");
-	assetStore->AddTexture(renderer, "bullet-image", "./assets/images/bullet.png");
-	assetStore->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 30);
-	assetStore->AddFont("arial-font", "./assets/fonts/arial.ttf", 30);
-	assetStore->AddTexture(renderer, "tree-image", "./assets/images/tree.png");
-
 	//Add systems that need to be processed in our game
 	registry->AddSystem<MovementSystem>();
 	registry->AddSystem<RenderSystem>();
@@ -126,88 +62,11 @@ void Game::LoadLevel(int level)
 	registry->AddSystem<HealthDisplaySystem>();
 	registry->AddSystem<RenderGUISystem>();
 
-	SDL_Color startColor = { 10,255,10 };
+	lua.open_libraries(sol::lib::base);
 
-	Entity tank = registry->CreateEntity();
-	tank.AddComponent<TransformComponent>(glm::vec2(200.0, 200.0), glm::vec2(2.0, 2.0), 0.0f);
-	tank.AddComponent<RigidBodyComponent>(glm::vec2(0.0, 0.0));
-	tank.AddComponent<SpriteComponent>("tank-image", 32, 32,2);
-	tank.AddComponent<BoxColliderComponent>(32,32, tank.GetComponent<TransformComponent>().scale);
-	tank.Group("Enemies");
-	tank.AddComponent<HealthComponent>(100);
-	tank.AddComponent<TextLabelComponent>("charriot-font", std::to_string(tank.GetComponent<HealthComponent>().health), tank.GetComponent<TransformComponent>().position, startColor,false);
+	LevelLoader loader;
 
-	Entity truck = registry->CreateEntity();
-
-	//This shows that even constructor with default variables
-	truck.AddComponent<TransformComponent>(glm::vec2(500.0,500.0));
-	truck.AddComponent<RigidBodyComponent>(glm::vec2(0.0,0.0));
-	truck.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
-	truck.AddComponent<BoxColliderComponent>(64,64,truck.GetComponent<TransformComponent>().scale);
-	truck.AddComponent<HealthComponent>(100);
-	truck.Group("Enemies");
-	truck.AddComponent<ProjectileEmitterComponent>(glm::vec2(0, 100), 1000, 7000, 10, false, 80, true);
-	truck.AddComponent<TextLabelComponent>("charriot-font", std::to_string(truck.GetComponent<HealthComponent>().health), truck.GetComponent<TransformComponent>().position, startColor, false);
-
-	Entity chopper = registry->CreateEntity();
-	chopper.AddComponent<TransformComponent>(glm::vec2(10.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
-	chopper.AddComponent<RigidBodyComponent>(glm::vec2(0.0, -50.0));
-	chopper.AddComponent<SpriteComponent>("chopper-image", 32, 32, 1);
-	chopper.AddComponent<AnimationComponent>(2,20,true);
-	chopper.AddComponent<BoxColliderComponent>(32, 32, chopper.GetComponent<TransformComponent>().scale);
-	chopper.AddComponent<KeyboardControlledComponent>(glm::vec2(0,-400), glm::vec2(400, 0), glm::vec2(0, 400), glm::vec2(-400, 0));
-	chopper.AddComponent<ProjectileEmitterComponent>(glm::vec2(-100,0),1000,5000,5,true, 200,false);
-	chopper.AddComponent<CameraFollowComponent>();
-	chopper.Tag("Player");
-	chopper.Group("Military");
-	chopper.AddComponent<HealthComponent>(100);
-	glm::vec2 textPos = chopper.GetComponent<TransformComponent>().position;
-	
-	chopper.AddComponent<TextLabelComponent>("charriot-font", std::to_string(chopper.GetComponent<HealthComponent>().health), textPos, startColor, false);
-
-	Entity radar = registry->CreateEntity();
-	radar.AddComponent<TransformComponent>(glm::vec2(windowWidth - 200, 50), glm::vec2(2.0, 2.0), 0.0);
-	radar.AddComponent<RigidBodyComponent>();
-	radar.AddComponent<SpriteComponent>("radar-image", 64, 64, 3, true);
-	radar.AddComponent<AnimationComponent>(8, 3, true);
-	radar.Group("UI");
-	
-
-	//This won't use the same ID as above simply because its all happening in one frame, you need the death
-	//and creation to be on different frames, Frame in between the death and creation
-
-	//Entity newRader = registry->CreateEntity();
-	//newRader.AddComponent<TransformComponent>(glm::vec2(500.0, 500.0), glm::vec2(2.0, 2.0), 0.0);
-
-	Entity label1 = registry->CreateEntity();
-	SDL_Color white = { 255,255,255 };
-	label1.AddComponent<TextLabelComponent>("charriot-font", "Sample Text 1", glm::vec2(500,50), white);
-
-	Entity label2 = registry->CreateEntity();
-	SDL_Color purple = { 255,0,255 };
-	label2.AddComponent<TextLabelComponent>("arial-font", "Sample Text 2", glm::vec2(500, 100), purple);
-
-	Entity tree = registry->CreateEntity();
-	tree.Group("obstacles");
-	tree.AddComponent<TransformComponent>(glm::vec2(50, 100), glm::vec2(2, 2), 0);
-	tree.AddComponent<BoxColliderComponent>(16,32,tree.GetComponent<TransformComponent>().scale);
-	tree.AddComponent<SpriteComponent>("tree-image", 16, 32, 2, false);
-
-	Entity anotherTruck = registry->CreateEntity();
-
-	//This shows that even constructor with default variables
-	anotherTruck.AddComponent<TransformComponent>(glm::vec2(500, 100));
-	anotherTruck.AddComponent<RigidBodyComponent>(glm::vec2(-40, 0.0));
-	anotherTruck.AddComponent<SpriteComponent>("truck-image", 64, 64, 1);
-	anotherTruck.AddComponent<BoxColliderComponent>(64, 64, anotherTruck.GetComponent<TransformComponent>().scale);
-	anotherTruck.AddComponent<HealthComponent>(100);
-	anotherTruck.Group("enemies");
-}
-
-void Game::Setup()
-{
-
-	LoadLevel(1);
+	loader.LoadLevel(lua, registry, assetStore,renderer,1);
 }
 
 
@@ -284,6 +143,17 @@ void Game::Initialize()
 }
 
 
+void Game::Run()
+{
+
+	Setup();
+	while (isRunning)
+	{
+		ProcessInput();
+		Update();
+		Render();
+	}
+}
 
 void Game::ProcessInput() 
 {
@@ -329,17 +199,6 @@ void Game::ProcessInput()
 	}
 }
 
-void Game::Run() 
-{
-
-	Setup();
-	while (isRunning) 
-	{
-		ProcessInput();
-		Update();
-		Render();
-	}
-}
 
 void Game::Update() 
 {

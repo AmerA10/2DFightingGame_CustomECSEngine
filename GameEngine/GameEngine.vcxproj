@@ -146,6 +146,7 @@
     <ClCompile Include="libs\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\AssetStore\AssetStore.cpp" />
     <ClCompile Include="src\ECS\ECS.cpp" />
+    <ClCompile Include="src\game\LevelLoader.cpp" />
     <ClCompile Include="src\logger\Logger.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="libs\glm\detail\glm.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="src\Events\CollisionEvent.h" />
     <ClInclude Include="src\Events\HealthUpdatedEvent.h" />
     <ClInclude Include="src\Events\KeyboardInputEvent.h" />
+    <ClInclude Include="src\game\LevelLoader.h" />
     <ClInclude Include="src\Systems\AnimationSystem.h" />
     <ClInclude Include="src\Systems\CameraMovementSystem.h" />
     <ClInclude Include="src\Systems\CollisionSystem.h" />
@@ -446,6 +448,7 @@
     <ClInclude Include="src\Systems\RenderTextSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\scripts\Level1.lua" />
     <None Include="assets\scripts\myscript.lua" />
     <None Include="libavif-16.dll" />
     <None Include="libmodplug-1.dll" />

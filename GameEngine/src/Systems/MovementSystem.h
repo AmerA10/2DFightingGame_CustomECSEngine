@@ -6,6 +6,7 @@
 #include "../ECS/ECS.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/RigidBodyComponent.h"
+#include "../Components/SpriteComponent.h"
 #include "../Events/CollisionEvent.h"
 #include "../EventBus/EventBus.h"
 #include <memory>

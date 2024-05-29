@@ -18,8 +18,8 @@ struct BoxColliderComponent {
 
 public:
 	BoxColliderComponent(int width = 0, int height = 0, glm::vec2 scale = glm::vec2(1,1), glm::vec2 offset = glm::vec2(0)) {
-		this->width = width * scale.x;
-		this->height = height * scale.y;
+		this->width = width * (int)scale.x;
+		this->height = height * (int)scale.y;
 		this->offset = offset;
 		this->isCollliding = false;
 	}

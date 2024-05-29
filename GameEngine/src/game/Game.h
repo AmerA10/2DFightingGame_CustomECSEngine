@@ -10,6 +10,7 @@
 #include "../AssetStore/AssetStore.h"
 #include "../EventBus/EventBus.h"
 #include <imgui/imgui.h>
+#include <sol/sol.hpp>
 
 const int FPS = 60;
 //The time each frame is expected to take
@@ -38,6 +39,8 @@ class Game
 
 		float deltaTime = 0;
 
+		sol::state lua;
+
 		std::unique_ptr<Registry> registry;
 		std::unique_ptr<AssetStore> assetStore;
 		std::unique_ptr<EventBus> eventBus;
@@ -54,8 +57,6 @@ class Game
 		void Destroy();
 		void Render();
 		void Setup();
-		void LoadLevel(int level);
-		void LoadTileMap(const std::string& mapPath, const std::string& texturePath);
 
 		static int windowWidth;
 		static int windowHeight;

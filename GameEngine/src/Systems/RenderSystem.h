@@ -65,9 +65,6 @@ public:
 			const TransformComponent& transform = entity.GetComponent<TransformComponent>();
 			SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
-
-
-
 			//Set the source rectangle of our original sprite texture
 
 			SDL_Rect srcRect = sprite.srcRect;

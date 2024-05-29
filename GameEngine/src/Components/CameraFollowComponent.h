@@ -4,6 +4,10 @@
 struct CameraFollowComponent 
 {
 
-	CameraFollowComponent() = default;
+	bool follow;
+
+	CameraFollowComponent(bool follow = true) {
+		this->follow = follow;
+	}
 		
 };

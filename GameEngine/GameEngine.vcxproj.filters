@@ -54,6 +54,9 @@
     <ClCompile Include="libs\imgui\imgui_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\LevelLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\glm\detail\_features.hpp">
@@ -920,6 +923,9 @@
     <ClInclude Include="src\Systems\RenderGUISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\LevelLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="libs\glm\detail\func_common.inl">
@@ -1335,6 +1341,7 @@
     <None Include="libs\sol\LICENCE" />
     <None Include="libs\glm\LICENSE" />
     <None Include="assets\scripts\myscript.lua" />
+    <None Include="assets\scripts\Level1.lua" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\lua\liblua53.a" />

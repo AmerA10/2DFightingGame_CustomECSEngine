@@ -56,7 +56,7 @@ public:
 		
 			ImGui::InputInt2("Projectile Velocity", projVel);
 
-			const char* itemsSprite[] = { "tank-image" , "truck-image" };
+			const char* itemsSprite[] = { "tank-texture" , "truck-texture" };
 			static int currentSpriteItemIndex = 0;
 
 			if (ImGui::BeginCombo("Enemy Sprite", itemsSprite[currentSpriteItemIndex]))
