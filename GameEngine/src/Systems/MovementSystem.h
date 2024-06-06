@@ -22,11 +22,13 @@ public:
 
 	}
 
-	void Update(float deltaTime) {
+	void Update(const std::unique_ptr<Registry>& registry, float deltaTime) {
 		//TOOD:
 		//Loop all entities that the system is interested in
 		//Here auto automatically gets the type of entity
 		//Update entity position based on velocity in every frame of the game loop
+	
+
 		for (auto& entity : GetSystemEntities()) {
 			
 			TransformComponent& transform = entity.GetComponent<TransformComponent>();

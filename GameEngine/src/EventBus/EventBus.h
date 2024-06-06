@@ -24,17 +24,25 @@ class IEventCallback {
 
 };
 
+//Enacpuslates the idea of a callback function
+
 template <typename TOwner, typename TEvent>
 class EventCallback: public IEventCallback {
 	private:
 		//bruh what is happening here
+		//we have defined Callbackfunction to be a function pointer to a function
+		//belonging to TOwner that takes in a TEvent& as an argument and returns void
 		typedef void (TOwner::* CallbackFuncion)(TEvent&);
 
+		//this is probably dangerous af
 		TOwner* ownerInstance;
 		CallbackFuncion callbackFunction;
 
 		virtual void Call(Event& e) override 
 		{
+			//invoke takes in the function to call, who it is owned by and the arguments to pass
+			//since we are calling callbackFunction we know that it takes in a TEvent& as arugment 
+			//so we need to cast Event& to TEvent& 
 			std::invoke(callbackFunction, ownerInstance, static_cast<TEvent&>(e));
 		}
 	public:
@@ -80,6 +88,7 @@ class EventBus {
 		/// Example: eventBus->SubscribeToEvent<CollisionEvent>(this, &Game:onCollision);
 		/// </summary>
 		template<typename TEvent, typename TOwner>
+		//change pointers to be proper, maybe just weak pointers
 		void SubscribeToEvent(TOwner* ownerInstance, void(TOwner::* callbackFunction)(TEvent&)) {
 			
 
@@ -90,7 +99,7 @@ class EventBus {
 				subscribers[typeid(TEvent)] = std::make_unique<HandlerList>();
 			}
 
-			//Here we create a unique pointer of type EvenCallback which is a template class, taking
+			//Here we create a unique pointer of type EventCallback which is a template class, taking
 			//in the TOwner and TEvent types deduced in this function, with the constructor passing in
 			//a pointer to the ownerInstance and a callback function which is a pointer function
 			//could use auto but I like this more vurbose better to actually know what the fuck is going on
@@ -111,18 +120,19 @@ class EventBus {
 		template <typename TEvent, typename ...TArgs>
 		void EmitEvent(TArgs&& ...args)
 		{
+			//get the list of the IEventCallbacks
 			auto handlers = subscribers[typeid(TEvent)].get();
 			if (handlers)
 			{
+					//construct the event we want to call taking in the arguments
+				TEvent eventInfo(std::forward<TArgs>(args)...);
 				for (auto it = handlers->begin(); it != handlers->end(); it++)
 				{
 					auto handler = it->get();
 
-					//bruh TEvent is not real until it is called, shrodinger's type
-					TEvent event(std::forward<TArgs>(args)...);
 					
-					//what is happening
-					handler->Execute(event);
+					//execute the callback functions passing in the event information for each event
+					handler->Execute(eventInfo);
 				}
 			}
 		}

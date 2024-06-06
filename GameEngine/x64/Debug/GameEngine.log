@@ -9,7 +9,7 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileEmitterSystem.h(58,54): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileEmitterSystem.h(59,54): warning C4018: '>': signed/unsigned mismatch
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileLifeCycleSystem.h(21,50): warning C4018: '>': signed/unsigned mismatch
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ScriptSystem.h(14,26): warning C4244: '=': conversion from 'const double' to 'T', possible loss of data
           with
@@ -21,7 +21,9 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(175,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(175,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(228,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(198,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(198,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(256,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+  InputLoader.cpp
+  Generating Code...
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

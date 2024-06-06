@@ -12,6 +12,7 @@
 #include "../Components/ProjectileEmitterComponent.h"
 #include "../Components/TextLabelComponent.h"
 #include "../Components/ScriptComponent.h"
+#include "../Components/AudioComponent.h"
 #include "./Game.h"
 #include <sol/sol.hpp>
 
@@ -71,7 +72,7 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 		std::string assetType = asset["type"];
 		std::string assetId = asset["id"];
 		std::string assetFile = asset["file"];
-		//TODO: Need more error checking
+		//TODO: Need more error checking, make this a switch statement its faster
 		if (assetType == "texture")
 		{
 			assetStore->AddTexture(renderer, assetId, assetFile);
@@ -81,6 +82,11 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 		{
 			assetStore->AddFont(assetId, assetFile, asset["font_size"].get_or(10));
 			Logger::Log("added new Font: " + assetId);
+		}
+		else if (assetType == "sound")
+		{
+			assetStore->AddSound(assetId, assetFile);
+			Logger::Log("Added new sound: " + assetId);
 		}
 
 		i++;
@@ -319,12 +325,27 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					);
 			}
 
+			sol::optional<sol::table> soundComp = entity["components"]["sound"];
+			if (soundComp != sol::nullopt)
+			{
+				newEntity.AddComponent<AudioComponent>(
+					entity["components"]["sound"]["sound_asset_id"].get_or<std::string>(""),
+					entity["components"]["sound"]["sound_loop"].get_or(false),
+					entity["components"]["sound"]["sound_play"].get_or(false),
+					entity["components"]["sound"]["sound_voolume"].get_or(25)
+					
+					);
+			}
+
+
 			sol::optional<sol::table> updateScriptComp = entity["components"]["on_update_script"];
 			if (updateScriptComp != sol::nullopt)
 			{
 				sol::function func = entity["components"]["on_update_script"][0];
 				newEntity.AddComponent<ScriptComponent>(func);
 			}
+
+
 		}
 		
 		i++;

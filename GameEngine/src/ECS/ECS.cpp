@@ -272,3 +272,6 @@ void Registry::RemoveEntityGroup(Entity entity)
 		groupPerEntity.erase(groupedEntity);
 	}
 }
+
+
+

@@ -56,9 +56,13 @@ void AssetStore::ClearAssets()
 	}
 	fonts.clear();
 
-	//TODO: clear all fonts
 
-
+	//TODO: clear all sounds
+	for (std::pair<std::string, Mix_Chunk*> sound : sounds)
+	{
+		Mix_FreeChunk(sound.second);
+	}
+	sounds.clear();
 }
 
 SDL_Texture* AssetStore::GetTexture(const std::string& assetId) const  
@@ -72,4 +76,23 @@ SDL_Texture* AssetStore::GetTexture(const std::string& assetId) const
 TTF_Font* AssetStore::GetFont(const std::string& assetId) const
 {
 	return fonts.at(assetId);
+}
+
+void AssetStore::AddSound(const std::string& assetId, const std::string& path)
+{
+	Mix_Chunk* sound = Mix_LoadWAV(path.c_str());
+
+	if (sound == NULL)
+	{
+		Logger::Err("Failed to load music track: " + path);
+		return;
+	}
+
+	sounds.emplace(assetId, sound);
+
+}
+
+Mix_Chunk* AssetStore::GetSound(const std::string& assetId) const
+{
+	return sounds.at(assetId);
 }

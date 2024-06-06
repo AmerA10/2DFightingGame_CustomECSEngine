@@ -29,28 +29,28 @@ class DamageSystem : public System
 		{
 			Entity a = event.a;
 			Entity b = event.b;
-			Logger::Log("Collision Event: " + std::to_string(a.GetId())  +  " With: " + std::to_string(b.GetId()));
+			//Logger::Log("Collision Event: " + std::to_string(a.GetId())  +  " With: " + std::to_string(b.GetId()));
 			
 			if (a.BelongsToGroup("Projectile") && b.HasTag("Player"))
 			{
-				Logger::Log("Projectile Hit a Player");
+				//Logger::Log("Projectile Hit a Player");
 				OnProjectileHitsPlayer(a, b);
 
 			}
 			if (b.BelongsToGroup("Projectile") && a.HasTag("Player"))
 			{
-				Logger::Log("Player Hit a Projectile");
+				//Logger::Log("Player Hit a Projectile");
 				OnProjectileHitsPlayer(b, a);
 
 			}
 			if (a.BelongsToGroup("Projectile") && b.BelongsToGroup("Enemies"))
 			{
-				Logger::Log("Projectile Hit an enemy");
+				//Logger::Log("Projectile Hit an enemy");
 				OnProjectileHitsEnemy(a, b);
 			}
 			if (b.BelongsToGroup("Projectile") && a.BelongsToGroup("Enemies"))
 			{
-				Logger::Log("Projectile Hit a enemy");
+				//Logger::Log("Projectile Hit a enemy");
 				OnProjectileHitsEnemy(b, a);
 
 			}

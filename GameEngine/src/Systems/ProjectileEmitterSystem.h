@@ -11,6 +11,7 @@
 #include "../Components/CameraFollowComponent.h"
 #include "../EventBus/EventBus.h"
 #include "../Events/KeyboardInputEvent.h"
+#include "../Events/InputActionEvent.h"
 #include <glm/glm.hpp>
 
 class ProjectilEmitterSystem : public System
@@ -24,7 +25,7 @@ public:
 
 	void SubscribeToKeyInputEvent(std::unique_ptr<EventBus>& eventBus)
 	{
-		eventBus->SubscribeToEvent<KeyboardInputEvent>(this, &ProjectilEmitterSystem::CreateProjectileEvent);
+		eventBus->SubscribeToEvent<InputActionEvent>(this, &ProjectilEmitterSystem::CreateProjectileEvent);
 	}
 
 
@@ -73,9 +74,9 @@ public:
 		}
 	}
 
-	void CreateProjectileEvent(KeyboardInputEvent& event)
+	void CreateProjectileEvent(InputActionEvent& event)
 	{
-		if (event.keyCode == SDLK_SPACE)
+		if (event.action.inputActionName == "FIRE")
 		{
 			for (auto entity : GetSystemEntities())
 			{

@@ -74,7 +74,7 @@ public:
 	//can't make this a weak pointer I don't think, actually it probably should be a weak pointer
 	//This cretes a cyclical dependency so Idk why the prof decided to do this tbh
 	//There is probabl a better way of handing this, an interface or something
-	//This pointer is also not deleted when this entity is deleted
+	//This pointer is also not deleted when this entity is deleted 
 	Registry* registry;
 
 	template<typename TComponent, typename ...TArgs> void AddComponent(TArgs&& ...args);
@@ -234,6 +234,11 @@ class Pool: public IPool {
 		T& operator [] (unsigned int index) {
 			return data[index];
 		}
+
+		std::unordered_map<int,int> GetEntityIdToIndexMap()
+		{
+			return entityIdToIndex;
+		}
 };
 
 /// <summary>
@@ -351,7 +356,28 @@ class Registry {
 		std::vector<Entity> GetEntitiesByGroup(const std::string& group) const;
 		void RemoveEntityGroup(Entity entity);
 
+		//Pool functions
+		template<typename TComponent>
+		std::shared_ptr<Pool<TComponent>> GetComponentPool() const;
+		template<typename TComponent>
+		std::unordered_map<int, int> GetEntityIdIndexMapForComponent()const ;
 };
+
+template<typename TComponent>
+std::shared_ptr<Pool<TComponent>> Registry::GetComponentPool() const
+{
+
+	int componentId = Component<TComponent>::GetId();
+	std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);
+	return componentPool;
+}
+
+template<typename TComponent>
+std::unordered_map<int, int> Registry::GetEntityIdIndexMapForComponent() const
+{
+	return GetComponentPool<TComponent>()->GetEntityIdToIndexMap();
+}
+
 
 ///////Template Function Implementations REGISTRY
 

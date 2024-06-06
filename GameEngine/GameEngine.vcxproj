@@ -146,6 +146,7 @@
     <ClCompile Include="libs\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\AssetStore\AssetStore.cpp" />
     <ClCompile Include="src\ECS\ECS.cpp" />
+    <ClCompile Include="src\game\InputLoader.cpp" />
     <ClCompile Include="src\game\LevelLoader.cpp" />
     <ClCompile Include="src\logger\Logger.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="libs\imgui\imgui_impl_sdlrenderer2.h" />
     <ClInclude Include="src\AssetStore\AssetStore.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
+    <ClInclude Include="src\Components\AudioComponent.h" />
     <ClInclude Include="src\Components\BoxColliderComponent.h" />
     <ClInclude Include="src\Components\CameraFollowComponent.h" />
     <ClInclude Include="src\Components\HealthComponent.h" />
@@ -177,13 +179,18 @@
     <ClInclude Include="src\EventBus\EventBus.h" />
     <ClInclude Include="src\Events\CollisionEvent.h" />
     <ClInclude Include="src\Events\HealthUpdatedEvent.h" />
+    <ClInclude Include="src\Events\InputActionEvent.h" />
     <ClInclude Include="src\Events\KeyboardInputEvent.h" />
+    <ClInclude Include="src\game\InputLoader.h" />
     <ClInclude Include="src\game\LevelLoader.h" />
+    <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Systems\AnimationSystem.h" />
+    <ClInclude Include="src\Systems\AudioSystem.h" />
     <ClInclude Include="src\Systems\CameraMovementSystem.h" />
     <ClInclude Include="src\Systems\CollisionSystem.h" />
     <ClInclude Include="src\Systems\DamageSystem.h" />
     <ClInclude Include="src\Systems\HealthDisplaySystem.h" />
+    <ClInclude Include="src\Systems\InputBufferSystem.h" />
     <ClInclude Include="src\Systems\KeyboardInputSystem.h" />
     <ClInclude Include="src\Systems\MovementSystem.h" />
     <ClInclude Include="src\logger\Logger.h" />
@@ -450,6 +457,7 @@
     <ClInclude Include="src\Systems\ScriptSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\scripts\InputMapping.lua" />
     <None Include="assets\scripts\Level1.lua" />
     <None Include="assets\scripts\myscript.lua" />
     <None Include="libavif-16.dll" />

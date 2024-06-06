@@ -1,7 +1,9 @@
 #include "Game.h"
 #include "LevelLoader.h"
+#include "InputLoader.h"
 #include <iostream>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <glm/glm.hpp>
 #include "../ECS/ECS.h"
 #include "../logger/Logger.h"
@@ -19,8 +21,13 @@
 #include "../Systems/HealthDisplaySystem.h"
 #include "../Systems/RenderGUISystem.h"
 #include "../Systems/ScriptSystem.h"
+#include "../Systems/AudioSystem.h"
+#include "../Systems/InputBufferSystem.h"
+#include "../Components/InputActionReciever.h"
+#include "../Input/Input.h"
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
+#include <vector>
 
 
 int Game::windowWidth;
@@ -63,6 +70,10 @@ void Game::Setup()
 	registry->AddSystem<HealthDisplaySystem>();
 	registry->AddSystem<RenderGUISystem>();
 	registry->AddSystem<ScriptSystem>();
+	registry->AddSystem<AudioSystem>();
+	registry->AddSystem<InputBufferSystem>();
+
+
 
 	registry->GetSystem<ScriptSystem>().CreateLuaBinding(lua);
 
@@ -71,6 +82,19 @@ void Game::Setup()
 	LevelLoader loader;
 
 	loader.LoadLevel(lua, registry, assetStore,renderer,1);
+
+	InputLoader inputLoader;
+	inputLoader.LoadInput(lua, registry);
+
+	eventBus->Reset();
+
+	//this works though we can have an event just subscribed to once and done
+	registry->GetSystem<MovementSystem>().SubscribeToEvents(eventBus);
+	registry->GetSystem<DamageSystem>().SubscriberToEvents(eventBus);
+	registry->GetSystem<KeyboardInputSystem>().SubscribeToKeyInputEvent(eventBus);
+	registry->GetSystem<ProjectilEmitterSystem>().SubscribeToKeyInputEvent(eventBus);
+
+
 }
 
 
@@ -130,19 +154,18 @@ void Game::Initialize()
 
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
+
+
 	//Initialize the imGUI context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
 	ImGui_ImplSDLRenderer2_Init(renderer);
 
+
 	io = ImGui::GetIO();
-
-	isRunning = true;
 	Logger::Log("game init success");
-
-
-
+	isRunning = true;
 
 }
 
@@ -185,7 +208,7 @@ void Game::ProcessInput()
 
 		case SDL_KEYDOWN:
 
-			eventBus->EmitEvent<KeyboardInputEvent>(sdlEvent.key.keysym.sym);
+			registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
 
 			if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) 
 			{
@@ -198,7 +221,12 @@ void Game::ProcessInput()
 
 			break;
 
+		
+		
+			
 		}
+		
+			
 		
 	}
 }
@@ -238,21 +266,16 @@ void Game::Update()
 	//Of the subscibing events or systems that have subscribed to events
 	//in the event bus class
 
-	eventBus->Reset();
-	
-	registry->GetSystem<MovementSystem>().SubscribeToEvents(eventBus);
-	registry->GetSystem<DamageSystem>().SubscriberToEvents(eventBus);
-	registry->GetSystem<KeyboardInputSystem>().SubscribeToKeyInputEvent(eventBus);
-	registry->GetSystem<ProjectilEmitterSystem>().SubscribeToKeyInputEvent(eventBus);
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
 
 	registry->GetSystem<CollisionSystem>().Update(eventBus);
-	registry->GetSystem<MovementSystem>().Update(deltaTime);
+	registry->GetSystem<MovementSystem>().Update(registry, deltaTime);
 	registry->GetSystem<AnimationSystem>().Update();
 	registry->GetSystem<CameraMovementSystem>().Update(camera);
 	registry->GetSystem<ProjectilEmitterSystem>().Update(registry);
 	registry->GetSystem<ProjectileLifeCycleSystem>().Update();
+	registry->GetSystem<AudioSystem>().Update(assetStore);
 	registry->GetSystem<ScriptSystem>().Update(deltaTime, SDL_GetTicks());
 
 }

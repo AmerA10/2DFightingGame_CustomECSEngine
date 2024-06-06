@@ -24,7 +24,9 @@ Level = {
         { type = "texture", id = "bullet-texture",  file = "./assets/images/bullet.png" },
         { type = "texture", id = "fw190-texture",  file = "./assets/images/fw190-spritesheet.png" },
         { type = "font"   , id = "arial-font",    file = "./assets/fonts/arial.ttf", font_size = 20 },
-        { type = "font"   , id = "charriot-font",   file = "./assets/fonts/charriot.ttf", font_size = 20 }
+        { type = "font"   , id = "charriot-font",   file = "./assets/fonts/charriot.ttf", font_size = 20 },
+        { type = "sound"  , id = "helicopter-sound", file= "./assets/sounds/helicopter.wav"}
+    
     },
 
     ----------------------------------------------------
@@ -103,6 +105,12 @@ Level = {
                     text_position = { x = 242,  y = 110 },
                     color = { r = 50, g = 50, b = 50},
                     is_fixed = false
+                },
+                sound = {
+                    sound_asset_id = "helicopter-sound",
+                    sound_loop = true,
+                    sound_play = true,
+                    sound_volume = 150
                 }
             }
         },

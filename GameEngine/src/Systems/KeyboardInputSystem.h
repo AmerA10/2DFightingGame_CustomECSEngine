@@ -6,6 +6,10 @@
 #include "../Components/KeyboardControlledComponent.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
+#include "../Events/InputActionEvent.h"
+
+//This keyboard input system sucks because it is not very universal
+//
 
 class KeyboardInputSystem : public System
 {
@@ -23,10 +27,10 @@ public:
 
 	void SubscribeToKeyInputEvent(std::unique_ptr<EventBus>& eventBus) 
 	{
-		eventBus->SubscribeToEvent<KeyboardInputEvent>(this, &KeyboardInputSystem::OnKeyboardInput);
+		eventBus->SubscribeToEvent<InputActionEvent>(this, &KeyboardInputSystem::OnKeyboardInput);
 	}
 
-	void OnKeyboardInput(KeyboardInputEvent& event)
+	void OnKeyboardInput(InputActionEvent& event)
 	{
 		for (auto entity : GetSystemEntities()) 
 		{
@@ -34,26 +38,35 @@ public:
 			RigidBodyComponent& rigidBody = entity.GetComponent<RigidBodyComponent>();
 			SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
-			Logger::Log("Recieved input: " + event.keyName);
 
-			switch (event.keyCode) {
-				case (SDLK_UP):
-					rigidBody.velocity = keyboardControlled.upVel;
-					sprite.srcRect.y = sprite.height * 0;
-					break;
-				case (SDLK_RIGHT):
-					rigidBody.velocity = keyboardControlled.rightVel;
-					sprite.srcRect.y = sprite.height * 1;
-					break;
-				case (SDLK_DOWN):
+			if (event.action.inputActionName == "UP") 
+			{
 
-					rigidBody.velocity = keyboardControlled.downVel;
-					sprite.srcRect.y = sprite.height * 2;
-					break;
-				case (SDLK_LEFT):
-					rigidBody.velocity = keyboardControlled.leftVel;
-					sprite.srcRect.y = sprite.height * 3;
-					break;
+				rigidBody.velocity = keyboardControlled.upVel;
+				sprite.srcRect.y = sprite.height * 0;
+			}
+			else if (event.action.inputActionName == "RIGHT") 
+			{
+				
+				rigidBody.velocity = keyboardControlled.rightVel;
+				sprite.srcRect.y = sprite.height * 1;
+				
+
+			}
+
+			else if (event.action.inputActionName == "DOWN") 
+			{
+
+				rigidBody.velocity = keyboardControlled.downVel;
+				sprite.srcRect.y = sprite.height * 2;
+			}
+
+
+			else if (event.action.inputActionName == "LEFT")
+			{
+				rigidBody.velocity = keyboardControlled.leftVel;
+				sprite.srcRect.y = sprite.height * 3;
+			
 			}
 
 		}
