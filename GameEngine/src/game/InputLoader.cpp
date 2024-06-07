@@ -42,6 +42,7 @@ void InputLoader::LoadInput(sol::state& lua, const std::unique_ptr<Registry>& re
 		sol::table mapping = mappingsTable[i];
 		std::string key = mapping["key"];
 		std::string action = mapping["action"];
+		int scale = mapping["scale"].get_or(1);
 
 
 		SDL_Keycode code = SDL_GetKeyFromName(key.c_str());
@@ -57,7 +58,7 @@ void InputLoader::LoadInput(sol::state& lua, const std::unique_ptr<Registry>& re
 			continue;
 		}
 
-		registry->GetSystem<InputBufferSystem>().AddInputActionMapping(code,action);
+		registry->GetSystem<InputBufferSystem>().AddInputActionMapping(code,action,scale);
 
 		Logger::Log("Creating input mapping for key: " + key + " Action: " + action);
 

@@ -93,8 +93,6 @@ Level = {
                 keyboard_controller = {
                     up_velocity = { x = 0, y = -100 },
                     right_velocity = { x = 100, y = 0 },
-                    down_velocity = { x = 0, y = 100 },
-                    left_velocity = { x = -100, y = 0 }
                 },
                 camera_follow = {
                     follow = true

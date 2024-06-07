@@ -23,7 +23,6 @@
 #include "../Systems/ScriptSystem.h"
 #include "../Systems/AudioSystem.h"
 #include "../Systems/InputBufferSystem.h"
-#include "../Components/InputActionReciever.h"
 #include "../Input/Input.h"
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>

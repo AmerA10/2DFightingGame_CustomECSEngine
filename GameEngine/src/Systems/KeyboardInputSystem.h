@@ -39,36 +39,43 @@ public:
 			SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
 
-			if (event.action.inputActionName == "UP") 
+			if (event.action.inputActionName == "MOVEY") 
 			{
+				
+				rigidBody.velocity = keyboardControlled.yVel;
+				rigidBody.velocity.y *= event.action.scale;
 
-				rigidBody.velocity = keyboardControlled.upVel;
+				if (event.action.scale >= 1)
+				{
 				sprite.srcRect.y = sprite.height * 0;
+
+				}
+				else
+				{
+					sprite.srcRect.y = sprite.height * 2;
+
+				}
+
 			}
-			else if (event.action.inputActionName == "RIGHT") 
+			else if (event.action.inputActionName == "MOVEX") 
 			{
 				
-				rigidBody.velocity = keyboardControlled.rightVel;
-				sprite.srcRect.y = sprite.height * 1;
+				rigidBody.velocity = keyboardControlled.xVel;
+				rigidBody.velocity.x *= event.action.scale;
+
+				if (event.action.scale >= 1)
+				{
+					sprite.srcRect.y = sprite.height * 1;
+
+				}
+				else
+				{
+					sprite.srcRect.y = sprite.height * 3;
+
+				}
 				
 
 			}
-
-			else if (event.action.inputActionName == "DOWN") 
-			{
-
-				rigidBody.velocity = keyboardControlled.downVel;
-				sprite.srcRect.y = sprite.height * 2;
-			}
-
-
-			else if (event.action.inputActionName == "LEFT")
-			{
-				rigidBody.velocity = keyboardControlled.leftVel;
-				sprite.srcRect.y = sprite.height * 3;
-			
-			}
-
 		}
 	}
 

@@ -276,16 +276,6 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 						entity["components"]["keyboard_controller"]["right_velocity"]["x"].get_or(0),
 						entity["components"]["keyboard_controller"]["right_velocity"]["y"].get_or(0)
 
-					),
-					glm::vec2(
-						entity["components"]["keyboard_controller"]["down_velocity"]["x"].get_or(0),
-						entity["components"]["keyboard_controller"]["down_velocity"]["y"].get_or(0)
-
-					),
-					glm::vec2(
-						entity["components"]["keyboard_controller"]["left_velocity"]["x"].get_or(0),
-						entity["components"]["keyboard_controller"]["left_velocity"]["y"].get_or(0)
-
 					)
 
 					);

@@ -5,7 +5,6 @@
 #include "../EventBus/EventBus.h"
 #include "../Events/InputActionEvent.h"
 #include "../Input/Input.h"
-#include "../Components/InputActionReciever.h"
 
 class InputBufferSystem : public System
 {
@@ -33,9 +32,9 @@ public:
 		}
 	}
 
-	void AddInputActionMapping(SDL_Keycode& keycode, std::string actionName)
+	void AddInputActionMapping(SDL_Keycode& keycode, std::string actionName, int scale)
 	{
-		InputAction actiontoAdd = { actionName };
+		InputAction actiontoAdd = { actionName, scale };
 		inputActionMapping.emplace(keycode, actiontoAdd);
 	}
 

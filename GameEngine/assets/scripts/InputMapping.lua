@@ -4,10 +4,10 @@ InputMapping =
 	mappings =
 	{
 		[0] =
-		{ key=  "Up",		action = "UP" },
-		{ key=  "Down",		action = "DOWN"},
-		{ key = "Right",	action = "RIGHT"},
-		{ key = "Left",		action = "LEFT"},
+		{ key=  "Up",		action = "MOVEY" , scale = 1},
+		{ key=  "Down",		action = "MOVEY", scale = -1},
+		{ key = "Right",	action = "MOVEX", scale = 1},
+		{ key = "Left",		action = "MOVEX", scale = -1},
 		{ key = "Space",	action = "FIRE"},
 		{ key = "P", action = "FIRE"}
 	}

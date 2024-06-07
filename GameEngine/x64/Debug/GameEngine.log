@@ -21,9 +21,13 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(198,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(198,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(256,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(197,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(197,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(255,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
   InputLoader.cpp
+  LevelLoader.cpp
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(298,61): warning C4838: conversion from 'U' to 'Uint8' requires a narrowing conversion
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(299,61): warning C4838: conversion from 'U' to 'Uint8' requires a narrowing conversion
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(300,61): warning C4838: conversion from 'U' to 'Uint8' requires a narrowing conversion
   Generating Code...
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe
