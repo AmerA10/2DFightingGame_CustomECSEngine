@@ -3,19 +3,34 @@
 
 #include<SDL.h>
 
+// we need to keep track of our animation's current state
+//as an will have more than one animtion to play
+
+enum AnimationState
+{
+	Stopped, Playing, WaitingToPlay
+};
 
 struct AnimationComponent {
-	int numFrames;
-	int currentFrame;
-	int frameSpeedRate;
-	bool isLoop;
-	int startTime;
+	float globalStartTime;
+	float localTime;
+	float playbackRate;
+	//this is in frames or seconds?? lets say frames
+	float duration;
+	int numLoops;
 
-	AnimationComponent(int numFrames = 1, int frameSpeedRate = 1, bool isLoop = true) {
-		this->numFrames = numFrames;
-		this->frameSpeedRate = frameSpeedRate;
-		this->isLoop = isLoop;
-		this->currentFrame = 1;
-		this->startTime = SDL_GetTicks();
+	std::string spriteSheetId;
+	std::string animationId;
+	AnimationState animState;
+
+	AnimationComponent(const std::string& spriteSheetId, int playbackRate = 1, float duration = 1.0, int numLoops = 0) {
+		this->duration = duration;
+		this->playbackRate = playbackRate;
+		this->numLoops = numLoops;
+		this->localTime = 0;
+		this->globalStartTime = 0;
+		this->spriteSheetId = spriteSheetId;
+		animState = WaitingToPlay;
 	}
 };
+

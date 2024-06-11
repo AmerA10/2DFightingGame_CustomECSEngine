@@ -66,7 +66,6 @@ public:
 				if (event.action.scale >= 1)
 				{
 					sprite.srcRect.y = sprite.height * 1;
-
 				}
 				else
 				{

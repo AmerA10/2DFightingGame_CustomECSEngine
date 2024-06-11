@@ -9,6 +9,10 @@ InputMapping =
 		{ key = "Right",	action = "MOVEX", scale = 1},
 		{ key = "Left",		action = "MOVEX", scale = -1},
 		{ key = "Space",	action = "FIRE"},
+		{ key=  "W",		action = "MOVEY" , scale = 1},
+		{ key=  "S",		action = "MOVEY", scale = -1},
+		{ key = "D",		action = "MOVEX", scale = 1},
+		{ key = "A",		action = "MOVEX", scale = -1},
 		{ key = "P", action = "FIRE"}
 	}
 }

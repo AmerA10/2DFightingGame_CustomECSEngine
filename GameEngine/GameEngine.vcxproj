@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="libs\imgui\imgui_impl_sdl2.h" />
     <ClInclude Include="libs\imgui\imgui_impl_sdlrenderer2.h" />
+    <ClInclude Include="src\Animation\AnimationClip.h" />
     <ClInclude Include="src\AssetStore\AssetStore.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
     <ClInclude Include="src\Components\AudioComponent.h" />
@@ -183,7 +184,9 @@
     <ClInclude Include="src\Events\KeyboardInputEvent.h" />
     <ClInclude Include="src\game\InputLoader.h" />
     <ClInclude Include="src\game\LevelLoader.h" />
+    <ClInclude Include="src\Helper\Range.h" />
     <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Input\InputBufferHolderExample.h" />
     <ClInclude Include="src\Systems\AnimationSystem.h" />
     <ClInclude Include="src\Systems\AudioSystem.h" />
     <ClInclude Include="src\Systems\CameraMovementSystem.h" />
