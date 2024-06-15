@@ -3,7 +3,6 @@
 #include "../ECS/ECS.h"
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
-
 #include "../Components/TransformComponent.h"
 #include "../Components/SpriteComponent.h"
 #include "../Components/BoxColliderComponent.h"

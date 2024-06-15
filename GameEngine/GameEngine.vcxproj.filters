@@ -962,6 +962,12 @@
     <ClInclude Include="src\Input\InputBufferHolderExample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\TestComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\TestSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="libs\glm\detail\func_common.inl">
@@ -1387,5 +1393,77 @@
     <Image Include="assets\images\chopper-spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\images\truck-ford-up.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\fw190.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\fw190-spritesheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\landing-base.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\radar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\takeoff-base.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-panther-down.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-panther-left.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-panther-right.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-panther-up.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-tiger-down.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-tiger-left.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-tiger-right.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tank-tiger-up.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\tree.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\truck-ford-down.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\truck-ford-killed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\truck-ford-left.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\truck-ford-right.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\chopper.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\bullet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\arial.ttf" />
+    <Font Include="assets\fonts\charriot.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\sounds\helicopter.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

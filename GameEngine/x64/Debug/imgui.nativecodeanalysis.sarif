@@ -5,40 +5,9 @@
     {
       "results": [
         {
-          "ruleId": "C26495",
+          "ruleId": "C33011",
           "message": {
-            "text": "Variable 'ImGuiColorMod::Col' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui_internal.h"
-                },
-                "region": {
-                  "startLine": 811,
-                  "startColumn": 1,
-                  "endLine": 811,
-                  "endColumn": 1
-                }
-              },
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "ImGuiColorMod::{ctor}",
-                  "decoratedName": "??0ImGuiColorMod@@QEAA@XZ",
-                  "kind": "function"
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "targetSymbol": "ImGuiColorMod::Col"
-          }
-        },
-        {
-          "ruleId": "C26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2)."
+            "text": "Unchecked upper bound for enum key used as index.."
           },
           "locations": [
             {
@@ -47,44 +16,16 @@
                   "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
                 },
                 "region": {
-                  "startLine": 3515,
-                  "startColumn": 44,
-                  "endLine": 3515,
-                  "endColumn": 73
+                  "startLine": 8156,
+                  "startColumn": 29,
+                  "endLine": 8156,
+                  "endColumn": 50
                 }
               },
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "ImGui::UpdateMouseInputs",
-                  "decoratedName": "?UpdateMouseInputs@ImGui@@YAXXZ",
-                  "kind": "function"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "ruleId": "C28182",
-          "message": {
-            "text": "Dereferencing NULL pointer. 'window' contains the same NULL value as 'hovered_window' did. See line 4368 for an earlier location where this can occur"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                },
-                "region": {
-                  "startLine": 4394,
-                  "startColumn": 13,
-                  "endLine": 4394,
-                  "endColumn": 118
-                }
-              },
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "FindHoveredWindow",
-                  "decoratedName": "?FindHoveredWindow@@YAXXZ",
+                  "fullyQualifiedName": "ImGui::GetKeyData",
+                  "decoratedName": "?GetKeyData@ImGui@@YAPEAUImGuiKeyData@@PEAUImGuiContext@@W4ImGuiKey@@@Z",
                   "kind": "function"
                 }
               ]
@@ -102,7 +43,21 @@
                             "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
                           },
                           "region": {
-                            "startLine": 4356,
+                            "startLine": 8146,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8148,
                             "startColumn": 19
                           }
                         }
@@ -116,35 +71,7 @@
                             "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
                           },
                           "region": {
-                            "startLine": 4358,
-                            "startColumn": 18
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4359,
-                            "startColumn": 18
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4360,
+                            "startLine": 8148,
                             "startColumn": 24
                           }
                         }
@@ -158,380 +85,16 @@
                             "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
                           },
                           "region": {
-                            "startLine": 4363,
-                            "startColumn": 12
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4364,
-                            "startColumn": 12
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4365,
-                            "startColumn": 14
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4365,
-                            "startColumn": 40
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4367,
-                            "startColumn": 22
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4368,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4370,
-                            "startColumn": 27
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4374,
-                            "startColumn": 16
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4375,
-                            "startColumn": 27
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4378,
-                            "startColumn": 22
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4379,
+                            "startLine": 8151,
                             "startColumn": 13
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4384,
-                            "startColumn": 39
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4392,
-                            "startColumn": 28
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4393,
-                            "startColumn": 28
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4394,
-                            "startColumn": 59
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4396,
-                            "startColumn": 28
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4365,
-                            "startColumn": 47
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4365,
-                            "startColumn": 40
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4367,
-                            "startColumn": 22
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4368,
-                            "startColumn": 29
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4370,
-                            "startColumn": 27
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4374,
-                            "startColumn": 16
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4375,
-                            "startColumn": 27
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4378,
-                            "startColumn": 22
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4379,
-                            "startColumn": 13
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4384,
-                            "startColumn": 39
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4392,
-                            "startColumn": 28
                           }
                         },
                         "message": {
-                          "text": "'window' may be NULL (Enter this branch)"
+                          "text": "Branching based on condition 'key & 63488'. 'false' branch is taken"
                         }
                       },
                       "kinds": [
-                        "branch"
+                        "Branch"
                       ],
                       "importance": "important"
                     },
@@ -542,52 +105,148 @@
                             "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
                           },
                           "region": {
-                            "startLine": 4393,
-                            "startColumn": 28
-                          }
-                        }
-                      },
-                      "importance": "unimportant"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4394,
-                            "startColumn": 59
+                            "startLine": 8155,
+                            "startColumn": 5
                           }
                         },
                         "message": {
-                          "text": "Skip this branch, (assume '<branch condition>' is false)"
+                          "text": "Branching based on condition '0 <= key'. 'true' branch is taken\nEnum value 'key' is checked for lower bound."
                         }
                       },
                       "kinds": [
-                        "branch"
-                      ],
-                      "importance": "important"
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                          },
-                          "region": {
-                            "startLine": 4394,
-                            "startColumn": 59
-                          }
-                        },
-                        "message": {
-                          "text": "'window' is dereferenced, but may still be NULL"
-                        }
-                      },
-                      "kinds": [
-                        "usage"
+                        "Combination"
                       ],
                       "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8155,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition 'key < 666'. 'false' branch is taken\nEnum value 'key' is checked for lower bound."
+                        }
+                      },
+                      "kinds": [
+                        "Combination"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8155,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8155,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition '0'. 'false' branch is taken"
+                        }
+                      },
+                      "kinds": [
+                        "Branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8155,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8155,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8156,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8156,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition 'result.IsLegacyKey'. 'true' branch is taken"
+                        }
+                      },
+                      "kinds": [
+                        "Branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 8156,
+                            "startColumn": 46
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
                     }
                   ]
                 }
@@ -596,68 +255,205 @@
           ]
         },
         {
-          "ruleId": "C26495",
+          "ruleId": "C33010",
           "message": {
-            "text": "Variable 'ImGuiSizeCallbackData::UserData' is uninitialized. Always initialize a member variable (type.6)."
+            "text": "Unchecked lower bound for enum source used as index.."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.h"
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
                 },
                 "region": {
-                  "startLine": 1693,
-                  "startColumn": 1,
-                  "endLine": 1693,
-                  "endColumn": 1
+                  "startLine": 9194,
+                  "startColumn": 5,
+                  "endLine": 9194,
+                  "endColumn": 37
                 }
               },
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "ImGuiSizeCallbackData::{ctor}",
-                  "decoratedName": "??0ImGuiSizeCallbackData@@QEAA@XZ",
+                  "fullyQualifiedName": "GetInputSourceName",
+                  "decoratedName": "?GetInputSourceName@@YAPEBDW4ImGuiInputSource@@@Z",
                   "kind": "function"
                 }
               ]
             }
           ],
-          "properties": {
-            "targetSymbol": "ImGuiSizeCallbackData::UserData"
-          }
-        },
-        {
-          "ruleId": "C26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
-          },
-          "locations": [
+          "codeFlows": [
             {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                },
-                "region": {
-                  "startLine": 6158,
-                  "startColumn": 84,
-                  "endLine": 6158,
-                  "endColumn": 115
-                }
-              },
-              "logicalLocations": [
+              "threadFlows": [
                 {
-                  "fullyQualifiedName": "ImGui::BringWindowToFocusFront",
-                  "decoratedName": "?BringWindowToFocusFront@ImGui@@YAXPEAUImGuiWindow@@@Z",
-                  "kind": "function"
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9190,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9192,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9192,
+                            "startColumn": 40
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9193,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition '1'. 'true' branch is taken"
+                        }
+                      },
+                      "kinds": [
+                        "Branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9193,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition '0 <= source'. 'false' branch is taken\nEnum value 'source' is checked for upper bound."
+                        }
+                      },
+                      "kinds": [
+                        "Combination"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9193,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9193,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition '0'. 'false' branch is taken"
+                        }
+                      },
+                      "kinds": [
+                        "Branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9193,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9193,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9194,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    }
+                  ]
                 }
               ]
             }
           ]
         },
         {
-          "ruleId": "C26451",
+          "ruleId": "C33010",
           "message": {
-            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
+            "text": "Unchecked lower bound for enum source used as index.."
           },
           "locations": [
             {
@@ -666,101 +462,185 @@
                   "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
                 },
                 "region": {
-                  "startLine": 6158,
-                  "startColumn": 84,
-                  "endLine": 6158,
-                  "endColumn": 111
+                  "startLine": 9200,
+                  "startColumn": 5,
+                  "endLine": 9200,
+                  "endColumn": 37
                 }
               },
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "ImGui::BringWindowToFocusFront",
-                  "decoratedName": "?BringWindowToFocusFront@ImGui@@YAXPEAUImGuiWindow@@@Z",
+                  "fullyQualifiedName": "GetMouseSourceName",
+                  "decoratedName": "?GetMouseSourceName@@YAPEBDW4ImGuiMouseSource@@@Z",
                   "kind": "function"
                 }
               ]
             }
-          ]
-        },
-        {
-          "ruleId": "C26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
-          },
-          "locations": [
+          ],
+          "codeFlows": [
             {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                },
-                "region": {
-                  "startLine": 6173,
-                  "startColumn": 64,
-                  "endLine": 6173,
-                  "endColumn": 85
-                }
-              },
-              "logicalLocations": [
+              "threadFlows": [
                 {
-                  "fullyQualifiedName": "ImGui::BringWindowToDisplayFront",
-                  "decoratedName": "?BringWindowToDisplayFront@ImGui@@YAXPEAUImGuiWindow@@@Z",
-                  "kind": "function"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "ruleId": "C26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                },
-                "region": {
-                  "startLine": 6173,
-                  "startColumn": 64,
-                  "endLine": 6173,
-                  "endColumn": 81
-                }
-              },
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "ImGui::BringWindowToDisplayFront",
-                  "decoratedName": "?BringWindowToDisplayFront@ImGui@@YAXPEAUImGuiWindow@@@Z",
-                  "kind": "function"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "ruleId": "C26451",
-          "message": {
-            "text": "Arithmetic overflow: Using operator '-' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '-' to avoid overflow (io.2)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
-                },
-                "region": {
-                  "startLine": 10516,
-                  "startColumn": 71,
-                  "endLine": 10516,
-                  "endColumn": 97
-                }
-              },
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "ImGui::ShowMetricsWindow::Funcs::NodeColumns",
-                  "decoratedName": "?NodeColumns@Funcs@?1??ShowMetricsWindow@ImGui@@YAXPEA_N@Z@SAXPEBUImGuiColumns@@@Z",
-                  "kind": "function"
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9196,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9198,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9198,
+                            "startColumn": 40
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9199,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition '1'. 'true' branch is taken"
+                        }
+                      },
+                      "kinds": [
+                        "Branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9199,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition '0 <= source'. 'false' branch is taken\nEnum value 'source' is checked for upper bound."
+                        }
+                      },
+                      "kinds": [
+                        "Combination"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9199,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9199,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "Branching based on condition '0'. 'false' branch is taken"
+                        }
+                      },
+                      "kinds": [
+                        "Branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9199,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9199,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 9200,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    }
+                  ]
                 }
               ]
             }
@@ -783,17 +663,6 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui_internal.h"
-          },
-          "roles": [
-            "resultFile"
-          ],
-          "hashes": {
-            "sha-256": "6326baca7f7099ce67f542f02f9c6e147b5c273f6065b6b4f732f00bc271b72e"
-          }
-        },
-        {
-          "location": {
             "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.cpp"
           },
           "roles": [
@@ -801,18 +670,15 @@
             "resultFile"
           ],
           "hashes": {
-            "sha-256": "21841f543c147ba94581b850ade4909798a9efacc7b5bae7c4b310fd57ca3f4e"
+            "sha-256": "1dc51e25f9d10fbadfcf4b007ff9a07010b18b685599b596061be2ba7879379a"
           }
         },
         {
           "location": {
-            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/imgui/imgui.h"
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/imgui/imgui.h"
           },
-          "roles": [
-            "resultFile"
-          ],
           "hashes": {
-            "sha-256": "4ebaa2d4d34e25736c123e684e6917325defac53d7430c832d4c233d3431cc38"
+            "sha-256": "af58e1d47a33c5d83aae32fb9e96d4878294ee782d32328f1f47d2313656e7c4"
           }
         },
         {
@@ -820,7 +686,15 @@
             "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/imgui/imconfig.h"
           },
           "hashes": {
-            "sha-256": "e1d3a885a64d133afffa1daba29b0b4944fd2d155c071297c3f8529906761982"
+            "sha-256": "a253e82c1960f8aa7594a51a8ac606a6235738c923f12d67a7742e88bf07ed63"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/imgui/imgui_internal.h"
+          },
+          "hashes": {
+            "sha-256": "7c87dce4ef5ca8e5d349145bf39c10b6a14b909d268a7e5cb82039461d675371"
           }
         },
         {
@@ -828,7 +702,7 @@
             "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/imgui/imstb_textedit.h"
           },
           "hashes": {
-            "sha-256": "fd8408584842d13ca4a3f5b002a77c80491626d289a96463ba52c11981816024"
+            "sha-256": "6cb9de88e714f42bdbdc25ba190f01e346a2b6eba727c2044acccc7e70966c70"
           }
         }
       ]

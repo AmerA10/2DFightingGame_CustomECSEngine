@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "./game/Game.h"
+#include "Animation/AnimationClip.h"
 
 
 int main(int argc, char* argv[])
@@ -12,9 +13,11 @@ int main(int argc, char* argv[])
 
     Game game;
 
-    //game.Initialize();
-    //game.Run();
-    //game.Destroy();
+
+
+    game.Initialize();
+    game.Run();
+    game.Destroy();
 
 
     return 0;

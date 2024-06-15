@@ -36,8 +36,8 @@ public:
 		for (Entity entity : GetSystemEntities())
 		{
 	
-			TransformComponent transform = entity.GetComponent<TransformComponent>();
-			SpriteComponent sprite = entity.GetComponent<SpriteComponent>();
+			const TransformComponent& transform = entity.GetComponent<TransformComponent>();
+			const SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
 			bool isOutSideCameraView = transform.position.x + (sprite.width * transform.scale.x) < camera.x ||
 				transform.position.x > camera.w + camera.x || 
@@ -52,6 +52,7 @@ public:
 			sortedEntities.emplace_back(entity);
 		}
 
+		//This is extremely un-optimized
 		std::sort(sortedEntities.begin(), sortedEntities.end(), [](const Entity& a, const Entity& b) {
 				return a.GetComponent<SpriteComponent>().zIndex < b.GetComponent<SpriteComponent>().zIndex;
 			
@@ -85,7 +86,7 @@ public:
 
 	}
 
-
+	
 };
 
 

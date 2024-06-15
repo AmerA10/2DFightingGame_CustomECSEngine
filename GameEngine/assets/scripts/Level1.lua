@@ -18,14 +18,24 @@ Level = {
         [0] =
         { type = "texture", id = "tilemap-texture-day", file = "./assets/tilemaps/jungle.png" },
         { type = "texture", id = "tilemap-texture-night", file = "./assets/tilemaps/jungle-night.png" },
-        { type = "texture", id = "chopper-texture", file = "./assets/images/chopper-spritesheet.png" },
+        { type = "texture", id = "chopper-texture", file = "./assets/images/chopper-spritesheet.png"},
         { type = "texture", id = "tank-texture",    file = "./assets/images/tank-tiger-up.png" },
         { type = "texture", id = "truck-texture",    file = "./assets/images/truck-ford-up.png" },
         { type = "texture", id = "bullet-texture",  file = "./assets/images/bullet.png" },
         { type = "texture", id = "fw190-texture",  file = "./assets/images/fw190-spritesheet.png" },
         { type = "font"   , id = "arial-font",    file = "./assets/fonts/arial.ttf", font_size = 20 },
         { type = "font"   , id = "charriot-font",   file = "./assets/fonts/charriot.ttf", font_size = 20 },
-        { type = "sound"  , id = "helicopter-sound", file= "./assets/sounds/helicopter.wav"}
+        { type = "sound"  , id = "helicopter-sound", file= "./assets/sounds/helicopter.wav"},
+        { type = "animClip",id = "chopper-idle", duration = 2.0, sprite_sheet_id = "chopper-texture", 
+            
+            timeToFrames = {
+                [0] = 
+                {t = 0.5, f = 0}, 
+                {t = 1.0, f = 1}, 
+                {t = 1.5, f = 2}
+
+            }
+        }
     
     },
 
@@ -65,11 +75,14 @@ Level = {
                     z_index = 4,
                     fixed = false,
                     src_rect_x = 0,
-                    src_rect_y = 0
+                    src_rect_y = 0,
+                    num_v_cuts = 2,
+                    num_h_cuts = 4
                 },
                 animation = {
-                    num_frames = 2,
-                    speed_rate = 10 -- fps
+                    animation_clip_id = "chopper-idle",
+                    playback_rate = 1.0,
+                    num_loops = -1
                 },
                 boxcollider = {
                     width = 32,
@@ -103,12 +116,6 @@ Level = {
                     text_position = { x = 242,  y = 110 },
                     color = { r = 50, g = 50, b = 50},
                     is_fixed = false
-                },
-                sound = {
-                    sound_asset_id = "helicopter-sound",
-                    sound_loop = true,
-                    sound_play = true,
-                    sound_volume = 150
                 }
             }
         },
@@ -191,10 +198,6 @@ Level = {
                     text = "",
                     color = { r = 150, g = 250, b = 50},
                     is_fixed = false
-                },
-                animation = {
-                    num_frames = 3,
-                    speed_rate = 10 -- fps
                 },
                 on_update_script = {
                     [0] = 

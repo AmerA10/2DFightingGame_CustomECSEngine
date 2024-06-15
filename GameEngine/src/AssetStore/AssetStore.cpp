@@ -92,24 +92,15 @@ void AssetStore::AddSound(const std::string& assetId, const std::string& path)
 
 }
 
-//void AssetStore::AddAnimationClip(const std::string& assetId, std::shared_ptr<AnimationClip> animationClip)
-//{
-//	sounds.emplace(assetId, animationClip);
-//}
-//void AssetStore::AddAnimationSpriteSheet(const std::string& assetId, std::shared_ptr<AnimationSpriteSheet> animationClip)
-//{
-//	sounds.emplace(assetId, animationClip);
-//}
-//
-//std::shared_ptr<AnimationClip> AssetStore::GetAnimationClip(const std::string& assetId) const
-//{
-//	return animationClips.at(assetId);
-//}
-//
-//std::shared_ptr<AnimationSpriteSheet> AssetStore::GetAnimationSpriteSheet(const std::string& assetId) const
-//{
-//	return animationSpriteSheets.at(assetId);
-//}
+void AssetStore::AddAnimationClip(const std::string& assetId, std::shared_ptr<SpriteAnimationClip> animClip)
+{
+	animationClips.emplace(assetId, animClip);
+}
+
+std::shared_ptr<SpriteAnimationClip> AssetStore::GetAnimationClip(const std::string& assetId) const
+{
+	return animationClips.at(assetId);
+}
 
 Mix_Chunk* AssetStore::GetSound(const std::string& assetId) const
 {

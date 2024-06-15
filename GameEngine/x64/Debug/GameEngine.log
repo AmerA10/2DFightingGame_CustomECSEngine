@@ -1,26 +1,28 @@
-﻿  Main.cpp
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Animation\AnimationClip.h(17,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Animation\AnimationClip.h(18,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Main.cpp(26,34): warning C4305: 'argument': truncation from 'double' to 'const float'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\utility(190,16): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
+﻿  Game.cpp
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\AnimationSystem.h(89,82): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\CameraMovementSystem.h(31,37): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
-              _Ty=double
+              T=float
           ]
-          and
-          [
-              _Ty1=const float
-          ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Main.cpp(19): message : see reference to function template instantiation 'std::pair<const float,int>::pair<double,int,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\CameraMovementSystem.h(35,37): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
-              _Other1=double,
-              _Other2=int
+              T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Main.cpp(19): message : see reference to function template instantiation 'std::pair<const float,int>::pair<double,int,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileEmitterSystem.h(59,54): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ProjectileLifeCycleSystem.h(21,50): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ScriptSystem.h(14,26): warning C4244: '=': conversion from 'const double' to 'T', possible loss of data
           with
           [
-              _Other1=double,
-              _Other2=int
+              T=float
           ]
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\ScriptSystem.h(15,26): warning C4244: '=': conversion from 'const double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(199,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(199,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(257,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

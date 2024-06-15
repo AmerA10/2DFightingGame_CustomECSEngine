@@ -1,0 +1,778 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\SDL2\include\</FILEPATH>
+      <FILENAME>SDL_stdinc.h</FILENAME>
+      <LINE>544</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26819</DEFECTCODE>
+    <DESCRIPTION>Unannotated fallthrough between switch labels (es.78).</DESCRIPTION>
+    <FUNCTION>SDL_memset4</FUNCTION>
+    <DECORATED>SDL_memset4</DECORATED>
+    <FUNCLINE>525</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\SDL2\include\</FILEPATH>
+      <FILENAME>SDL_stdinc.h</FILENAME>
+      <LINE>545</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26819</DEFECTCODE>
+    <DESCRIPTION>Unannotated fallthrough between switch labels (es.78).</DESCRIPTION>
+    <FUNCTION>SDL_memset4</FUNCTION>
+    <DECORATED>SDL_memset4</DECORATED>
+    <FUNCLINE>525</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\SDL2\include\</FILEPATH>
+      <FILENAME>SDL_stdinc.h</FILENAME>
+      <LINE>546</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26819</DEFECTCODE>
+    <DESCRIPTION>Unannotated fallthrough between switch labels (es.78).</DESCRIPTION>
+    <FUNCTION>SDL_memset4</FUNCTION>
+    <DECORATED>SDL_memset4</DECORATED>
+    <FUNCLINE>525</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\SDL2\include\</FILEPATH>
+      <FILENAME>SDL_stdinc.h</FILENAME>
+      <LINE>547</LINE>
+      <COLUMN>13</COLUMN>
+    </SFA>
+    <DEFECTCODE>26819</DEFECTCODE>
+    <DESCRIPTION>Unannotated fallthrough between switch labels (es.78).</DESCRIPTION>
+    <FUNCTION>SDL_memset4</FUNCTION>
+    <DECORATED>SDL_memset4</DECORATED>
+    <FUNCLINE>525</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\</FILEPATH>
+      <FILENAME>ECS.h</FILENAME>
+      <LINE>57</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Entity::registry' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Entity::{ctor}</FUNCTION>
+    <DECORATED>??0Entity@@QEAA@H@Z</DECORATED>
+    <FUNCLINE>57</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Entity::registry</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\</FILEPATH>
+      <FILENAME>ECS.cpp</FILENAME>
+      <LINE>79</LINE>
+      <COLUMN>45</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Registry::CreateEntity</FUNCTION>
+    <DECORATED>?CreateEntity@Registry@@QEAA?AVEntity@@XZ</DECORATED>
+    <FUNCLINE>69</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>3392</LINE>
+      <COLUMN>3</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'sol::detail::error_result::args_strings' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>sol::detail::error_result::{ctor}</FUNCTION>
+    <DECORATED>??0error_result@detail@sol@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3392</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sol::detail::error_result::args_strings</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>3395</LINE>
+      <COLUMN>3</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'sol::detail::error_result::args_strings' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>sol::detail::error_result::{ctor}</FUNCTION>
+    <DECORATED>??0error_result@detail@sol@@QEAA@H@Z</DECORATED>
+    <FUNCLINE>3395</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sol::detail::error_result::args_strings</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>15349</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>This kind of function should not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
+    <FUNCTION>sol::unsafe_function_result::{ctor}</FUNCTION>
+    <DECORATED>??0unsafe_function_result@sol@@QEAA@$$QEAU01@@Z</DECORATED>
+    <FUNCLINE>15349</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>15356</LINE>
+      <COLUMN>26</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>This kind of function should not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
+    <FUNCTION>sol::unsafe_function_result::=</FUNCTION>
+    <DECORATED>??4unsafe_function_result@sol@@QEAAAEAU01@$$QEAU01@@Z</DECORATED>
+    <FUNCLINE>15356</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>25190</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>This kind of function should not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
+    <FUNCTION>sol::state::=</FUNCTION>
+    <DECORATED>??4state@sol@@QEAAAEAV01@$$QEAV01@@Z</DECORATED>
+    <FUNCLINE>25190</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>25597</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>This kind of function should not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
+    <FUNCTION>sol::variadic_args::{ctor}</FUNCTION>
+    <DECORATED>??0variadic_args@sol@@QEAA@$$QEAU01@@Z</DECORATED>
+    <FUNCLINE>25597</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>25606</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>This kind of function should not throw. Declare it 'noexcept' (f.6).</DESCRIPTION>
+    <FUNCTION>sol::variadic_args::=</FUNCTION>
+    <DECORATED>??4variadic_args@sol@@QEAAAEAU01@$$QEAU01@@Z</DECORATED>
+    <FUNCLINE>25606</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>3784</LINE>
+      <COLUMN>3</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'sol::detail::optional_storage_base&lt;int,1&gt;::&lt;unnamed-tag&gt;::m_value' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>sol::detail::optional_storage_base&lt;int,1&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$optional_storage_base@H$00@detail@sol@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3784</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sol::detail::optional_storage_base&lt;int,1&gt;::&lt;unnamed-tag&gt;::m_value</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>21205</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'sol::u_detail::string_for_each_metatable_func::change_indexing' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>sol::u_detail::string_for_each_metatable_func::{ctor}</FUNCTION>
+    <DECORATED>??0string_for_each_metatable_func@u_detail@sol@@QEAA@XZ</DECORATED>
+    <FUNCLINE>21205</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sol::u_detail::string_for_each_metatable_func::change_indexing</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>13361</LINE>
+      <COLUMN>50</COLUMN>
+    </SFA>
+    <DEFECTCODE>26800</DEFECTCODE>
+    <DESCRIPTION>Use of a moved from object: ''(c-&gt;sol::closure&lt;std::nullptr_t,void * &amp;&gt;::upvalues)'' (lifetime.1).</DESCRIPTION>
+    <FUNCTION>sol::stack::unqualified_pusher&lt;sol::closure&lt;std::nullptr_t,void * &amp;&gt;,void&gt;::push</FUNCTION>
+    <DECORATED>??$push@$0A@$00U?$closure@$$TAEAPEAX@sol@@@?$unqualified_pusher@U?$closure@$$TAEAPEAX@sol@@X@stack@sol@@SAHU?$integer_sequence@_K$0A@$00@std@@PEAUlua_State@@$$QEAU?$closure@$$TAEAPEAX@2@@Z</DECORATED>
+    <FUNCLINE>13359</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13359</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13361</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13361</LINE>
+        <COLUMN>72</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13361</LINE>
+        <COLUMN>50</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13361</LINE>
+        <COLUMN>38</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13361</LINE>
+        <COLUMN>72</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13361</LINE>
+        <COLUMN>50</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>3758</LINE>
+      <COLUMN>3</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'sol::detail::optional_storage_base&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,0&gt;::&lt;unnamed-tag&gt;::m_value' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>sol::detail::optional_storage_base&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,0&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$optional_storage_base@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$0A@@detail@sol@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3758</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>sol::detail::optional_storage_base&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;,0&gt;::&lt;unnamed-tag&gt;::m_value</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\</FILEPATH>
+      <FILENAME>ECS.h</FILENAME>
+      <LINE>432</LINE>
+      <COLUMN>36</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '+' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '+' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Registry::AddComponent</FUNCTION>
+    <DECORATED>??$AddComponent@UTransformComponent@@U?$vec@$01M$0A@@glm@@U23@N@Registry@@QEAAXVEntity@@$$QEAU?$vec@$01M$0A@@glm@@1$$QEAN@Z</DECORATED>
+    <FUNCLINE>425</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\</FILEPATH>
+      <FILENAME>ECS.h</FILENAME>
+      <LINE>184</LINE>
+      <COLUMN>22</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>Pool&lt;ScriptComponent&gt;::Set</FUNCTION>
+    <DECORATED>?Set@?$Pool@UScriptComponent@@@@QEAAXHUScriptComponent@@@Z</DECORATED>
+    <FUNCLINE>167</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\logger\</FILEPATH>
+      <FILENAME>Logger.h</FILENAME>
+      <LINE>20</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'LogEntry::type' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>LogEntry::{ctor}</FUNCTION>
+    <DECORATED>??0LogEntry@@QEAA@XZ</DECORATED>
+    <FUNCLINE>20</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>LogEntry::type</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>23469</LINE>
+      <COLUMN>36</COLUMN>
+    </SFA>
+    <DEFECTCODE>26800</DEFECTCODE>
+    <DESCRIPTION>Use of a moved from object: ''(*args)'' (lifetime.1).</DESCRIPTION>
+    <FUNCTION>sol::basic_usertype&lt;Entity,sol::basic_reference&lt;0&gt; &gt;::tuple_set</FUNCTION>
+    <DECORATED>??$tuple_set@$0A@$00$01$02$$ZAEAY06$$CBD$$QEAP8Entity@@EBAHXZAEAY07$$CBD$$QEAP81@EAAXXZAEAY06$$CBD$$QEAP81@EBA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZAEAY0P@$$CBD$$QEAP81@EBA_N0@Z@?$basic_usertype@VEntity@@V?$basic_reference@$0A@@sol@@@sol@@AEAAXU?$integer_sequence@_K$0A@$00$01$02@std@@$$QEAV?$tuple@AEAY06$$CBD$$QEAP8Entity@@EBAHXZAEAY07$$CBD$$QEAP81@EAAXXZAEAY06$$CBD$$QEAP81@EBA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZAEAY0P@$$CBD$$QEAP81@EBA_N0@Z@3@@Z</DECORATED>
+    <FUNCLINE>23466</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>23466</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>23467</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>23468</LINE>
+        <COLUMN>26</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>23469</LINE>
+        <COLUMN>74</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>23469</LINE>
+        <COLUMN>54</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>23469</LINE>
+        <COLUMN>36</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+      <FILENAME>sol.hpp</FILENAME>
+      <LINE>13920</LINE>
+      <COLUMN>76</COLUMN>
+    </SFA>
+    <DEFECTCODE>26800</DEFECTCODE>
+    <DESCRIPTION>Use of a moved from object: ''(*t)'' (lifetime.1).</DESCRIPTION>
+    <FUNCTION>sol::stack::unqualified_pusher&lt;std::tuple&lt;double,double&gt;,void&gt;::push</FUNCTION>
+    <DECORATED>??$push@$0A@$00V?$tuple@NN@std@@@?$unqualified_pusher@V?$tuple@NN@std@@X@stack@sol@@SAHU?$integer_sequence@_K$0A@$00@std@@PEAUlua_State@@$$QEAV?$tuple@NN@4@@Z</DECORATED>
+    <FUNCLINE>13915</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13915</LINE>
+        <COLUMN>2</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13917</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13919</LINE>
+        <COLUMN>7</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13919</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13920</LINE>
+        <COLUMN>27</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13920</LINE>
+        <COLUMN>76</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13920</LINE>
+        <COLUMN>64</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13920</LINE>
+        <COLUMN>55</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13920</LINE>
+        <COLUMN>41</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13920</LINE>
+        <COLUMN>27</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\sol\</FILEPATH>
+        <FILENAME>sol.hpp</FILENAME>
+        <LINE>13920</LINE>
+        <COLUMN>76</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+      <FILENAME>imgui.cpp</FILENAME>
+      <LINE>8156</LINE>
+      <COLUMN>45</COLUMN>
+    </SFA>
+    <DEFECTCODE>33011</DEFECTCODE>
+    <DESCRIPTION>Unchecked upper bound for enum key used as index..</DESCRIPTION>
+    <FUNCTION>ImGui::GetKeyData</FUNCTION>
+    <DECORATED>?GetKeyData@ImGui@@YAPEAUImGuiKeyData@@PEAUImGuiContext@@W4ImGuiKey@@@Z</DECORATED>
+    <FUNCLINE>8146</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8146</LINE>
+        <COLUMN>21</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8148</LINE>
+        <COLUMN>18</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8148</LINE>
+        <COLUMN>23</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8151</LINE>
+        <COLUMN>12</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Branching based on condition 'key &amp; 63488'. 'false' branch is taken</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8155</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>Combination</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Branching based on condition '0 &lt;= key'. 'true' branch is taken
+Enum value 'key' is checked for lower bound.</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8155</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>Combination</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Branching based on condition 'key &lt; 666'. 'false' branch is taken
+Enum value 'key' is checked for lower bound.</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8155</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8155</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Branching based on condition '0'. 'false' branch is taken</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8155</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8155</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8156</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8156</LINE>
+        <COLUMN>19</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Branching based on condition 'result.IsLegacyKey'. 'true' branch is taken</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>8156</LINE>
+        <COLUMN>45</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+      <FILENAME>imgui.cpp</FILENAME>
+      <LINE>9194</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>33010</DEFECTCODE>
+    <DESCRIPTION>Unchecked lower bound for enum source used as index..</DESCRIPTION>
+    <FUNCTION>GetInputSourceName</FUNCTION>
+    <DECORATED>?GetInputSourceName@@YAPEBDW4ImGuiInputSource@@@Z</DECORATED>
+    <FUNCLINE>9190</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9190</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9192</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9192</LINE>
+        <COLUMN>39</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9193</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Branching based on condition '1'. 'true' branch is taken</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9193</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>Combination</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Branching based on condition '0 &lt;= source'. 'false' branch is taken
+Enum value 'source' is checked for upper bound.</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9193</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9193</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Branching based on condition '0'. 'false' branch is taken</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9193</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9193</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9194</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+      <FILENAME>imgui.cpp</FILENAME>
+      <LINE>9200</LINE>
+      <COLUMN>4</COLUMN>
+    </SFA>
+    <DEFECTCODE>33010</DEFECTCODE>
+    <DESCRIPTION>Unchecked lower bound for enum source used as index..</DESCRIPTION>
+    <FUNCTION>GetMouseSourceName</FUNCTION>
+    <DECORATED>?GetMouseSourceName@@YAPEBDW4ImGuiMouseSource@@@Z</DECORATED>
+    <FUNCLINE>9196</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9196</LINE>
+        <COLUMN>19</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9198</LINE>
+        <COLUMN>16</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9198</LINE>
+        <COLUMN>39</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9199</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Branching based on condition '1'. 'true' branch is taken</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9199</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>Combination</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Branching based on condition '0 &lt;= source'. 'false' branch is taken
+Enum value 'source' is checked for upper bound.</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9199</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9199</LINE>
+        <COLUMN>4</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>Branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Branching based on condition '0'. 'false' branch is taken</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9199</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9199</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+        <FILENAME>imgui.cpp</FILENAME>
+        <LINE>9200</LINE>
+        <COLUMN>4</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\libs\imgui\</FILEPATH>
+      <FILENAME>imstb_truetype.h</FILENAME>
+      <LINE>2148</LINE>
+      <COLUMN>11</COLUMN>
+    </SFA>
+    <DEFECTCODE>26819</DEFECTCODE>
+    <DESCRIPTION>Unannotated fallthrough between switch labels (es.78).</DESCRIPTION>
+    <FUNCTION>stbtt__run_charstring</FUNCTION>
+    <DECORATED>?stbtt__run_charstring@@YAHPEBUstbtt_fontinfo@@HPEAUstbtt__csctx@@@Z</DECORATED>
+    <FUNCLINE>2015</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>

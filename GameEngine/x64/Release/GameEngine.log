@@ -1,1 +1,39 @@
-﻿  GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Release\GameEngine.exe
+﻿LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+imgui.obj : error LNK2005: "void __cdecl ImGui::ItemSize(struct ImRect const &,float)" (?ItemSize@ImGui@@YAXAEBUImRect@@M@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::Columns(int,char const *,bool)" (?Columns@ImGui@@YAXHPEBD_N@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::EndColumns(void)" (?EndColumns@ImGui@@YAXXZ) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::NextColumn(void)" (?NextColumn@ImGui@@YAXXZ) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::BeginColumns(char const *,int,int)" (?BeginColumns@ImGui@@YAXPEBDHH@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "unsigned int __cdecl ImGui::GetColumnsID(char const *,int)" (?GetColumnsID@ImGui@@YAIPEBDH@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::PopColumnsBackground(void)" (?PopColumnsBackground@ImGui@@YAXXZ) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::PushColumnsBackground(void)" (?PushColumnsBackground@ImGui@@YAXXZ) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::PushColumnClipRect(int)" (?PushColumnClipRect@ImGui@@YAXH@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::SetColumnWidth(int,float)" (?SetColumnWidth@ImGui@@YAXHM@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::SetColumnOffset(int,float)" (?SetColumnOffset@ImGui@@YAXHM@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "float __cdecl ImGui::GetColumnWidth(int)" (?GetColumnWidth@ImGui@@YAMH@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "float __cdecl ImGui::GetColumnOffset(int)" (?GetColumnOffset@ImGui@@YAMH@Z) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "int __cdecl ImGui::GetColumnsCount(void)" (?GetColumnsCount@ImGui@@YAHXZ) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "int __cdecl ImGui::GetColumnIndex(void)" (?GetColumnIndex@ImGui@@YAHXZ) already defined in imgui_tables.obj
+imgui_widgets.obj : error LNK2005: "void __cdecl ImGui::SetWindowClipRectBeforeSetChannel(struct ImGuiWindow *,struct ImRect const &)" (?SetWindowClipRectBeforeSetChannel@ImGui@@YAXPEAUImGuiWindow@@AEBUImRect@@@Z) already defined in imgui_tables.obj
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::SetKeyEventNativeData(enum ImGuiKey,int,int,int)" (?SetKeyEventNativeData@ImGuiIO@@QEAAXW4ImGuiKey@@HHH@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::AddFocusEvent(bool)" (?AddFocusEvent@ImGuiIO@@QEAAX_N@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::AddMouseSourceEvent(enum ImGuiMouseSource)" (?AddMouseSourceEvent@ImGuiIO@@QEAAXW4ImGuiMouseSource@@@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::AddMouseWheelEvent(float,float)" (?AddMouseWheelEvent@ImGuiIO@@QEAAXMM@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::AddMouseButtonEvent(int,bool)" (?AddMouseButtonEvent@ImGuiIO@@QEAAXH_N@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::AddMousePosEvent(float,float)" (?AddMousePosEvent@ImGuiIO@@QEAAXMM@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::AddKeyAnalogEvent(enum ImGuiKey,bool,float)" (?AddKeyAnalogEvent@ImGuiIO@@QEAAXW4ImGuiKey@@_NM@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImGuiIO::AddKeyEvent(enum ImGuiKey,bool)" (?AddKeyEvent@ImGuiIO@@QEAAXW4ImGuiKey@@_N@Z)
+imgui_impl_sdl2.obj : error LNK2001: unresolved external symbol "struct ImGuiViewport * __cdecl ImGui::GetMainViewport(void)" (?GetMainViewport@ImGui@@YAPEAUImGuiViewport@@XZ)
+imgui_tables.obj : error LNK2001: unresolved external symbol "public: void __cdecl ImDrawList::PushClipRect(struct ImVec2 const &,struct ImVec2 const &,bool)" (?PushClipRect@ImDrawList@@QEAAXAEBUImVec2@@0_N@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "bool __cdecl ImGui::DebugBreakButton(char const *,char const *)" (?DebugBreakButton@ImGui@@YA_NPEBD0@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "void __cdecl ImGui::AddSettingsHandler(struct ImGuiSettingsHandler const *)" (?AddSettingsHandler@ImGui@@YAXPEBUImGuiSettingsHandler@@@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "bool __cdecl ImGui::BeginChildEx(char const *,unsigned int,struct ImVec2 const &,int,int)" (?BeginChildEx@ImGui@@YA_NPEBDIAEBUImVec2@@HH@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "void __cdecl ImGui::ErrorCheckUsingSetCursorPosToExtendParentBoundaries(void)" (?ErrorCheckUsingSetCursorPosToExtendParentBoundaries@ImGui@@YAXXZ)
+imgui_tables.obj : error LNK2001: unresolved external symbol "void __cdecl ImGui::SetItemTooltip(char const *,...)" (?SetItemTooltip@ImGui@@YAXPEBDZZ)
+imgui_tables.obj : error LNK2001: unresolved external symbol "bool __cdecl ImGui::ItemAdd(struct ImRect const &,unsigned int,struct ImRect const *,int)" (?ItemAdd@ImGui@@YA_NAEBUImRect@@IPEBU2@H@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "bool __cdecl ImGui::IsClippedEx(struct ImRect const &,unsigned int)" (?IsClippedEx@ImGui@@YA_NAEBUImRect@@I@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "bool __cdecl ImGui::ItemHoverable(struct ImRect const &,unsigned int,int)" (?ItemHoverable@ImGui@@YA_NAEBUImRect@@IH@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "void __cdecl ImGui::NavUpdateCurrentWindowIsScrollPushableX(void)" (?NavUpdateCurrentWindowIsScrollPushableX@ImGui@@YAXXZ)
+imgui_tables.obj : error LNK2001: unresolved external symbol "void __cdecl ImGui::ShadeVertsTransformPos(struct ImDrawList *,int,int,struct ImVec2 const &,float,float,struct ImVec2 const &)" (?ShadeVertsTransformPos@ImGui@@YAXPEAUImDrawList@@HHAEBUImVec2@@MM1@Z)
+imgui_tables.obj : error LNK2001: unresolved external symbol "unsigned int __cdecl ImGui::GetIDWithSeed(int,unsigned int)" (?GetIDWithSeed@ImGui@@YAIHI@Z)
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Release\GameEngine.exe : fatal error LNK1120: 21 unresolved externals

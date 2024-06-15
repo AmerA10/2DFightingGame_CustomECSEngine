@@ -14,6 +14,7 @@
 #include "../Components/ScriptComponent.h"
 #include "../Components/AudioComponent.h"
 #include "./Game.h"
+#include "../Animation/AnimationClip.h"
 #include <sol/sol.hpp>
 
 LevelLoader::LevelLoader()
@@ -87,6 +88,36 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 		{
 			assetStore->AddSound(assetId, assetFile);
 			Logger::Log("Added new sound: " + assetId);
+		}
+		else if (assetType == "animClip")
+		{
+			float duration = asset["duration"].get_or(1.0);
+			std::map<float, int> timeToFrames;
+
+			sol::optional<sol::table> hasTimeTable = asset["timeToFrames"];
+			if (hasTimeTable != sol::nullopt)
+			{
+				sol::table timeTable = asset["timeToFrames"];
+				int i = 0;
+				while (true)
+				{
+					sol::optional<sol::table> hasFrame = timeTable[i];
+					if (hasFrame == sol::nullopt)
+					{
+						break;
+					}
+					sol::table frame = timeTable[i];
+					float timeStamp = frame["t"].get_or(0.0);
+					int val = frame["f"].get_or(0);
+					timeToFrames.emplace(timeStamp, val);
+					Logger::Log("adding to timeline|  t:" + std::to_string(timeStamp) + " f: " + std::to_string(val));
+					i++;
+				}
+
+			}
+			std::shared_ptr<SpriteAnimationClip> newAnim = std::make_unique<SpriteAnimationClip>(assetId, asset["sprite_sheet_id"].get_or<std::string>(""), timeToFrames, duration);
+			assetStore->AddAnimationClip(assetId, newAnim);
+
 		}
 
 		i++;
@@ -199,7 +230,10 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					entity["components"]["sprite"]["z_index"].get_or(0),
 					entity["components"]["sprite"]["fixed"].get_or(false),
 					entity["components"]["sprite"]["src_rect_x"].get_or(0),
-					entity["components"]["sprite"]["src_rect_y"].get_or(0)
+					entity["components"]["sprite"]["src_rect_y"].get_or(0),
+					entity["components"]["sprite"]["num_v_cuts"].get_or(1),
+					entity["components"]["sprite"]["num_h_cuts"].get_or(1),
+					entity["components"]["sprite"]["start_frame"].get_or(0)
 					);
 			}
 
@@ -208,9 +242,9 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 			{
 				newEntity.AddComponent<AnimationComponent>(
 
-					entity["components"]["animation"]["num_frames"].get_or(1),
-					entity["components"]["animation"]["speed_rate"].get_or(1),
-					entity["components"]["animation"]["is_loop"].get_or(true)
+					entity["components"]["animation"]["animation_clip_id"].get_or<std::string>(""),
+					entity["components"]["animation"]["playback_rate"].get_or(1.0),
+					entity["components"]["animation"]["num_loops"].get_or(0)
 
 					);
 			}
@@ -322,10 +356,11 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					entity["components"]["sound"]["sound_asset_id"].get_or<std::string>(""),
 					entity["components"]["sound"]["sound_loop"].get_or(false),
 					entity["components"]["sound"]["sound_play"].get_or(false),
-					entity["components"]["sound"]["sound_voolume"].get_or(25)
+					entity["components"]["sound"]["sound_volume"].get_or(25)
 					
 					);
 			}
+
 
 
 			sol::optional<sol::table> updateScriptComp = entity["components"]["on_update_script"];
@@ -334,7 +369,6 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 				sol::function func = entity["components"]["on_update_script"][0];
 				newEntity.AddComponent<ScriptComponent>(func);
 			}
-
 
 		}
 		

@@ -150,7 +150,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "77bf7c65045bd0ef258e319b42f73648c35d007967f350b7c87d85bd626049f0"
+            "sha-256": "bfd5a5771eeb52325f23c339931a074c73ee6b5ada44bed58ab7e5cde472b43b"
           }
         },
         {
@@ -158,7 +158,7 @@
             "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/src/assetstore/assetstore.h"
           },
           "hashes": {
-            "sha-256": "20377787eccc83714d29a35ccf021c7a117d99ce55e81189d3b7aa18058c088b"
+            "sha-256": "9dbc420b10b0c196c7569dd4b22da64ed9d52f58f1b0351af338ce8c526ccad7"
           }
         },
         {
@@ -551,6 +551,30 @@
           },
           "hashes": {
             "sha-256": "33edc2aefb529ae630be99660c730bef2fe6acc3bf7c92f0123369693853be8e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/sdl2/include/sdl_ttf.h"
+          },
+          "hashes": {
+            "sha-256": "530f2592c84201d4086ceec691f81991c8a4196ec672606d9bfc224d6a084db3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/sdl2/include/sdl_mixer.h"
+          },
+          "hashes": {
+            "sha-256": "b049cc6232040b12e16aa23838025f9f488d8d665b5e49c405f036ecba77124f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/src/animation/animationclip.h"
+          },
+          "hashes": {
+            "sha-256": "890c2c3ef12cf66da8fbd1138fafd1826f876c1e4e922c99790e3d0942bd5825"
           }
         },
         {

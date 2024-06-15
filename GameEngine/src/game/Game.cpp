@@ -23,6 +23,7 @@
 #include "../Systems/ScriptSystem.h"
 #include "../Systems/AudioSystem.h"
 #include "../Systems/InputBufferSystem.h"
+#include "../Systems/TestSystem.h"
 #include "../Input/Input.h"
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
@@ -71,6 +72,7 @@ void Game::Setup()
 	registry->AddSystem<ScriptSystem>();
 	registry->AddSystem<AudioSystem>();
 	registry->AddSystem<InputBufferSystem>();
+	registry->AddSystem<TestSystem>();
 
 
 
@@ -134,7 +136,7 @@ void Game::Initialize()
 	}
 
 	//We pass -1 because it gets the default window index
-	renderer = SDL_CreateRenderer(window, -1, 0);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
 
 	if (!renderer) 
 	{
@@ -270,7 +272,7 @@ void Game::Update()
 
 	registry->GetSystem<CollisionSystem>().Update(eventBus);
 	registry->GetSystem<MovementSystem>().Update(registry, deltaTime);
-	registry->GetSystem<AnimationSystem>().Update();
+	registry->GetSystem<AnimationSystem>().Update(assetStore);
 	registry->GetSystem<CameraMovementSystem>().Update(camera);
 	registry->GetSystem<ProjectilEmitterSystem>().Update(registry);
 	registry->GetSystem<ProjectileLifeCycleSystem>().Update();

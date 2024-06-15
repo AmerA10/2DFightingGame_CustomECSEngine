@@ -37,6 +37,10 @@ bool Entity::BelongsToGroup(const std::string& group) const
 void System::AddEntity(Entity entity) 
 {
 	entities.push_back(entity);
+
+	//TODO:
+	//Here I can maybe make it such that each system can call a AddEntityComponentsToSystem function??
+	AddEntityComponentsToSystem(entity);
 }
 
 void System::RemoveEntity(Entity entity) 
@@ -53,6 +57,7 @@ void System::RemoveEntity(Entity entity)
 			return entity == other;
 		}
 	),entities.end());
+	RemoveEntityComponentsFromSystem(entity);
 
 }
 
@@ -91,7 +96,7 @@ Entity Registry::CreateEntity()
 	//Make sure that the entityComponentSignatures vector can house this entity signatures
 	entitiesToBeAdded.insert(entity);
 	
-	Logger::Log("Entity Created with id= " + std::to_string(entity.GetId()));
+	//Logger::Log("Entity Created with id= " + std::to_string(entity.GetId()));
 	
 	return entity;
 }
@@ -145,7 +150,7 @@ void Registry::Update() {
 
 		//Make entity available for reuse
 
-		Logger::Log("new free id: " + std::to_string(entity.GetId()));
+		//Logger::Log("new free id: " + std::to_string(entity.GetId()));
 		entityComponentSignatures[entity.GetId()].reset();
 
 

@@ -111,6 +111,8 @@ public:
 	//Defines the components type that entities must have to be considered by the system
 	template <typename TComponent> void RequireComponent();
 
+	virtual void AddEntityComponentsToSystem(Entity entity) { return; }
+	virtual void RemoveEntityComponentsFromSystem(Entity entity) { return; }
 };
 
 class IPool {
@@ -429,7 +431,7 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
 	//need to resize the component pool if the id of the component is bigger than the size
 	//As the componentIds increase by one for each unique component type
 	if (componentId >= componentPools.size()) {
-		componentPools.resize(componentId + 1, nullptr);
+		componentPools.resize(componentId + 10, nullptr);
 	}
 
 	//if we do not have a pool for the component type
@@ -454,9 +456,9 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
 
 	entityComponentSignatures[entityId].set(componentId);
 
-	Logger::Log("Adding Component - Component ID = " + std::to_string(componentId) + " added to the Entity with ID: " + std::to_string(entityId));
+	//Logger::Log("Adding Component - Component ID = " + std::to_string(componentId) + " added to the Entity with ID: " + std::to_string(entityId));
 
-	Logger::Log("New Pool size: " + std::to_string(componentPool->GetSize()));
+	//Logger::Log("New Pool size: " + std::to_string(componentPool->GetSize()));
 }
 
 template<typename TComponent>

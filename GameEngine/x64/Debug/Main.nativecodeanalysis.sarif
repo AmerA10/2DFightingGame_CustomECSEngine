@@ -146,6 +146,542 @@
           "properties": {
             "targetSymbol": "Entity::registry"
           }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'sol::detail::error_result::args_strings' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 3392,
+                  "startColumn": 4,
+                  "endLine": 3392,
+                  "endColumn": 4
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::detail::error_result::{ctor}",
+                  "decoratedName": "??0error_result@detail@sol@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "sol::detail::error_result::args_strings"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'sol::detail::error_result::args_strings' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 3395,
+                  "startColumn": 4,
+                  "endLine": 3395,
+                  "endColumn": 4
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::detail::error_result::{ctor}",
+                  "decoratedName": "??0error_result@detail@sol@@QEAA@H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "sol::detail::error_result::args_strings"
+          }
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "This kind of function should not throw. Declare it 'noexcept' (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 15349,
+                  "startColumn": 3,
+                  "endLine": 15349,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::unsafe_function_result::{ctor}",
+                  "decoratedName": "??0unsafe_function_result@sol@@QEAA@$$QEAU01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "This kind of function should not throw. Declare it 'noexcept' (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 15356,
+                  "startColumn": 27,
+                  "endLine": 15356,
+                  "endColumn": 27
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::unsafe_function_result::=",
+                  "decoratedName": "??4unsafe_function_result@sol@@QEAAAEAU01@$$QEAU01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "This kind of function should not throw. Declare it 'noexcept' (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 25190,
+                  "startColumn": 10,
+                  "endLine": 25190,
+                  "endColumn": 10
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::state::=",
+                  "decoratedName": "??4state@sol@@QEAAAEAV01@$$QEAV01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "This kind of function should not throw. Declare it 'noexcept' (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 25597,
+                  "startColumn": 3,
+                  "endLine": 25597,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::variadic_args::{ctor}",
+                  "decoratedName": "??0variadic_args@sol@@QEAA@$$QEAU01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "This kind of function should not throw. Declare it 'noexcept' (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 25606,
+                  "startColumn": 18,
+                  "endLine": 25606,
+                  "endColumn": 18
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::variadic_args::=",
+                  "decoratedName": "??4variadic_args@sol@@QEAAAEAU01@$$QEAU01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'sol::u_detail::string_for_each_metatable_func::change_indexing' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 21205,
+                  "startColumn": 2,
+                  "endLine": 21205,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::u_detail::string_for_each_metatable_func::{ctor}",
+                  "decoratedName": "??0string_for_each_metatable_func@u_detail@sol@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "sol::u_detail::string_for_each_metatable_func::change_indexing"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'sol::detail::optional_storage_base<std::basic_string_view<char,std::char_traits<char> >,1>::<unnamed-tag>::m_value' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 3784,
+                  "startColumn": 4,
+                  "endLine": 3784,
+                  "endColumn": 4
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::detail::optional_storage_base<std::basic_string_view<char,std::char_traits<char> >,1>::{ctor}",
+                  "decoratedName": "??0?$optional_storage_base@V?$basic_string_view@DU?$char_traits@D@std@@@std@@$00@detail@sol@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "sol::detail::optional_storage_base<std::basic_string_view<char,std::char_traits<char> >,1>::<unnamed-tag>::m_value"
+          }
+        },
+        {
+          "ruleId": "C26800",
+          "message": {
+            "text": "Use of a moved from object: ''(c->sol::closure<std::nullptr_t,void * &>::upvalues)'' (lifetime.1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 13361,
+                  "startColumn": 51,
+                  "endLine": 13361,
+                  "endColumn": 86
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::stack::unqualified_pusher<sol::closure<std::nullptr_t,void * &>,void>::push",
+                  "decoratedName": "??$push@$0A@$00U?$closure@$$TAEAPEAX@sol@@@?$unqualified_pusher@U?$closure@$$TAEAPEAX@sol@@X@stack@sol@@SAHU?$integer_sequence@_K$0A@$00@std@@PEAUlua_State@@$$QEAU?$closure@$$TAEAPEAX@2@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13359,
+                            "startColumn": 3
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 73
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 51
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 39
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 73
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 51
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26800",
+          "message": {
+            "text": "Use of a moved from object: ''(c->sol::closure<std::nullptr_t,void * &,void * &,std::nullptr_t,__int64 const &>::upvalues)'' (lifetime.1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                },
+                "region": {
+                  "startLine": 13361,
+                  "startColumn": 51,
+                  "endLine": 13361,
+                  "endColumn": 86
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "sol::stack::unqualified_pusher<sol::closure<std::nullptr_t,void * &,void * &,std::nullptr_t,__int64 const &>,void>::push",
+                  "decoratedName": "??$push@$0A@$00$01$02$03U?$closure@$$TAEAPEAXAEAPEAX$$TAEB_J@sol@@@?$unqualified_pusher@U?$closure@$$TAEAPEAXAEAPEAX$$TAEB_J@sol@@X@stack@sol@@SAHU?$integer_sequence@_K$0A@$00$01$02$03@std@@PEAUlua_State@@$$QEAU?$closure@$$TAEAPEAXAEAPEAX$$TAEB_J@2@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13359,
+                            "startColumn": 3
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 73
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 51
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 39
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 73
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+                          },
+                          "region": {
+                            "startLine": 13361,
+                            "startColumn": 51
+                          }
+                        }
+                      },
+                      "importance": "important"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "tool": {
@@ -181,7 +717,18 @@
             "resultFile"
           ],
           "hashes": {
-            "sha-256": "84a405c2df813839f6bf3efb6492e22eef3d21a7015a20cfb571f99c8af0e4e4"
+            "sha-256": "294d2a23ecc3d7b9bc69f745ef768e2cc6c0c04eaf20206ce195071fb7069a30"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/Amer Unreal PC/Desktop/3DRendererProject/GameEngine/GameEngine/libs/sol/sol.hpp"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "1bb34857921db520b0d1d14d9c231158ef46110fc06bd3a0a95dfad9d6063393"
           }
         },
         {
@@ -192,7 +739,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "9593513de3d2af4b93b69f3f43ed684876b701d7d90b5a27473a9a5b6b8f84f5"
+            "sha-256": "609c0e89fb4107c8834e85739ccd20ba87f27f00098994a9bbc439c37edab845"
           }
         },
         {
@@ -200,7 +747,7 @@
             "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/src/game/game.h"
           },
           "hashes": {
-            "sha-256": "64b8af1ad16d10caaaa8f59e8d86960521c3f3acbbc8db4239f7547080599419"
+            "sha-256": "c879a581e2156946359a566723836dc825fa03d7df9b272851d641206a49d916"
           }
         },
         {
@@ -608,7 +1155,31 @@
             "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/src/assetstore/assetstore.h"
           },
           "hashes": {
-            "sha-256": "20377787eccc83714d29a35ccf021c7a117d99ce55e81189d3b7aa18058c088b"
+            "sha-256": "9dbc420b10b0c196c7569dd4b22da64ed9d52f58f1b0351af338ce8c526ccad7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/sdl2/include/sdl_ttf.h"
+          },
+          "hashes": {
+            "sha-256": "530f2592c84201d4086ceec691f81991c8a4196ec672606d9bfc224d6a084db3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/sdl2/include/sdl_mixer.h"
+          },
+          "hashes": {
+            "sha-256": "b049cc6232040b12e16aa23838025f9f488d8d665b5e49c405f036ecba77124f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/src/animation/animationclip.h"
+          },
+          "hashes": {
+            "sha-256": "890c2c3ef12cf66da8fbd1138fafd1826f876c1e4e922c99790e3d0942bd5825"
           }
         },
         {
@@ -616,7 +1187,7 @@
             "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/src/eventbus/eventbus.h"
           },
           "hashes": {
-            "sha-256": "faac8344d0868fbb63f485b710245d88fd1e96a5b6e8946ad0edba52c244c7d7"
+            "sha-256": "05e82cbf0d436fad5027e2d32f0b3ae4531782bad3a673fb2edde79989ab9e29"
           }
         },
         {
@@ -625,6 +1196,62 @@
           },
           "hashes": {
             "sha-256": "724008e9fe2cf75e7c9761094aa2d89fe6ca6aba7c2b8636835bbea0b5c19bb4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/imgui/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "af58e1d47a33c5d83aae32fb9e96d4878294ee782d32328f1f47d2313656e7c4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/imgui/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "a253e82c1960f8aa7594a51a8ac606a6235738c923f12d67a7742e88bf07ed63"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/lua/lua.hpp"
+          },
+          "hashes": {
+            "sha-256": "fd83f7e823cfbb03ac2da937ec83f01b4a6ddaac220a4fa1ffd6c6c3842c5890"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/lua/lua.h"
+          },
+          "hashes": {
+            "sha-256": "ad0c88137d59e93f88c416f1f24661fd5d529d2658b10ffa9c283a94a507af82"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/lua/luaconf.h"
+          },
+          "hashes": {
+            "sha-256": "67b98bb351f0f12e0a1259936f9520e11436c057367f167e2d947c5c971c2c65"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/lua/lualib.h"
+          },
+          "hashes": {
+            "sha-256": "ff460960aad15065580bbd64a49dcd73e9b9d728209a1d0dfedee4817c6f0543"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/amer unreal pc/desktop/3drendererproject/gameengine/gameengine/libs/lua/lauxlib.h"
+          },
+          "hashes": {
+            "sha-256": "b402036cde8fcc9180d28ead326cdac20381a352561c4cfd4fc11cf92aeea85b"
           }
         }
       ]
