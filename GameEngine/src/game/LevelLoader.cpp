@@ -13,6 +13,7 @@
 #include "../Components/TextLabelComponent.h"
 #include "../Components/ScriptComponent.h"
 #include "../Components/AudioComponent.h"
+#include "../Components/TestComponent.h"
 #include "./Game.h"
 #include "../Animation/AnimationClip.h"
 #include <sol/sol.hpp>
@@ -93,6 +94,7 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 		{
 			float duration = asset["duration"].get_or(1.0);
 			std::map<float, int> timeToFrames;
+			std::map<float, sol::function> timeToEvents;
 
 			sol::optional<sol::table> hasTimeTable = asset["timeToFrames"];
 			if (hasTimeTable != sol::nullopt)
@@ -108,14 +110,33 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					}
 					sol::table frame = timeTable[i];
 					float timeStamp = frame["t"].get_or(0.0);
-					int val = frame["f"].get_or(0);
-					timeToFrames.emplace(timeStamp, val);
-					Logger::Log("adding to timeline|  t:" + std::to_string(timeStamp) + " f: " + std::to_string(val));
+
+					sol::optional<int> hasValue = frame["f"];
+
+					if (hasValue != sol::nullopt)
+					{
+						int val = frame["f"].get_or(0);
+						timeToFrames.emplace(timeStamp, val);
+						Logger::Log("adding to timeline|  t:" + std::to_string(timeStamp) + " f: " + std::to_string(val));
+					}
+
+					
+					sol::optional<sol::function> func = frame["e"];
+
+					if (func != sol::nullopt)
+					{
+						sol	::function funcToAdd = frame["e"];
+						timeToEvents.emplace(timeStamp, funcToAdd);
+
+					}
+					
+
+
 					i++;
 				}
 
 			}
-			std::shared_ptr<SpriteAnimationClip> newAnim = std::make_unique<SpriteAnimationClip>(assetId, asset["sprite_sheet_id"].get_or<std::string>(""), timeToFrames, duration);
+			std::shared_ptr<SpriteAnimationClip> newAnim = std::make_unique<SpriteAnimationClip>(assetId, asset["sprite_sheet_id"].get_or<std::string>(""), timeToFrames, duration, timeToEvents);
 			assetStore->AddAnimationClip(assetId, newAnim);
 
 		}
@@ -250,6 +271,8 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 			}
 
 			sol::optional<sol::table> boxCollComp = entity["components"]["boxcollider"];
+			std::string layer = entity["components"]["boxcollider"]["layer"].get_or<std::string>("00000000000000000000000000000000");
+			std::string mask = entity["components"]["boxcollider"]["mask"].get_or<std::string>("00000000000000000000000000000000");
 			if (boxCollComp != sol::nullopt)
 			{
 				newEntity.AddComponent<BoxColliderComponent>(
@@ -264,7 +287,9 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					glm::vec2(
 						entity["components"]["boxcollider"]["offset"]["x"].get_or(0),
 						entity["components"]["boxcollider"]["offset"]["y"].get_or(0)
-					)
+					),
+					layer,
+					mask
 					);
 			}
 
@@ -360,8 +385,6 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					
 					);
 			}
-
-
 
 			sol::optional<sol::table> updateScriptComp = entity["components"]["on_update_script"];
 			if (updateScriptComp != sol::nullopt)

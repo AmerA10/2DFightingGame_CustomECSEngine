@@ -5,6 +5,8 @@
 //as an will have more than one animtion to play
 
 
+#include <sol/sol.hpp>
+
 enum AnimationState
 {
 	Stopped, Playing, WaitingToPlay
@@ -20,6 +22,9 @@ struct AnimationComponent {
 	float localTime;
 	AnimationState animState;
 
+	std::vector<sol::function> calledFuncs;
+
+	int frameVal;
 
 	AnimationComponent(const std::string& animClipId = "", float playbackRate = 1.0f, int numLoops = 1 )
 	{
@@ -29,6 +34,20 @@ struct AnimationComponent {
 		this->globalStartTime = 0.0f;
 		this->localTime = 0.0f;
 		this->animState = WaitingToPlay;
+		this->frameVal = 0;
+	}
+
+	bool HasPlayedClip(sol::function func)
+	{
+		for (sol::function f : calledFuncs)
+		{
+			if (func == f)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 };
 

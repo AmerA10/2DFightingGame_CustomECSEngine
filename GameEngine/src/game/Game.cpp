@@ -278,6 +278,7 @@ void Game::Update()
 	registry->GetSystem<ProjectileLifeCycleSystem>().Update();
 	registry->GetSystem<AudioSystem>().Update(assetStore);
 	registry->GetSystem<ScriptSystem>().Update(deltaTime, SDL_GetTicks());
+	//registry->GetSystem<TestSystem>().Update();
 
 }
 

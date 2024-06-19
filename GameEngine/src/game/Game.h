@@ -12,7 +12,7 @@
 #include <imgui/imgui.h>
 #include <sol/sol.hpp>
 
-const int FPS = 60;
+const int FPS = 65;
 //The time each frame is expected to take
 const int MILLISECS_PER_FRAME = 1000 / FPS;
 

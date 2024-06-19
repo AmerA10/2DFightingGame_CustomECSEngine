@@ -103,7 +103,7 @@ public:
 				enemy.AddComponent<TransformComponent>(glm::vec2(pos[0], pos[1]), glm::vec2(scale, scale), rotation);
 				enemy.AddComponent<RigidBodyComponent>(glm::vec2(vel[0], vel[1]));
 				enemy.AddComponent<SpriteComponent>(itemsSprite[currentSpriteItemIndex], 32, 32, scale);
-				enemy.AddComponent<BoxColliderComponent>(32, 32, enemy.GetComponent<TransformComponent>().scale);
+				enemy.AddComponent<BoxColliderComponent>(32, 32, enemy.GetComponent<TransformComponent>().scale, glm::vec2(0,0));
 				enemy.Group("Enemies");
 				enemy.AddComponent<HealthComponent>(healthPercentage);
 				SDL_Color startColor = { 10,255,10 };

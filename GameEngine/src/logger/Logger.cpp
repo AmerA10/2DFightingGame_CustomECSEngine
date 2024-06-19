@@ -30,7 +30,7 @@ void Logger::Log(const std::string& message)
 	strftime(buffer, sizeof(buffer), "LOG | [ %d/%b/%Y %T ] - ", &currentTime);
 
 
-	std::cout << "\033[32m" << buffer << message <<  "\033[0m " <<  std::endl;
+	std::cout << "\033[32m" << buffer << message <<  "\033[0m " << '\n';
 
 	LogEntry logEntry;
 	logEntry.type = LOG_INFO;

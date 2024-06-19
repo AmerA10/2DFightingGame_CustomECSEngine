@@ -62,7 +62,7 @@ public:
 				projectile.AddComponent<TransformComponent>(projectileOrigin,glm::vec2(4.0,4.0), 0.0);
 				projectile.AddComponent<RigidBodyComponent>(projEmitter.projectileVelocity);
 				projectile.AddComponent<SpriteComponent>("bullet-texture", 4, 4, 4);
-				projectile.AddComponent<BoxColliderComponent>(4, 4, glm::vec2(4,4));
+				projectile.AddComponent<BoxColliderComponent>(4, 4, glm::vec2(4,4), glm::vec2(0), "00000100000000000000000000000000", "10000000000000000000000000000000");
 				projectile.AddComponent<ProjectileComponent>(projEmitter.isFriendly, projEmitter.hitPercentDamage, projEmitter.projectileDuration);
 				//
 				projEmitter.lastEmissionTime = SDL_GetTicks();
@@ -104,7 +104,7 @@ public:
 					projectile.AddComponent<TransformComponent>(projectileOrigin, glm::vec2(6.0, 6.0), 0.0);
 					projectile.AddComponent<RigidBodyComponent>(projVel);
 					projectile.AddComponent<SpriteComponent>("bullet-texture", 4, 4, 4);
-					projectile.AddComponent<BoxColliderComponent>(4, 4, glm::vec2(6,6));
+					projectile.AddComponent<BoxColliderComponent>(4, 4, glm::vec2(6, 6), glm::vec2(0), "00000100000000000000000000000000", "01000000000000000000000000000000");
 					projectile.AddComponent<ProjectileComponent>(pec.isFriendly, pec.hitPercentDamage, pec.projectileDuration);
 					projectile.Group("Projectile");
 

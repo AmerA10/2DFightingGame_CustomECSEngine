@@ -1,5 +1,5 @@
 ﻿  Game.cpp
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\AnimationSystem.h(89,82): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\AnimationSystem.h(155,96): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\CameraMovementSystem.h(31,37): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
@@ -25,4 +25,26 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(199,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(199,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(257,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+  LevelLoader.cpp
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(95,19): warning C4244: 'initializing': conversion from 'U' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(112,22): warning C4244: 'initializing': conversion from 'U' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(357,61): warning C4838: conversion from 'U' to 'Uint8' requires a narrowing conversion
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(358,61): warning C4838: conversion from 'U' to 'Uint8' requires a narrowing conversion
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(359,61): warning C4838: conversion from 'U' to 'Uint8' requires a narrowing conversion
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(453,45): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\ECS\ECS.h(507): message : see reference to function template instantiation 'void Registry::AddComponent<AnimationComponent,T,double,int>(Entity,T &&,double &&,int &&)' being compiled
+          with
+          [
+              T=std::string
+          ]
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\LevelLoader.cpp(270): message : see reference to function template instantiation 'void Entity::AddComponent<AnimationComponent,T,U,U>(T &&,U &&,U &&)' being compiled
+          with
+          [
+              T=std::string
+          ]
+  Generating Code...
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

@@ -30,8 +30,17 @@ Level = {
             
             timeToFrames = {
                 [0] = 
-                {t = 0.5, f = 0}, 
-                {t = 1.0, f = 1}, 
+                {t = 0.5, f = 0, 
+                
+                    e = function(entity) 
+                            set_position(entity,math.random(10,100),math.random(100,200)) 
+                        end
+                }, 
+                {t = 1.0, f = 1},
+                {t = 1.25, e = function(entity)
+                                set_position(entity,0,0)
+                            end
+                },
                 {t = 1.5, f = 2}
 
             }
@@ -88,7 +97,9 @@ Level = {
                     width = 32,
                     height = 32,
                     scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 0 }
+                    offset = { x = 0, y = 0 },
+                    layer = "10000000000000000000000000000000",
+                    mask =  "00000000000000000000000000000000"
                 },
                 health = {
                     health_percentage = 100
@@ -138,7 +149,9 @@ Level = {
                     width = 32,
                     height = 32,
                     scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 0 }
+                    offset = { x = 0, y = 0 },
+                    layer = "01000000000000000000000000000000",
+                    mask =  "00000000000000000000000000000000"
                 },
                 health = {
                     health_percentage = 100
@@ -179,7 +192,9 @@ Level = {
                     width = 32,
                     height = 32,
                     scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 0 }
+                    offset = { x = 0, y = 0 },
+                    layer = "01000000000000000000000000000000",
+                    mask =  "00000000000000000000000000000000"
                 },
                 health = {
                     health_percentage = 100
