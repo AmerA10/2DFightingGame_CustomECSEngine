@@ -7,6 +7,7 @@
 #include <SDL.h>
 #include <glm/glm.hpp>
 #include <sol/sol.hpp>
+#include <glm/glm.hpp>
 
 class AnimationSystem : public System {
 
@@ -47,13 +48,11 @@ public:
 				//need to change the sprite
 				spriteComponent.assetId = animClip->spriteSheetId;
 				animComponent.calledFuncs.clear();
-				Logger::Log("waiting to play anim");
 
 
 			}
 	
 			float time = (float)(SDL_GetTicks() - animComponent.globalStartTime) / 1000.0f;
-			std::cout << "Time: " << time << '\n';
 
 
 			if (animComponent.numLoops < 0)

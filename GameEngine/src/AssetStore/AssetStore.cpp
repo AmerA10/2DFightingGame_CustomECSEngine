@@ -27,6 +27,8 @@ void AssetStore::AddTexture(SDL_Renderer* renderer, const std::string& assetId, 
 	textures.emplace(assetId, texture);
 }
 
+
+
 void AssetStore::AddFont(const std::string& assetId, const std::string& path, int fontSize)
 {
 	fonts.emplace(assetId, TTF_OpenFont(path.c_str(), fontSize));
@@ -78,13 +80,26 @@ TTF_Font* AssetStore::GetFont(const std::string& assetId) const
 	return fonts.at(assetId);
 }
 
+void AssetStore::AddMusic(const std::string& assetId, const std::string& path)
+{
+	Mix_Music* song = Mix_LoadMUS(path.c_str());
+
+	if (song == NULL)
+	{
+		Logger::Err("Failed to load music track: " + path);
+	}
+
+	songs.emplace(assetId, song);
+;}
+
 void AssetStore::AddSound(const std::string& assetId, const std::string& path)
 {
 	Mix_Chunk* sound = Mix_LoadWAV(path.c_str());
 
+
 	if (sound == NULL)
 	{
-		Logger::Err("Failed to load music track: " + path);
+		Logger::Err("Failed to load sound : " + path);
 		return;
 	}
 
@@ -97,6 +112,25 @@ void AssetStore::AddAnimationClip(const std::string& assetId, std::shared_ptr<Sp
 	animationClips.emplace(assetId, animClip);
 }
 
+void AssetStore::AddFAnimationClip(const std::string& assetId, FAnimationClip animClip)
+{
+	fAnimationClips.emplace(assetId, std::make_unique<FAnimationClip>(animClip));
+}
+void AssetStore::AddSpriteSheet(const std::string& assetId, SpriteSheet spriteSheet)
+{
+	spriteSheets.emplace(assetId, std::make_unique<SpriteSheet>(spriteSheet));
+}
+
+std::unique_ptr<FAnimationClip>& AssetStore::GetFAnimationClip(const std::string& assetId) 
+{
+	return fAnimationClips.at(assetId);
+}
+
+std::unique_ptr<SpriteSheet>& AssetStore::GetSpriteSheet(const std::string& assetId)
+{
+	return spriteSheets.at(assetId);
+}
+
 std::shared_ptr<SpriteAnimationClip> AssetStore::GetAnimationClip(const std::string& assetId) const
 {
 	return animationClips.at(assetId);
@@ -105,4 +139,9 @@ std::shared_ptr<SpriteAnimationClip> AssetStore::GetAnimationClip(const std::str
 Mix_Chunk* AssetStore::GetSound(const std::string& assetId) const
 {
 	return sounds.at(assetId);
+}
+
+Mix_Music* AssetStore::GetMusic(const std::string& assetId) const
+{
+	return songs.at(assetId);
 }

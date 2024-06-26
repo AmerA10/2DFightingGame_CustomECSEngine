@@ -14,8 +14,10 @@
 #include "../Components/ScriptComponent.h"
 #include "../Components/AudioComponent.h"
 #include "../Components/TestComponent.h"
+#include "../Components/FAnimationComponent.h"
 #include "./Game.h"
 #include "../Animation/AnimationClip.h"
+#include "../Events/InputActionEvent.h"
 #include <sol/sol.hpp>
 
 LevelLoader::LevelLoader()
@@ -29,7 +31,7 @@ LevelLoader::~LevelLoader()
 }
 
 
-void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& registry, const std::unique_ptr<AssetStore>& assetStore, SDL_Renderer* renderer, int level)
+void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& registry, const std::unique_ptr<AssetStore>& assetStore, SDL_Renderer* renderer, int level, std::unique_ptr<EventBus>& eventBus)
 {
 	//This load result, this will NOT execute the script but just loading it
 	sol::load_result script = lua.load_file("./assets/scripts/Level" + std::to_string(level) + ".lua");
@@ -90,6 +92,11 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 			assetStore->AddSound(assetId, assetFile);
 			Logger::Log("Added new sound: " + assetId);
 		}
+		else if (assetType == "song")
+		{
+			assetStore->AddMusic(assetId, assetFile);
+			Logger::Log("Added new song: " + assetFile);
+		}
 		else if (assetType == "animClip")
 		{
 			float duration = asset["duration"].get_or(1.0);
@@ -138,6 +145,91 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 			}
 			std::shared_ptr<SpriteAnimationClip> newAnim = std::make_unique<SpriteAnimationClip>(assetId, asset["sprite_sheet_id"].get_or<std::string>(""), timeToFrames, duration, timeToEvents);
 			assetStore->AddAnimationClip(assetId, newAnim);
+
+		}
+		else if (assetType == "fightAnimationClip")
+		{
+			int frameDuration = asset["duration"].get_or(1);
+			std::map<int, int> frameNumToVal;
+			std::map<int, sol::function> frameNumToEvent;
+
+			sol::optional<sol::table> hasTimeTable = asset["frameNumToFrames"];
+			if (hasTimeTable != sol::nullopt)
+			{
+				sol::table frameNumTable = asset["frameNumToFrames"];
+				int i = 0;
+				while (true)
+				{
+					sol::optional<sol::table> hasFrame = frameNumTable[i];
+					if (hasFrame == sol::nullopt)
+					{
+						break;
+					}
+					sol::table frame = frameNumTable[i];
+
+					int timeStamp = frame["t"].get_or(0);
+
+					sol::optional<int> hasValue = frame["f"];
+
+					if (hasValue != sol::nullopt)
+					{
+						int val = frame["f"].get_or(0);
+						frameNumToVal.emplace(timeStamp, val);
+						Logger::Log("adding to timeline|  t:" + std::to_string(timeStamp) + " f: " + std::to_string(val));
+					}
+
+
+					sol::optional<sol::function> func = frame["e"];
+
+					if (func != sol::nullopt)
+					{
+						sol::function funcToAdd = frame["e"];
+						frameNumToEvent.emplace(timeStamp, funcToAdd);
+
+					}
+
+					i++;
+				}
+
+			}
+			FAnimationClip newAnim = { assetId, asset["sprite_sheet_id"].get_or<std::string>(""), frameNumToVal, frameDuration, frameNumToEvent };
+			assetStore->AddFAnimationClip(assetId, newAnim);
+
+		}
+
+		else if (assetType == "sprite_sheet")
+		{
+			assetStore->AddTexture(renderer, assetId, assetFile);
+
+			int numFrames = asset["num_frames"].get_or(0);
+			sol::optional<sol::table> hasFrameData = asset["frame_data"];
+
+			std::map<int, SDL_Rect> indexToRect;
+
+			if (hasFrameData != sol::nullopt)
+			{
+				sol::table frameData = asset["frame_data"];
+
+				int i = 0;
+				while (true)
+				{
+					sol::optional<sol::table> hasFrame = frameData[i];
+					if (hasFrame == sol::nullopt)
+					{
+						break;
+					}
+
+					sol::table frame = frameData[i];
+					SDL_Rect frameRect = { frame["x"].get_or(0), frame["y"].get_or(0),frame["w"].get_or(0) ,frame["h"].get_or(0)};
+					indexToRect.emplace(i, frameRect);
+
+					i++;
+				}
+
+				SpriteSheet sheetToAdd = { assetId,numFrames, indexToRect };
+
+				assetStore->AddSpriteSheet(assetId, sheetToAdd);
+			}
 
 		}
 
@@ -270,6 +362,18 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					);
 			}
 
+			sol::optional<sol::table> fAnimComp = entity["components"]["f_animation"];
+			if (fAnimComp != sol::nullopt)
+			{
+				if (!newEntity.HasComponent<AnimationComponent>())
+				{
+					newEntity.AddComponent<FAnimationComponent>(
+						entity["components"]["f_animation"]["clip_id"].get_or<std::string>(""),
+						entity["components"]["f_animation"]["playback_rate"].get_or(1)
+						);
+				}
+			}
+
 			sol::optional<sol::table> boxCollComp = entity["components"]["boxcollider"];
 			std::string layer = entity["components"]["boxcollider"]["layer"].get_or<std::string>("00000000000000000000000000000000");
 			std::string mask = entity["components"]["boxcollider"]["mask"].get_or<std::string>("00000000000000000000000000000000");
@@ -380,7 +484,7 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 				newEntity.AddComponent<AudioComponent>(
 					entity["components"]["sound"]["sound_asset_id"].get_or<std::string>(""),
 					entity["components"]["sound"]["sound_loop"].get_or(false),
-					entity["components"]["sound"]["sound_play"].get_or(false),
+					entity["components"]["sound"]["is_music"].get_or(false),
 					entity["components"]["sound"]["sound_volume"].get_or(25)
 					
 					);
@@ -392,6 +496,7 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 				sol::function func = entity["components"]["on_update_script"][0];
 				newEntity.AddComponent<ScriptComponent>(func);
 			}
+
 
 		}
 		

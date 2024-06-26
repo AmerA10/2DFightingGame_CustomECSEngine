@@ -24,6 +24,7 @@
 #include "../Systems/AudioSystem.h"
 #include "../Systems/InputBufferSystem.h"
 #include "../Systems/TestSystem.h"
+#include "../Systems/FAnimationSystem.h"
 #include "../Input/Input.h"
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
@@ -73,21 +74,22 @@ void Game::Setup()
 	registry->AddSystem<AudioSystem>();
 	registry->AddSystem<InputBufferSystem>();
 	registry->AddSystem<TestSystem>();
+	registry->AddSystem<FAnimationSystem>();
 
+	eventBus->Reset();
 
-
+	
 	registry->GetSystem<ScriptSystem>().CreateLuaBinding(lua);
 
 	lua.open_libraries(sol::lib::base, sol::lib::os, sol::lib::math);
 
 	LevelLoader loader;
 
-	loader.LoadLevel(lua, registry, assetStore,renderer,1);
+	loader.LoadLevel(lua, registry, assetStore,renderer,1, eventBus);
 
 	InputLoader inputLoader;
 	inputLoader.LoadInput(lua, registry);
 
-	eventBus->Reset();
 
 	//this works though we can have an event just subscribed to once and done
 	registry->GetSystem<MovementSystem>().SubscribeToEvents(eventBus);
@@ -273,6 +275,7 @@ void Game::Update()
 	registry->GetSystem<CollisionSystem>().Update(eventBus);
 	registry->GetSystem<MovementSystem>().Update(registry, deltaTime);
 	registry->GetSystem<AnimationSystem>().Update(assetStore);
+	registry->GetSystem<FAnimationSystem>().Update(assetStore);
 	registry->GetSystem<CameraMovementSystem>().Update(camera);
 	registry->GetSystem<ProjectilEmitterSystem>().Update(registry);
 	registry->GetSystem<ProjectileLifeCycleSystem>().Update();

@@ -6,11 +6,9 @@
 
 
 #include <sol/sol.hpp>
+#include "../Animation/AnimationClip.h"
 
-enum AnimationState
-{
-	Stopped, Playing, WaitingToPlay
-};
+
 struct AnimationComponent {
 
 	std::string animClipId;

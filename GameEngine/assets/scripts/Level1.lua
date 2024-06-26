@@ -23,12 +23,30 @@ Level = {
         { type = "texture", id = "truck-texture",    file = "./assets/images/truck-ford-up.png" },
         { type = "texture", id = "bullet-texture",  file = "./assets/images/bullet.png" },
         { type = "texture", id = "fw190-texture",  file = "./assets/images/fw190-spritesheet.png" },
+        { type = "texture", id = "ryu-idle-texture",  file = "./assets/images/ruy_idle_done.png" },
+        { type = "texture", id = "ryu-hk-texture",  file = "./assets/images/ryu_hk_done.png" },
         { type = "font"   , id = "arial-font",    file = "./assets/fonts/arial.ttf", font_size = 20 },
         { type = "font"   , id = "charriot-font",   file = "./assets/fonts/charriot.ttf", font_size = 20 },
         { type = "sound"  , id = "helicopter-sound", file= "./assets/sounds/helicopter.wav"},
+        { type = "sound"  , id = "laser-sound",    file="./assets/sounds/laser.ogg"},
+        { type = "song",    id = "level1-music",   file="./assets/sounds/level1music.mp3" },
+        {type = "sprite_sheet", id = "fighter_1_hk_sheet", file = "./assets/images/ryu_hk_done.png", num_frames = 6, 
+        
+            frame_data = 
+            {
+                [0] = 
+                { x = 276, y = 0,  w = 57, h = 117},
+                { x = 215, y = 0,  w = 61, h = 117},
+                { x = 0,   y = 0,  w = 114,h = 117},
+                { x = 114, y = 0,  w = 101,h = 117},
+                { x = 333, y = 0,w = 55, h = 117},
+                { x = 388, y = 0,  w = 54, h = 117},
+            }
+        },
         { type = "animClip",id = "chopper-idle", duration = 2.0, sprite_sheet_id = "chopper-texture", 
             
-            timeToFrames = {
+            timeToFrames = 
+            {
                 [0] = 
                 {t = 0.5, f = 0, 
                 
@@ -42,10 +60,26 @@ Level = {
                             end
                 },
                 {t = 1.5, f = 2}
+            }
+        },
+
+        {type = "fightAnimationClip", id = "fighter_1_hk", duration = 120, sprite_sheet_id = "fighter_1_hk_sheet",
+        
+            frameNumToFrames =
+            {
+                [0] =
+                {t = 0,  f = 0},
+                {t = 20, f = 1},
+                {t = 40, f = 2},
+                {t = 60, f = 3},
+                {t = 80, f = 4},
+                {t = 100,f = 5}
+ 
 
             }
         }
-    
+
+
     },
 
     ----------------------------------------------------
@@ -63,7 +97,8 @@ Level = {
     ----------------------------------------------------
     -- table to define entities and their components
     ----------------------------------------------------
-    entities = {
+    entities = 
+    {
         [0] =
         {
             -- Player
@@ -78,24 +113,21 @@ Level = {
                     velocity = { x = 0.0, y = 0.0 }
                 },
                 sprite = {
-                    texture_asset_id = "chopper-texture",
-                    width = 32,
-                    height = 32,
+                    texture_asset_id = "fighter_1_hk_sheet",
+                    width = 100,
+                    height = 100,
                     z_index = 4,
                     fixed = false,
                     src_rect_x = 0,
-                    src_rect_y = 0,
-                    num_v_cuts = 2,
-                    num_h_cuts = 4
+                    src_rect_y = 0
                 },
-                animation = {
-                    animation_clip_id = "chopper-idle",
-                    playback_rate = 1.0,
-                    num_loops = -1
+                f_animation = {
+                    clip_id = "fighter_1_hk",
+                    playback_rate = 1
                 },
                 boxcollider = {
-                    width = 32,
-                    height = 32,
+                    width = 76,
+                    height = 100,
                     scale = { x = 2.0, y = 2.0},
                     offset = { x = 0, y = 0 },
                     layer = "10000000000000000000000000000000",
@@ -127,6 +159,9 @@ Level = {
                     text_position = { x = 242,  y = 110 },
                     color = { r = 50, g = 50, b = 50},
                     is_fixed = false
+                },
+                sound = {
+                    --placeHolder
                 }
             }
         },
@@ -174,7 +209,7 @@ Level = {
             } 
         },
         {
-             -- Fw190
+            -- Fw190
             group = "Enemies",
             components = {
                 transform = {
@@ -223,6 +258,20 @@ Level = {
                         set_position(entity,new_x,new_y)
 
                     end
+                },
+            }
+        },
+        {
+            --MusicPlayer
+            tag = "MusicPlayer",
+            components =
+            {
+                sound=
+                {
+                    sound_asset_id="level1-music",
+                    sound_loop=true,
+                    is_music=true,
+                    sound_volume = 50
                 }
             }
         }

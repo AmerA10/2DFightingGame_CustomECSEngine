@@ -9,6 +9,7 @@
 #include "../Components/SpriteComponent.h"
 #include "../Components/ProjectileComponent.h"
 #include "../Components/CameraFollowComponent.h"
+#include "../Components/AudioComponent.h"
 #include "../EventBus/EventBus.h"
 #include "../Events/KeyboardInputEvent.h"
 #include "../Events/InputActionEvent.h"
@@ -108,6 +109,15 @@ public:
 					projectile.AddComponent<ProjectileComponent>(pec.isFriendly, pec.hitPercentDamage, pec.projectileDuration);
 					projectile.Group("Projectile");
 
+					if (entity.HasComponent<AudioComponent>())
+					{
+						AudioComponent& audio = entity.GetComponent<AudioComponent>();
+						audio.assetId = "laser-sound";
+						audio.volume = 50;
+						audio.loop = false;
+						audio.isMusic = false;
+						audio.isPlaying = false;
+					}
 
 				}
 			}

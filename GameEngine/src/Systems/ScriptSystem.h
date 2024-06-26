@@ -3,6 +3,8 @@
 #include "../ECS/ECS.h"
 #include "../Components/ScriptComponent.h"
 #include "../Components/AudioComponent.h"
+#include "../EventBus/Event.h"
+#include "../Events/InputActionEvent.h"
 #include <SDL.h>
 //declare some native c++ function that we will bind with lua functions
 
@@ -42,12 +44,21 @@ std::tuple<double, double> GetEntityPosition(Entity entity)
 
 //this brings into question which is how we want to expose the audio
 //or even regular systems to be used by external users
-void PlayAudio(Entity entity, const std::string& assetId, int volume)
+void PlayAudio(Entity entity, const std::string& assetId, int volume, bool loop = false,  bool isMusic = false)
 {
+
+	if (!entity.HasComponent<AudioComponent>())
+	{
+		Logger::Err("Attempting to play audio on an entity with no audio component");
+		return;
+	}
+
 	AudioComponent& audio = entity.GetComponent<AudioComponent>();
 	audio.assetId = assetId;
-	audio.play = true;
 	audio.volume = volume;
+	audio.loop = loop;
+	audio.isMusic = isMusic;
+	audio.isPlaying = false;
 
 }
 
@@ -71,6 +82,14 @@ public:
 			"HasTag", &Entity::HasTag,
 			"BelongsToGroup", &Entity::BelongsToGroup);
 
+		lua.new_usertype<Event>("Event");
+
+		lua.new_usertype<InputAction>("InputAction",
+			"get_action", &InputAction::inputActionName);
+
+		lua.new_usertype<InputActionEvent>("InputEvent",
+			"get_event", &InputActionEvent::action
+			);
 
 
 		//We can create a input type or aciton type that is called via an input and expose it to lua
@@ -80,6 +99,8 @@ public:
 		//CreatAllBindingsBetween C++ and Lua
 		lua.set_function("set_position", SetEntityPosition);
 		lua.set_function("get_position", GetEntityPosition);
+		lua.set_function("play_audio", PlayAudio);
+		
 
 	}
 
