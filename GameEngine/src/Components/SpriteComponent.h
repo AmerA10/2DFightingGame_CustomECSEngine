@@ -26,11 +26,8 @@ struct SpriteComponent {
 	SDL_Rect srcRect;
 	SDL_RendererFlip flip;
 
-	int numVCuts;
-	int numHCuts;
-	int currentFrame;
 
-	SpriteComponent(const std::string& assetId = "", int width = 20, int height = 20, int zIndex = 0, bool isFixed = false, int srcRectX = 0, int srcRectY = 0, int numVCuts = 1, int numHCuts = 1, int frame = 0) 
+	SpriteComponent(const std::string& assetId = "", int width = 20, int height = 20, int zIndex = 0, bool isFixed = false, int srcRectX = 0, int srcRectY = 0) 
 	{
 		this->width = width;
 		this->height = height;
@@ -39,9 +36,6 @@ struct SpriteComponent {
 		this->isFixed = isFixed;
 		this->srcRect = { srcRectX, srcRectY , this->width, this->height};
 		this->flip = SDL_FLIP_NONE;
-		this->numVCuts = numVCuts;
-		this->numHCuts = numHCuts;
-		this->currentFrame = 0;
 	}
 
 	bool operator < (const SpriteComponent& other) const { return zIndex < other.zIndex; }

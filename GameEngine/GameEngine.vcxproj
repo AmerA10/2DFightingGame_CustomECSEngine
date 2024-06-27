@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -228,6 +228,7 @@
     <ClInclude Include="src\AssetStore\AssetStore.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
     <ClInclude Include="src\Components\AudioComponent.h" />
+    <ClInclude Include="src\Components\BattleBoxColliderComponent.h" />
     <ClInclude Include="src\Components\BoxColliderComponent.h" />
     <ClInclude Include="src\Components\CameraFollowComponent.h" />
     <ClInclude Include="src\Components\FAnimationComponent.h" />
@@ -244,6 +245,7 @@
     <ClInclude Include="src\ECS\ECS.h" />
     <ClInclude Include="src\EventBus\Event.h" />
     <ClInclude Include="src\EventBus\EventBus.h" />
+    <ClInclude Include="src\Events\BattleCollisionEvent.h" />
     <ClInclude Include="src\Events\CollisionEvent.h" />
     <ClInclude Include="src\Events\HealthUpdatedEvent.h" />
     <ClInclude Include="src\Events\InputActionEvent.h" />
@@ -255,6 +257,8 @@
     <ClInclude Include="src\Input\InputBufferHolderExample.h" />
     <ClInclude Include="src\Systems\AnimationSystem.h" />
     <ClInclude Include="src\Systems\AudioSystem.h" />
+    <ClInclude Include="src\Systems\BattleCollisionResolverSystem.h" />
+    <ClInclude Include="src\Systems\BattleCollisionSystem.h" />
     <ClInclude Include="src\Systems\CameraMovementSystem.h" />
     <ClInclude Include="src\Systems\CollisionSystem.h" />
     <ClInclude Include="src\Systems\DamageSystem.h" />
@@ -520,6 +524,7 @@
     <ClInclude Include="libs\sol\sol.hpp" />
     <ClInclude Include="src\Systems\ProjectileEmitterSystem.h" />
     <ClInclude Include="src\Systems\ProjectileLifeCycleSystem.h" />
+    <ClInclude Include="src\Systems\RenderDebugBattleSystem.h" />
     <ClInclude Include="src\Systems\RenderDebugSystem.h" />
     <ClInclude Include="src\Systems\RenderGUISystem.h" />
     <ClInclude Include="src\Systems\RenderSystem.h" />

@@ -32,15 +32,12 @@ public:
 			}
 
 			std::unique_ptr<FAnimationClip>& animClip = assetStore->GetFAnimationClip(animComponent.animClipId);
-
 			std::vector<sol::function> funcsToPlay;
-
 			std::unique_ptr<SpriteSheet>& sheet = assetStore->GetSpriteSheet(animClip->spriteSheetId);
-
 
 			if (animComponent.animState == Stopped)
 			{
-				animComponent.animState == WaitingToPlay;
+				animComponent.animState = WaitingToPlay;
 			}
 
 			if (animComponent.animState == WaitingToPlay)
@@ -52,13 +49,9 @@ public:
 				spriteComponent.assetId = animClip->spriteSheetId;
 				animComponent.calledFuncs.clear();
 
-
 			}
 
 			animComponent.localFrame += 1;
-
-			animComponent.localFrame %= animClip->duration;
-
 			sol::function func;
 
 			if (animClip->frameNumToSheetIndex.size() > 0)
@@ -77,25 +70,16 @@ public:
 
 					animComponent.frameVal = it->second;
 
-
 				}
 
-
-				Logger::Log("Animation: " + std::to_string(animComponent.localFrame) + " : " + std::to_string(animComponent.frameVal));
 			}
-
 
 			if (sheet->indexToRect.size() > 0)
 			{
-				
-
-					
 				SDL_Rect newRect = sheet->indexToRect.at(animComponent.frameVal);
 				spriteComponent.height = newRect.h;
 				spriteComponent.width =  newRect.w;
 				spriteComponent.srcRect = newRect;
-
-				
 			}
 
 			//this is such a horrible system lmao
@@ -131,6 +115,11 @@ public:
 					}
 				}
 
+			}
+
+			if (animComponent.localFrame + 1 > animClip->duration)
+			{
+				animComponent.animState = WaitingToPlay;
 			}
 
 		}

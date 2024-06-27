@@ -39,7 +39,7 @@ Level = {
                 { x = 215, y = 0,  w = 61, h = 117},
                 { x = 0,   y = 0,  w = 114,h = 117},
                 { x = 114, y = 0,  w = 101,h = 117},
-                { x = 333, y = 0,w = 55, h = 117},
+                { x = 333, y = 0,  w = 55, h = 117},
                 { x = 388, y = 0,  w = 54, h = 117},
             }
         },
@@ -68,14 +68,14 @@ Level = {
             frameNumToFrames =
             {
                 [0] =
-                {t = 0,  f = 0},
+                {t = 0,  f = 0, e = function(entity) 
+                            set_position(entity,math.random(10,200),math.random(10,200)) 
+                        end },
                 {t = 20, f = 1},
                 {t = 40, f = 2},
                 {t = 60, f = 3},
                 {t = 80, f = 4},
                 {t = 100,f = 5}
- 
-
             }
         }
 
@@ -125,13 +125,35 @@ Level = {
                     clip_id = "fighter_1_hk",
                     playback_rate = 1
                 },
-                boxcollider = {
-                    width = 76,
-                    height = 100,
-                    scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 0 },
-                    layer = "10000000000000000000000000000000",
-                    mask =  "00000000000000000000000000000000"
+                battle_box_colliders = 
+                {
+                    colliders = 
+                    {
+                        [0] = {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 100 },
+                            layer = "01000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 100, y = 0 },
+                            layer = "00100000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        }
+                    }
                 },
                 health = {
                     health_percentage = 100
@@ -153,6 +175,87 @@ Level = {
                 camera_follow = {
                     follow = true
                 },
+                text_label = {
+                    font_asset_id = "charriot-font",
+                    text = "",
+                    text_position = { x = 242,  y = 110 },
+                    color = { r = 50, g = 50, b = 50},
+                    is_fixed = false
+                },
+                sound = {
+                    --placeHolder
+                }
+            }
+        },
+        {
+            -- Player
+            tag = "Other",
+            components = {
+                transform = {
+                    position = { x = math.random(10,200), y = 110 },
+                    scale = { x = 2.0, y = 2.0 },
+                    rotation = 0.0, -- degrees
+                },
+                rigidbody = {
+                    velocity = { x = 0.0, y = 0.0 }
+                },
+                sprite = {
+                    texture_asset_id = "fighter_1_hk_sheet",
+                    width = 100,
+                    height = 100,
+                    z_index = 4,
+                    fixed = false,
+                    src_rect_x = 0,
+                    src_rect_y = 0
+                },
+                f_animation = {
+                    clip_id = "fighter_1_hk",
+                    playback_rate = 1
+                },
+                battle_box_colliders = 
+                {
+                    colliders = 
+                    {
+                        [0] = {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "01000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 100 },
+                            layer = "01000000000000000000000000000000",
+                            mask =  "10000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 100, y = 0 },
+                            layer = "00100000000000000000000000000000",
+                            mask =  "00100000000000000000000000000000"
+                        }
+                    }
+                },
+                health = {
+                    health_percentage = 100
+                },
+                projectile_emitter = {
+                    projectile_velocity = { x = 200, y = 200 },
+                    projectile_duration = 10, -- seconds
+                    repeat_frequency = 0, -- seconds
+                    hit_percentage_damage = 10,
+                    friendly = true,
+                    projectile_speed = 200,
+                    use_frequency = false
+
+                },
+
                 text_label = {
                     font_asset_id = "charriot-font",
                     text = "",

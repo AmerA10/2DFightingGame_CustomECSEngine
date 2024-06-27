@@ -15,7 +15,6 @@ struct AnimationComponent {
 	float playbackRate;
 	int numLoops;
 
-	//this is in frames or seconds?? lets say frames
 	float globalStartTime;
 	float localTime;
 	AnimationState animState;

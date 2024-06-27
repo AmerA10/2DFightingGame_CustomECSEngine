@@ -100,7 +100,7 @@ public:
 				if (animComponent.localTime >= it->first)
 				{
 
-					animComponent.frameVal = glm::clamp(it->second, 0, (spriteComponent.numHCuts * spriteComponent.numVCuts) - 1);
+					//animComponent.frameVal = glm::clamp(it->second, 0, (spriteComponent.numHCuts * spriteComponent.numVCuts) - 1);
 
 
 				}
@@ -149,8 +149,8 @@ public:
 
 			}
 
-			spriteComponent.srcRect.x = (animComponent.frameVal * spriteComponent.width) % (spriteComponent.width * spriteComponent.numVCuts);
-			spriteComponent.srcRect.y = glm::floor((animComponent.frameVal / spriteComponent.numVCuts)) * spriteComponent.height ;
+			//spriteComponent.srcRect.x = (animComponent.frameVal * spriteComponent.width) % (spriteComponent.width * spriteComponent.numVCuts);
+			//spriteComponent.srcRect.y = glm::floor((animComponent.frameVal / spriteComponent.numVCuts)) * spriteComponent.height ;
 
 			
 

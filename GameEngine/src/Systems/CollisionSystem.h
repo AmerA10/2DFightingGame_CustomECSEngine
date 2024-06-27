@@ -54,17 +54,10 @@ public:
 				const TransformComponent& transB = entityB.GetComponent<TransformComponent>();
 				BoxColliderComponent& boxB = entityB.GetComponent<BoxColliderComponent>();
 
-
-
 				if ((boxA.layer & boxB.mask).any() == false)
 				{
-					
 					continue;
 				}
-				
-				//Logger::Log("Collision with layer: " + boxA.layer.to_string());
-				//Logger::Log("Collisio with mask: " + boxB.mask.to_string());
-				//Logger::Log("Collision with layer and mask have bits common");
 				
 				bool didCollision = checkAABBCollision(transA.position.x + boxA.offset.x, transA.position.y + boxA.offset.y, boxA.width, boxA.height, transB.position.x + boxB.offset.x, transB.position.y + boxB.offset.y, boxB.width, boxB.height);
 

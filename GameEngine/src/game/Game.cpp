@@ -11,6 +11,7 @@
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
 #include "../Systems/CollisionSystem.h"
+#include "../Systems/BattleCollisionSystem.h"
 #include "../Systems/RenderDebugSystem.h"
 #include "../Systems/DamageSystem.h"
 #include "../Systems/KeyboardInputSystem.h"
@@ -25,6 +26,7 @@
 #include "../Systems/InputBufferSystem.h"
 #include "../Systems/TestSystem.h"
 #include "../Systems/FAnimationSystem.h"
+#include "../Systems/RenderDebugBattleSystem.h"
 #include "../Input/Input.h"
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
@@ -61,6 +63,7 @@ void Game::Setup()
 	registry->AddSystem<RenderSystem>();
 	registry->AddSystem<AnimationSystem>();
 	registry->AddSystem<CollisionSystem>();
+	registry->AddSystem<BattleCollisionSystem>();
 	registry->AddSystem<RenderDebugSystem>();
 	registry->AddSystem<DamageSystem>();
 	registry->AddSystem<KeyboardInputSystem>();
@@ -70,6 +73,7 @@ void Game::Setup()
 	registry->AddSystem<RenderTextSystem>();
 	registry->AddSystem<HealthDisplaySystem>();
 	registry->AddSystem<RenderGUISystem>();
+	registry->AddSystem<RenderDebugBattleSystem>();
 	registry->AddSystem<ScriptSystem>();
 	registry->AddSystem<AudioSystem>();
 	registry->AddSystem<InputBufferSystem>();
@@ -273,6 +277,7 @@ void Game::Update()
 	registry->Update();
 
 	registry->GetSystem<CollisionSystem>().Update(eventBus);
+	registry->GetSystem<BattleCollisionSystem>().Update(eventBus);
 	registry->GetSystem<MovementSystem>().Update(registry, deltaTime);
 	registry->GetSystem<AnimationSystem>().Update(assetStore);
 	registry->GetSystem<FAnimationSystem>().Update(assetStore);
@@ -302,6 +307,7 @@ void Game::Render()
 		//We want to creat e asystem responsible for creating
 		//ImGUI widgets
 		registry->GetSystem<RenderGUISystem>().Update(registry);
+		registry->GetSystem<RenderDebugBattleSystem>().Update(renderer, camera);
 
 	}
 

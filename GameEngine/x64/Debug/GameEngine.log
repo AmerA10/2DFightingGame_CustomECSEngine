@@ -1,5 +1,4 @@
 ﻿  Game.cpp
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\AnimationSystem.h(153,96): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\CameraMovementSystem.h(31,37): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
@@ -22,8 +21,7 @@ C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Syst
           [
               T=float
           ]
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\Systems\FAnimationSystem.h(43,29): warning C4553: '==': result of expression not used; did you intend '='?
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(201,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(201,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(259,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(205,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(205,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\GameEngine\src\game\Game.cpp(263,13): warning C4244: 'argument': conversion from 'Uint64' to 'Uint32', possible loss of data
   GameEngine.vcxproj -> C:\Users\Amer Unreal PC\Desktop\3DRendererProject\GameEngine\x64\Debug\GameEngine.exe

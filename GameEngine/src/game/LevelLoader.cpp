@@ -15,6 +15,7 @@
 #include "../Components/AudioComponent.h"
 #include "../Components/TestComponent.h"
 #include "../Components/FAnimationComponent.h"
+#include "../Components/BattleBoxColliderComponent.h"
 #include "./Game.h"
 #include "../Animation/AnimationClip.h"
 #include "../Events/InputActionEvent.h"
@@ -343,10 +344,8 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					entity["components"]["sprite"]["z_index"].get_or(0),
 					entity["components"]["sprite"]["fixed"].get_or(false),
 					entity["components"]["sprite"]["src_rect_x"].get_or(0),
-					entity["components"]["sprite"]["src_rect_y"].get_or(0),
-					entity["components"]["sprite"]["num_v_cuts"].get_or(1),
-					entity["components"]["sprite"]["num_h_cuts"].get_or(1),
-					entity["components"]["sprite"]["start_frame"].get_or(0)
+					entity["components"]["sprite"]["src_rect_y"].get_or(0)
+
 					);
 			}
 
@@ -395,6 +394,51 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 					layer,
 					mask
 					);
+			}
+
+			sol::optional<sol::table> hasBattleBoxComp = entity["components"]["battle_box_colliders"];
+			if (hasBattleBoxComp != sol::nullopt)
+			{
+				std::vector<BoxColliderComponent> boxes;
+				sol::optional<sol::table> hasColliders = entity["components"]["battle_box_colliders"]["colliders"];
+
+				sol::table colliders;
+				if (hasColliders != sol::nullopt)
+				{
+					colliders = entity["components"]["battle_box_colliders"]["colliders"];
+					int i = 0;
+					while (true)
+					{
+						sol::optional<sol::table> hasCollider = colliders[i];
+						if (hasCollider == sol::nullopt)
+						{
+							break;
+						}
+						sol::table collider = colliders[i];
+						BoxColliderComponent boxToAdd =
+						{
+							collider["width"].get_or(1),
+							collider["height"].get_or(1),
+							glm::vec2(
+								collider["scale"]["x"].get_or(1),
+								collider["scale"]["y"].get_or(1)
+
+							),
+							glm::vec2(
+							collider["offset"]["x"].get_or(0),
+							collider["offset"]["y"].get_or(0)
+							),
+							collider["layer"].get_or<std::string>("00000000000000000000000000000000"),
+							collider["mask"].get_or<std::string>("00000000000000000000000000000000")
+						};
+
+						boxes.emplace_back(boxToAdd);
+						i++;
+					}
+					newEntity.AddComponent<BattleBoxColliderComponent>(boxes);
+
+				}
+				
 			}
 
 			sol::optional<sol::table> healthComp = entity["components"]["health"];
