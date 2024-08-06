@@ -43,6 +43,19 @@ Level = {
                 { x = 388, y = 0,  w = 54, h = 117},
             }
         },
+        {type = "sprite_sheet", id = "fighter_1_idle_sheet", file = "./assets/images/ryu_idle_done.png", num_frames = 5,
+            
+            frame_data = 
+            {
+                [0] =
+                    {x = 0,  y = 0, w = 70, h = 98},
+                    {x = 86, y = 0, w = 67, h =98},
+                    {x = 167,y = 0, w = 67, h =98},
+                    {x = 243,y = 0, w = 67, h =98},
+                    {x = 322,y = 0, w = 67, h =98}
+                
+            }
+        },
         { type = "animClip",id = "chopper-idle", duration = 2.0, sprite_sheet_id = "chopper-texture", 
             
             timeToFrames = 
@@ -68,16 +81,28 @@ Level = {
             frameNumToFrames =
             {
                 [0] =
-                {t = 0,  f = 0, e = function(entity) 
-                            set_position(entity,math.random(10,200),math.random(10,200)) 
-                        end },
+                {t = 0,  f = 0},
                 {t = 20, f = 1},
                 {t = 40, f = 2},
                 {t = 60, f = 3},
                 {t = 80, f = 4},
                 {t = 100,f = 5}
             }
-        }
+        },
+
+        {type = "fightAnimationClip", id = "fighter_1_idle", duration = 10, sprite_sheet_id = "fighter_1_idle_sheet",
+            frameNumToFrames =
+            {
+                [0] =
+                {t = 0, f = 0},
+                {t = 2, f = 1},
+                {t = 4, f = 2},
+                {t = 6, f = 3},
+                {t = 8, f = 4}
+            }
+        },
+
+        {type = "FightMotion", id = "fighter_1_idle", action = "NONE", is_attack = false}
 
 
     },
@@ -113,7 +138,7 @@ Level = {
                     velocity = { x = 0.0, y = 0.0 }
                 },
                 sprite = {
-                    texture_asset_id = "fighter_1_hk_sheet",
+                    texture_asset_id = "fighter_1_idle_sheet",
                     width = 100,
                     height = 100,
                     z_index = 4,
@@ -122,7 +147,7 @@ Level = {
                     src_rect_y = 0
                 },
                 f_animation = {
-                    clip_id = "fighter_1_hk",
+                    clip_id = "fighter_1_idle",
                     playback_rate = 1
                 },
                 battle_box_colliders = 
