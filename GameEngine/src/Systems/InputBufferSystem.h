@@ -5,6 +5,7 @@
 #include "../EventBus/EventBus.h"
 #include "../Events/InputActionEvent.h"
 #include "../Input/Input.h"
+#include "../Components/InputBufferReceiverComponent.h"
 
 class InputBufferSystem : public System
 {
@@ -20,6 +21,7 @@ public:
 		//be able to listen to the actions this is done via the command pattern
 
 		//since input is funneled through our get input system really its our input system we have in Game.cpp that needs to be changed
+		RequireComponent<InputBufferReceiverComponent>();
 	}
 
 
@@ -40,6 +42,7 @@ public:
 
 	//SDLK_SPACE -> FIRE
 	std::unordered_map<SDL_Keycode, InputAction> inputActionMapping;
+	std::vector<SDL_Keycode> keys;
 
 	
 };
