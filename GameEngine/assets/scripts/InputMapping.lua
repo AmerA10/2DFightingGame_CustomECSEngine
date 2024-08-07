@@ -1,7 +1,7 @@
 InputMapping = 
 {
 	-- Would probably be nice if we can bind the SDL types to this or if we wrap the SDL inputs in a type then we can bind it to that --
-	mappings =
+	general_mappings =
 	{
 		[0] =
 		{ key=  "Up",		action = "MOVEY" , scale = 1},
@@ -14,5 +14,30 @@ InputMapping =
 		{ key = "D",		action = "MOVEX", scale = 1},
 		{ key = "A",		action = "MOVEX", scale = -1},
 		{ key = "P", action = "FIRE"}
+	},
+
+	Inputmappings = 
+	{
+		[0] =
+		{
+			id = "fighter_1_input_mapping",
+			mapping = 
+			{
+				[0] = 
+				{key = "A", action = "MOVEY", scale = 1},
+				{key = "D", action = "MOVEY", scale = -1},
+				{key = "Space", action = "ATTACK"}
+			}
+		},
+		{
+			id = "fighter_2_input_mapping",
+			mapping = 
+			{
+				[0] = 
+				{key = "Left", action = "MOVEY", scale = 1},
+				{key = "Right", action = "MOVEY", scale = -1},
+				{key = "P", action = "ATTACK"}
+			}		
+		}
 	}
 }

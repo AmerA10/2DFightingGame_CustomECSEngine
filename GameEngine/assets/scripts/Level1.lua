@@ -90,7 +90,7 @@ Level = {
             }
         },
 
-        {type = "fightAnimationClip", id = "fighter_1_idle", duration = 10, sprite_sheet_id = "fighter_1_idle_sheet",
+        {type = "fightAnimationClip", id = "fighter_1_idle_anim", duration = 10, sprite_sheet_id = "fighter_1_idle_sheet",
             frameNumToFrames =
             {
                 [0] =
@@ -102,9 +102,47 @@ Level = {
             }
         },
 
-        {type = "FightMotion", id = "fighter_1_idle", action = "NONE", is_attack = false}
+        {type = "FightMotion", id = "fighter_1_idle", action = "NONE", duration = 10, motion_type = IDLE, canCancel = true, anim_clip_id = "fighter_1_idle_anim", 
+        
+            boxes = 
+            {
+                [0] = 
+                {
+                    width = 76,
+                    height = 100,
+                    scale = { x = 2.0, y = 2.0},
+                    offset = { x = 0, y = 0 },
+                    layer = "10000000000000000000000000000000",
+                    mask =  "00000000000000000000000000000000"
+                },
+                {
+                    width = 76,
+                    height = 100,
+                    scale = { x = 2.0, y = 2.0},
+                    offset = { x = 0, y = 100 },
+                    layer = "01000000000000000000000000000000",
+                    mask =  "00000000000000000000000000000000"
+                },
+                {
+                    width = 76,
+                    height = 100,
+                    scale = { x = 2.0, y = 2.0},
+                    offset = { x = 100, y = 0 },
+                    layer = "00100000000000000000000000000000",
+                    mask =  "00000000000000000000000000000000"
+                }
+            }
+        }
 
-
+        {type = "Fighter", id = "fighter_1", back_move_speed = 10, forward_move_speed = 15, 
+        
+            motions =
+            {
+                [0] = "fighter_1_idle"
+            }
+        
+        
+        }
     },
 
     ----------------------------------------------------
@@ -147,7 +185,7 @@ Level = {
                     src_rect_y = 0
                 },
                 f_animation = {
-                    clip_id = "fighter_1_idle",
+                    clip_id = "fighter_1_idle_anim",
                     playback_rate = 1
                 },
                 battle_box_colliders = 

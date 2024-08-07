@@ -234,6 +234,16 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 
 		}
 
+		else if (assetType == "FightMotion")
+		{
+
+		
+		}
+		else if (assetType == "Fighter")
+		{
+
+		}
+
 		i++;
 	}
 

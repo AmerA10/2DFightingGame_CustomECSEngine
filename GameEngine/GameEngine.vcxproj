@@ -232,7 +232,9 @@
     <ClInclude Include="src\Components\BoxColliderComponent.h" />
     <ClInclude Include="src\Components\CameraFollowComponent.h" />
     <ClInclude Include="src\Components\FAnimationComponent.h" />
+    <ClInclude Include="src\Components\FighterComponent.h" />
     <ClInclude Include="src\Components\HealthComponent.h" />
+    <ClInclude Include="src\Components\InputBufferReceiverComponent.h" />
     <ClInclude Include="src\Components\KeyboardControlledComponent.h" />
     <ClInclude Include="src\Components\ProjectileComponent.h" />
     <ClInclude Include="src\Components\ProjectileEmitterComponent.h" />
@@ -263,6 +265,7 @@
     <ClInclude Include="src\Systems\CollisionSystem.h" />
     <ClInclude Include="src\Systems\DamageSystem.h" />
     <ClInclude Include="src\Systems\FAnimationSystem.h" />
+    <ClInclude Include="src\Systems\FighterSystem.h" />
     <ClInclude Include="src\Systems\HealthDisplaySystem.h" />
     <ClInclude Include="src\Systems\InputBufferSystem.h" />
     <ClInclude Include="src\Systems\KeyboardInputSystem.h" />
