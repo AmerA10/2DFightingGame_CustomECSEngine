@@ -1,6 +1,15 @@
 #pragma once
 #include <string>
 #include <map>
+#include "../Components/BoxColliderComponent.h"
+
+enum MotionType {
+	IDLE = 0,
+	MOVE = 1,
+	ATTACK = 2,
+	DAMAGE = 3
+};
+
 struct FightMotion
 {
 	//need to know what motion this is
@@ -19,6 +28,7 @@ struct FightMotion
 	std::map<int, std::vector<BoxColliderComponent>> frameToBoxes;
 
 	//need to know which animation corresponds to this motion
+	MotionType motionType;
 
 
 };
@@ -26,12 +36,9 @@ struct FightMotion
 struct Fighter
 {
 	std::string id;
-	std::vector<FightMotion> motions;
+	std::vector<std::string> motions;
+
+	int backMoveSpeed;
+	int forwardMoveSpeed;
 };
 
-enum MotionType {
-	IDLE = 0,
-	MOVE = 1,
-	ATTACK = 2,
-	DAMAGE = 3
-};

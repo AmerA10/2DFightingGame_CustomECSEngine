@@ -1,5 +1,6 @@
 #include "InputLoader.h"
 #include "../Systems/InputBufferSystem.h"
+#include "../AssetStore/AssetStore.h"
 
 
 InputLoader::InputLoader()
@@ -11,7 +12,7 @@ InputLoader::~InputLoader()
 
 }
 
-void InputLoader::LoadInput(sol::state& lua, const std::unique_ptr<Registry>& registry)
+void InputLoader::LoadInput(sol::state& lua, const std::unique_ptr<Registry>& registry, const std::unique_ptr<AssetStore>& assetStore)
 {
 	sol::load_result script = lua.load_file("./assets/scripts/InputMapping.lua");
 
@@ -27,7 +28,7 @@ void InputLoader::LoadInput(sol::state& lua, const std::unique_ptr<Registry>& re
 
 	lua.script_file("./assets/scripts/InputMapping.lua");
 
-	sol::table mappingsTable = lua["InputMapping"]["mappings"];
+	sol::table mappingsTable = lua["InputMapping"]["general_mappings"];
 
 	int i = 0;
 	while (true)

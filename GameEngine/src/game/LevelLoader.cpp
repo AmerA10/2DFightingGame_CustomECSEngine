@@ -20,6 +20,7 @@
 #include "../Animation/AnimationClip.h"
 #include "../Events/InputActionEvent.h"
 #include <sol/sol.hpp>
+#include "../FighterCore/FighterCore.h"
 
 LevelLoader::LevelLoader()
 {
@@ -236,11 +237,101 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 
 		else if (assetType == "FightMotion")
 		{
+			FightMotion motionToAdd;
+			motionToAdd.motionId = assetId;
+			motionToAdd.motionAction = asset["action"].get_or<std::string>("NONE");
+			motionToAdd.motionDuration = asset["duration"].get_or(-1);
+			motionToAdd.motionType = (MotionType)asset["motion_type"].get_or(0);
+			motionToAdd.canCancel = asset["can_cancel"];
+			motionToAdd.motionAnimClipId = asset["anim_clip_id"].get_or <std::string>("");
 
+			std::map<int, std::vector<BoxColliderComponent>> framesToColliderMapToAdd;
+			std::vector<BoxColliderComponent> boxesToAdd;
+			sol::optional<sol::table> hasBoxesTable = asset["framesToBoxes"];
+
+			//this is a nightmare and a half but it works so dont touch it basically
+			if (hasBoxesTable != sol::nullopt)
+			{
+				sol::table framesToBoxesTable = asset["framesToBoxes"];
+
+				int i = 0;
+				while (true)
+				{
+					sol::optional<sol::table> hasBoxesTable = framesToBoxesTable[i];
+					if (hasBoxesTable == sol::nullopt)
+					{
+						break;
+					}
+					sol::table framesToBoxTable = framesToBoxesTable[i];
+					int time = framesToBoxTable["t"];
+					sol::optional<sol::table> hasBoxesArray = framesToBoxTable["boxes"];
+					if (hasBoxesArray != sol::nullopt)
+					{
+						sol::table boxesArray = framesToBoxTable["boxes"];
+						int j = 0;
+						while (true)
+						{
+							sol::optional<sol::table> hasBox = boxesArray[j];
+							if (hasBox == sol::nullopt)
+							{
+								break;
+							}
+							sol::table collider = boxesArray[j];
+							BoxColliderComponent boxToAdd = BoxColliderComponent
+							{
+								collider["width"].get_or(1),collider["height"].get_or(1),
+								glm::vec2(collider["scale"]["x"],collider["scale"]["y"]),
+								glm::vec2(collider["offset"]["x"],collider["offset"]["y"]),
+								collider["layer"].get_or<std::string>(""),
+								collider["mask"].get_or<std::string>(""),
+							};
+							boxesToAdd.push_back(boxToAdd);
+							j++;
+						}
+					}
+					framesToColliderMapToAdd.emplace(time, boxesToAdd);
+					i++;
+
+				}
+				motionToAdd.frameToBoxes = framesToColliderMapToAdd;
+				assetStore->AddMotion(assetId, motionToAdd);
+			}
 		
 		}
 		else if (assetType == "Fighter")
 		{
+			Fighter fighter;
+			std::vector<std::string> motionsVec;
+			fighter.id = assetId;
+			fighter.backMoveSpeed = asset["back_move_speed"];
+			fighter.forwardMoveSpeed= asset["forward_move_speed"];
+
+			sol::optional<sol::table> hasMotions = asset["motions"];
+
+			if (hasMotions != sol::nullopt)
+			{
+				sol::table motions = asset["motions"];
+				int i = 0;
+				while (true)
+				{
+					sol::optional<sol::table> hasMotion = motions[i];
+
+					if (hasMotion == sol::nullopt)
+					{
+						break;
+					}
+					sol::table motion = motions[i];
+					std::string motionId = motion["id"].get_or<std::string>("");
+					motionsVec.push_back(motionId);
+					i++;
+				}
+			}
+
+			fighter.motions = motionsVec;
+
+			assetStore->AddFighter(fighter.id, fighter);
+
+
 
 		}
 

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../Events/InputActionEvent.h"
-
+#include <string>
 struct InputAction
 {
 	std::string inputActionName;

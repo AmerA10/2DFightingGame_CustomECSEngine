@@ -3,6 +3,12 @@
 #include <map>
 #include "../FighterCore/FighterCore.h"
 #include "../Components/BoxColliderComponent.h"
+
+enum FighterState
+{
+	IDLE = 0, MOVING = 1, ATTACK = 2, DAMAGE = 3
+};
+
 struct FighterComponent
 {
 	std::string figther_id;
@@ -17,10 +23,14 @@ struct FighterComponent
 	int currentActionVelocity;
 
 	FightMotion currentMotion;
+	FighterState currentState;
 
 	std::unordered_map<std::string, FightMotion> motions;
 
 	//need to store a way to access the actions
+	void TryChangeMotion()
+	{
 
+	}
 };
 

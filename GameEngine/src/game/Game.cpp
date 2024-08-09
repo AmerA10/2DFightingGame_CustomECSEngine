@@ -92,7 +92,7 @@ void Game::Setup()
 	loader.LoadLevel(lua, registry, assetStore,renderer,1, eventBus);
 
 	InputLoader inputLoader;
-	inputLoader.LoadInput(lua, registry);
+	inputLoader.LoadInput(lua, registry, assetStore);
 
 
 	//this works though we can have an event just subscribed to once and done

@@ -7,9 +7,14 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include "../Animation/AnimationClip.h"
+#include "../Input/InputMap.h"
+
 #include <memory>
 
 //This class is responsible for storing and managing our assets
+
+struct Fighter;
+struct FightMotion;
 
 class AssetStore {
 public:
@@ -23,6 +28,8 @@ public:
 	void AddAnimationClip(const std::string& assetId, std::shared_ptr<SpriteAnimationClip> animClip);
 	void AddFAnimationClip(const std::string& assetId, FAnimationClip animClip);
 	void AddMusic(const std::string& assetId, const std::string& path);
+	void AddFighter(const std::string& assetId, Fighter fighter);
+	void AddMotion(const std::string& assetId, FightMotion motion);
 
 
 	SDL_Texture* GetTexture(const std::string& assetId) const;
@@ -34,6 +41,8 @@ public:
 	std::shared_ptr<SpriteAnimationClip> GetAnimationClip(const std::string& assetId) const;
 	std::unique_ptr<FAnimationClip>& GetFAnimationClip(const std::string& assetId);
 	std::unique_ptr<SpriteSheet>& GetSpriteSheet(const std::string& assetId);
+	std::unique_ptr<Fighter>& GetFighter(const std::string& assetId);
+	std::unique_ptr<FightMotion>& GetFightMotion(const std::string& assetId);
 
 
 	AssetStore();
@@ -52,6 +61,9 @@ private:
 	std::map <std::string, std::shared_ptr<SpriteAnimationClip>> animationClips;
 	std::map<std::string, std::unique_ptr<FAnimationClip>> fAnimationClips;
 	std::map<std::string, std::unique_ptr<SpriteSheet>> spriteSheets;
+	std::map<std::string, std::unique_ptr<Fighter>> fighters;
+	std::map<std::string, std::unique_ptr<FightMotion>> fightMotions;
+	std::map<std::string, std::unique_ptr<InputMap>> inputMaps;
 	
 
 };

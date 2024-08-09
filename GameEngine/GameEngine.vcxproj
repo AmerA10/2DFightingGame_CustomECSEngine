@@ -252,11 +252,13 @@
     <ClInclude Include="src\Events\HealthUpdatedEvent.h" />
     <ClInclude Include="src\Events\InputActionEvent.h" />
     <ClInclude Include="src\Events\KeyboardInputEvent.h" />
+    <ClInclude Include="src\FighterCore\FighterCore.h" />
     <ClInclude Include="src\game\InputLoader.h" />
     <ClInclude Include="src\game\LevelLoader.h" />
     <ClInclude Include="src\Helper\Range.h" />
     <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Input\InputBufferHolderExample.h" />
+    <ClInclude Include="src\Input\InputMap.h" />
     <ClInclude Include="src\Systems\AnimationSystem.h" />
     <ClInclude Include="src\Systems\AudioSystem.h" />
     <ClInclude Include="src\Systems\BattleCollisionResolverSystem.h" />

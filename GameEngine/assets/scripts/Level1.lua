@@ -102,46 +102,66 @@ Level = {
             }
         },
 
-        {type = "FightMotion", id = "fighter_1_idle", action = "NONE", duration = 10, motion_type = IDLE, canCancel = true, anim_clip_id = "fighter_1_idle_anim", 
+        {type = "FightMotion", id = "fighter_1_idle", action = "NONE", duration = 10, motion_type = 0, can_cancel = true, anim_clip_id = "fighter_1_idle_anim", 
         
-            boxes = 
+            framesToBoxes = 
             {
                 [0] = 
                 {
-                    width = 76,
-                    height = 100,
-                    scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 0 },
-                    layer = "10000000000000000000000000000000",
-                    mask =  "00000000000000000000000000000000"
+                    t = 0,
+                    boxes = 
+                    {
+                        [0] = 
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        }
+                    }
                 },
                 {
-                    width = 76,
-                    height = 100,
-                    scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 100 },
-                    layer = "01000000000000000000000000000000",
-                    mask =  "00000000000000000000000000000000"
-                },
-                {
-                    width = 76,
-                    height = 100,
-                    scale = { x = 2.0, y = 2.0},
-                    offset = { x = 100, y = 0 },
-                    layer = "00100000000000000000000000000000",
-                    mask =  "00000000000000000000000000000000"
+                    t = 3,
+                    boxes = 
+                    {
+                        [0] = 
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        }
+                    }
                 }
             }
-        }
+        },
 
         {type = "Fighter", id = "fighter_1", back_move_speed = 10, forward_move_speed = 15, 
         
             motions =
             {
-                [0] = "fighter_1_idle"
+                [0] = {id = "fighter_1_idle"}
             }
-        
-        
         }
     },
 

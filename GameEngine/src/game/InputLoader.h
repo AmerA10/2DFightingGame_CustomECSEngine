@@ -5,6 +5,8 @@
 #include "../ECS/ECS.h"
 #include <memory>
 
+class AssetStore;
+
 class InputLoader
 {
 public:
@@ -12,6 +14,6 @@ public:
 	InputLoader();
 	~InputLoader();
 
-	void LoadInput(sol::state& lua, const std::unique_ptr<Registry>& registry);
+	void LoadInput(sol::state& lua, const std::unique_ptr<Registry>& registry, const std::unique_ptr<AssetStore>& assetStore);
 
 };

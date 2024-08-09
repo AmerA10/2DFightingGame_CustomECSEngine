@@ -1,7 +1,7 @@
 #include "AssetStore.h"
 #include "../logger/Logger.h"
 #include <SDL_image.h>
-
+#include "../FighterCore/FighterCore.h"
 AssetStore::AssetStore() 
 {
 	Logger::Log("Asset Store Constructor");
@@ -145,3 +145,28 @@ Mix_Music* AssetStore::GetMusic(const std::string& assetId) const
 {
 	return songs.at(assetId);
 }
+
+
+//Fighting Core Assets
+
+void AssetStore::AddFighter(const std::string& assetId, Fighter fighter)
+{
+	fighters.emplace(assetId, std::make_unique<Fighter>(fighter));
+}
+
+void AssetStore::AddMotion(const std::string& assetId, FightMotion motion)
+{
+	fightMotions.emplace(assetId, std::make_unique<FightMotion>(motion));
+
+}
+
+std::unique_ptr<Fighter>& AssetStore::GetFighter(const std::string& assetId)
+{
+	return fighters.at(assetId);
+}
+std::unique_ptr<FightMotion>& AssetStore::GetFightMotion(const std::string& assetId)
+{
+	return fightMotions.at(assetId);
+}
+
+//Input Map assets
