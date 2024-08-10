@@ -33,6 +33,16 @@ struct FAnimationComponent {
 		this->frameVal = 0;
 	}
 
+	void PlayAnimClip(const std::string& animClipId)
+	{
+		this->animClipId = animClipId;
+		this->playbackRate = 1;
+		this->localFrame = 0;
+		this->animState = WaitingToPlay;
+		this->frameVal = 0;
+
+	}
+
 	bool HasPlayedClip(sol::function func)
 	{
 		for (sol::function f : calledFuncs)

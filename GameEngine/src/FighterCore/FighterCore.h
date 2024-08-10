@@ -36,6 +36,7 @@ public:
 		this->motionId = motion.motionId;
 		this->motionAnimClipId = motion.motionAnimClipId;
 		this->motionDuration = motion.motionDuration;
+		this->motionAction = motion.motionAction;
 		this->canCancel = motion.canCancel;
 		this->frameToBoxes = motion.frameToBoxes;
 		this->motionType = motion.motionType;

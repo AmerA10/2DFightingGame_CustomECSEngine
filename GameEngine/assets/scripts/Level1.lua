@@ -76,29 +76,29 @@ Level = {
             }
         },
 
-        {type = "fightAnimationClip", id = "fighter_1_hk", duration = 120, sprite_sheet_id = "fighter_1_hk_sheet",
+        {type = "fightAnimationClip", id = "fighter_1_hk_anim", duration = 45, sprite_sheet_id = "fighter_1_hk_sheet",
         
             frameNumToFrames =
             {
                 [0] =
                 {t = 0,  f = 0},
-                {t = 20, f = 1},
-                {t = 40, f = 2},
-                {t = 60, f = 3},
-                {t = 80, f = 4},
-                {t = 100,f = 5}
+                {t = 5,  f = 1},
+                {t = 10, f = 2},
+                {t = 20, f = 3},
+                {t = 30, f = 4},
+                {t = 40, f = 5}
             }
         },
 
-        {type = "fightAnimationClip", id = "fighter_1_idle_anim", duration = 10, sprite_sheet_id = "fighter_1_idle_sheet",
+        {type = "fightAnimationClip", id = "fighter_1_idle_anim", duration = 16, sprite_sheet_id = "fighter_1_idle_sheet",
             frameNumToFrames =
             {
                 [0] =
                 {t = 0, f = 0},
-                {t = 2, f = 1},
-                {t = 4, f = 2},
-                {t = 6, f = 3},
-                {t = 8, f = 4}
+                {t = 3, f = 1},
+                {t = 6, f = 2},
+                {t = 9, f = 3},
+                {t = 12, f = 4}
             }
         },
 
@@ -156,11 +156,77 @@ Level = {
             }
         },
 
+        {type = "FightMotion", id = "fighter_1_attack", action = "ATTACK", duration = 45, motion_type = 2, can_cancel = false, anim_clip_id = "fighter_1_hk_anim",
+        
+            framesToBoxes = 
+            {
+                [0] = 
+                {
+                    t = 0,
+                    boxes = 
+                    {
+                        [0] = 
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        }
+                    }
+                },
+                {
+                    t = 3,
+                    boxes = 
+                    {
+                        [0] = 
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        },
+                        {
+                            width = 76,
+                            height = 100,
+                            scale = { x = 2.0, y = 2.0},
+                            offset = { x = 0, y = 0 },
+                            layer = "10000000000000000000000000000000",
+                            mask =  "00000000000000000000000000000000"
+                        }
+                    }
+                }
+            }
+        },
+
         {type = "Fighter", id = "fighter_1", back_move_speed = 10, forward_move_speed = 15, 
         
             motions =
             {
-                [0] = {id = "fighter_1_idle"}
+                [0] = 
+                {id = "fighter_1_idle"},
+                {id = "fighter_1_attack"}
+            }
+        },
+        {type = "Fighter", id = "fighter_2", back_move_speed = 10, forward_move_speed = 15,
+            
+            motions =
+            {
+                [0] = 
+                {id = "fighter_1_idle"},
+                {id = "fighter_1_attack"}
+
             }
         }
     },
@@ -355,103 +421,13 @@ Level = {
                 },
                 sound = {
                     --placeHolder
+                },
+                fighter = {
+                    fighter_id = "fighter_2"
+                },
+                input_receiver = {
+                    input_map_id = "fighter_2_input_mapping"
                 }
-            }
-        },
-        {
-            -- Tank
-            group = "Enemies",
-            components = {
-                transform = {
-                    position = { x = 200, y = 497 },
-                    scale = { x = 2.0, y = 2.0 },
-                    rotation = 0.0, -- degrees
-                },
-                sprite = {
-                    texture_asset_id = "tank-texture",
-                    width = 32,
-                    height = 32,
-                    z_index = 2
-                },
-                boxcollider = {
-                    width = 32,
-                    height = 32,
-                    scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 0 },
-                    layer = "01000000000000000000000000000000",
-                    mask =  "00000000000000000000000000000000"
-                },
-                health = {
-                    health_percentage = 100
-                },
-                projectile_emitter = {
-                    projectile_velocity = { x = 100, y = 0 },
-                    projectile_duration = 2, -- seconds
-                    repeat_frequency = 1, -- seconds
-                    hit_percentage_damage = 20,
-                    friendly = false,
-                    projectile_speed = 200,
-                    use_frequency = true
-                },
-                text_label = {
-                    font_asset_id = "charriot-font",
-                    text = "",
-                    color = { r = 150, g = 250, b = 50},
-                    is_fixed = false
-                }
-            } 
-        },
-        {
-            -- Fw190
-            group = "Enemies",
-            components = {
-                transform = {
-                    position = { x = math.random(200,300), y = math.random(200,500) },
-                    scale = { x = 2.0, y = 2.0 },
-                    rotation = 0.0, -- degrees
-                },
-                sprite = {
-                    texture_asset_id = "fw190-texture",
-                    width = 32,
-                    height = 32,
-                    z_index = 2
-                },
-                boxcollider = {
-                    width = 32,
-                    height = 32,
-                    scale = { x = 2.0, y = 2.0},
-                    offset = { x = 0, y = 0 },
-                    layer = "01000000000000000000000000000000",
-                    mask =  "00000000000000000000000000000000"
-                },
-                health = {
-                    health_percentage = 100
-                },
-                projectile_emitter = {
-                    projectile_velocity = { x = 100, y = 0 },
-                    projectile_duration = 2, -- seconds
-                    repeat_frequency = 1, -- seconds
-                    hit_percentage_damage = 20,
-                    friendly = false,
-                    projectile_speed = 200,
-                    use_frequency = true
-                },
-                text_label = {
-                    font_asset_id = "charriot-font",
-                    text = "",
-                    color = { r = 150, g = 250, b = 50},
-                    is_fixed = false
-                },
-                on_update_script = {
-                    [0] = 
-                    function (entity, delta_time, ellapsed_time)
-                        local position_x, position_y = get_position(entity)
-                        local new_x = ellapsed_time * 0.09
-                        local new_y = 200 + (math.sin(ellapsed_time * 0.001) * 50)
-                        set_position(entity,new_x,new_y)
-
-                    end
-                },
             }
         },
         {

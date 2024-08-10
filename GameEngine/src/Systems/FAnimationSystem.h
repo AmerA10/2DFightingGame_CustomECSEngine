@@ -37,7 +37,7 @@ public:
 
 			if (animComponent.animState == Stopped)
 			{
-				animComponent.animState = WaitingToPlay;
+				continue;
 			}
 
 			if (animComponent.animState == WaitingToPlay)
@@ -119,7 +119,7 @@ public:
 
 			if (animComponent.localFrame + 1 > animClip->duration)
 			{
-				animComponent.animState = WaitingToPlay;
+				animComponent.animState = Stopped;
 			}
 
 		}

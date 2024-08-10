@@ -235,12 +235,10 @@ void Game::ProcessInput()
 
 			registry->GetSystem<InputBufferSystem>().RemoveKey(sdlEvent.key.keysym.sym);
 			break;
-
 			
 		}
 		
 		registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
-
 		
 	}
 }

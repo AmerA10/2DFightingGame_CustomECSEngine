@@ -24,25 +24,42 @@ public:
 			FighterComponent& fighterComp = entity.GetComponent<FighterComponent>();
 			InputBufferReceiverComponent& inputComp = entity.GetComponent<InputBufferReceiverComponent>();
 			BattleBoxColliderComponent& boxComp = entity.GetComponent<BattleBoxColliderComponent>();
+			FAnimationComponent& animComp = entity.GetComponent<FAnimationComponent>();
 
 			InputAction currentRequestedAction = inputComp.GetCurrentAction();
 			//Logger::Log("current requested action is: " + currentRequestedAction.inputActionName);
-			if (currentRequestedAction.inputActionName == "NONE")
+
+			//we can change our state
+			if (fighterComp.currentMotion.canCancel || fighterComp.currentActionFrame >= fighterComp.currentActionFrameCount)
 			{
-			//	Logger::Log("not doing anything");
-			}
-			if (currentRequestedAction.inputActionName == "MOVEY")
-			{
-			//	Logger::Log("Trying to move");
+				if (fighterComp.TryChangeMotion(currentRequestedAction.inputActionName))
+				{
+					animComp.PlayAnimClip(fighterComp.currentMotion.motionAnimClipId);
+					Logger::Log("Changing action to: " + currentRequestedAction.inputActionName);
+				}
+
+				if (currentRequestedAction.inputActionName == "NONE")
+				{
+					fighterComp.currentState = FighterState::IDLE;
+				
+				}
+				if (currentRequestedAction.inputActionName == "MOVEY")
+				{
+					
+					fighterComp.currentState = FighterState::MOVING;
+
+				}
+				if (currentRequestedAction.inputActionName == "ATTACK")
+				{
+					fighterComp.currentState = FighterState::ATTACKING;
+
+				}
+
 
 			}
-			if (currentRequestedAction.inputActionName == "ATTACK")
-			{
-			//	Logger::Log("Trying to attack");
 
-			}
-
-
+			fighterComp.currentActionFrame++;
+			//need to update boxes
 		}
 	}
 
