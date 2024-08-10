@@ -70,7 +70,7 @@ public:
 						{
 							boxA->isCollliding = true;
 							boxB->isCollliding = true;
-							Logger::Log("BATTLE COLLISION: " + std::to_string(entityA.GetId()) + " Collided with: " + std::to_string(entityB.GetId()));
+							//Logger::Log("BATTLE COLLISION: " + std::to_string(entityA.GetId()) + " Collided with: " + std::to_string(entityB.GetId()));
 
 							//Emmit an event 
 							eventBus->EmitEvent<BattleCollisionEvent>(entityA, entityB, *boxA,*boxB);

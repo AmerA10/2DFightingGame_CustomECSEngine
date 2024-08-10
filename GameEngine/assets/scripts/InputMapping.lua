@@ -16,7 +16,7 @@ InputMapping =
 		{ key = "P", action = "FIRE"}
 	},
 
-	input_mappings = 
+	individual_input_mappings = 
 	{
 		[0] =
 		{

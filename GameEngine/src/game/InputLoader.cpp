@@ -64,6 +64,55 @@ void InputLoader::LoadInput(sol::state& lua, const std::unique_ptr<Registry>& re
 		Logger::Log("Creating input mapping for key: " + key + " Action: " + action);
 
 	}
+
+	sol::optional<sol::table> hasIndividualMappingsTable = lua["InputMapping"]["individual_input_mappings"];
+	if (hasIndividualMappingsTable != sol::nullopt)
+	{
+		sol::table individualMappingsTable = lua["InputMapping"]["individual_input_mappings"];
+
+		int j = 0;
+		while (true)
+		{
+			sol::optional<sol::table> hasMappingTable = individualMappingsTable[j];
+			if (hasMappingTable == sol::nullopt)
+			{
+				break;
+			}
+
+			sol::table mappingsTable = individualMappingsTable[j];
+
+			std::string mappingTableId = mappingsTable["id"];
+
+			sol::optional<sol::table> hasKeyActionMappingTable = mappingsTable["mapping"];
+			sol::table keyActionMappingTable = mappingsTable["mapping"];
+			InputMap mapToAdd;
+			mapToAdd.inputMapId = mappingTableId;
+			if (hasKeyActionMappingTable != sol::nullopt)
+			{
+				int y = 0;
+				while (true)
+				{
+
+					sol::optional<sol::table> hasInputMapData = keyActionMappingTable[y];
+					if (hasInputMapData == sol::nullopt)
+					{
+						break;
+					}
+					sol::table inputMapData = keyActionMappingTable[y];
+					std::string keyStr = inputMapData["key"];
+					SDL_Keycode keyCode = SDL_GetKeyFromName(keyStr.c_str());
+					InputAction actionToAdd = { inputMapData["action"], inputMapData["scale"].get_or(1) };
+					mapToAdd.inputMap.emplace(keyCode,actionToAdd);
+					y++;
+				}
+			}
+
+			assetStore->AddInputMap(mapToAdd.inputMapId, mapToAdd);
+			j++;
+
+;		}
+	}
+
 	Logger::Log("Number of mappings created: " + std::to_string(registry->GetSystem<InputBufferSystem>().inputActionMapping.size()));
 
 }

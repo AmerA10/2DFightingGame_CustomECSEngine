@@ -27,6 +27,7 @@
 #include "../Systems/TestSystem.h"
 #include "../Systems/FAnimationSystem.h"
 #include "../Systems/RenderDebugBattleSystem.h"
+#include "../Systems/FighterSystem.h"
 #include "../Input/Input.h"
 #include <imgui/imgui_impl_sdl2.h>
 #include <imgui/imgui_impl_sdlrenderer2.h>
@@ -79,7 +80,7 @@ void Game::Setup()
 	registry->AddSystem<InputBufferSystem>();
 	registry->AddSystem<TestSystem>();
 	registry->AddSystem<FAnimationSystem>();
-
+	registry->AddSystem<FighterSystem>();
 	eventBus->Reset();
 
 	
@@ -94,13 +95,16 @@ void Game::Setup()
 	InputLoader inputLoader;
 	inputLoader.LoadInput(lua, registry, assetStore);
 
+	//force a creation of everything basically
+	registry->Update();
 
 	//this works though we can have an event just subscribed to once and done
 	registry->GetSystem<MovementSystem>().SubscribeToEvents(eventBus);
 	registry->GetSystem<DamageSystem>().SubscriberToEvents(eventBus);
 	registry->GetSystem<KeyboardInputSystem>().SubscribeToKeyInputEvent(eventBus);
 	registry->GetSystem<ProjectilEmitterSystem>().SubscribeToKeyInputEvent(eventBus);
-
+	registry->GetSystem<FighterSystem>().SetUpFighters(assetStore);
+	registry->GetSystem<InputBufferSystem>().SetupInputComps(assetStore);
 
 }
 
@@ -215,7 +219,7 @@ void Game::ProcessInput()
 
 		case SDL_KEYDOWN:
 
-			registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
+			registry->GetSystem<InputBufferSystem>().AddKey(sdlEvent.key.keysym.sym);
 
 			if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) 
 			{
@@ -225,15 +229,18 @@ void Game::ProcessInput()
 			{
 				drawDebug = !drawDebug;
 			}
-
 			break;
 
-		
-		
+		case SDL_KEYUP:
+
+			registry->GetSystem<InputBufferSystem>().RemoveKey(sdlEvent.key.keysym.sym);
+			break;
+
 			
 		}
 		
-			
+		registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
+
 		
 	}
 }
@@ -276,6 +283,7 @@ void Game::Update()
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
 
+	registry->GetSystem<FighterSystem>().Update();
 	registry->GetSystem<CollisionSystem>().Update(eventBus);
 	registry->GetSystem<BattleCollisionSystem>().Update(eventBus);
 	registry->GetSystem<MovementSystem>().Update(registry, deltaTime);
@@ -286,7 +294,6 @@ void Game::Update()
 	registry->GetSystem<ProjectileLifeCycleSystem>().Update();
 	registry->GetSystem<AudioSystem>().Update(assetStore);
 	registry->GetSystem<ScriptSystem>().Update(deltaTime, SDL_GetTicks());
-	//registry->GetSystem<TestSystem>().Update();
 
 }
 

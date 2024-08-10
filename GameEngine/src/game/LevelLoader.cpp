@@ -16,6 +16,8 @@
 #include "../Components/TestComponent.h"
 #include "../Components/FAnimationComponent.h"
 #include "../Components/BattleBoxColliderComponent.h"
+#include "../Components/FighterComponent.h"
+#include "../Components/InputBufferReceiverComponent.h"
 #include "./Game.h"
 #include "../Animation/AnimationClip.h"
 #include "../Events/InputActionEvent.h"
@@ -642,6 +644,20 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 				newEntity.AddComponent<ScriptComponent>(func);
 			}
 
+			sol::optional<sol::table> fighterComp = entity["components"]["fighter"];
+			if (fighterComp != sol::nullopt)
+			{
+				newEntity.AddComponent<FighterComponent>(
+					entity["components"]["fighter"]["fighter_id"].get_or<std::string>("")
+					);
+			}
+			sol::optional<sol::table> inputComp = entity["components"]["input_receiver"];
+			if (inputComp != sol::nullopt)
+			{
+				newEntity.AddComponent<InputBufferReceiverComponent>(
+					entity["components"]["input_receiver"]["input_map_id"].get_or<std::string>("")
+					);
+			}
 
 		}
 		

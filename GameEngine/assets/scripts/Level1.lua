@@ -267,6 +267,13 @@ Level = {
                 },
                 sound = {
                     --placeHolder
+                },
+                fighter = {
+                    fighter_id = "fighter_1"
+                },
+                input_receiver = 
+                {
+                    input_map_id = "fighter_1_input_mapping"
                 }
             }
         },

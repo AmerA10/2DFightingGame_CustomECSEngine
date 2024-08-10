@@ -30,6 +30,7 @@ public:
 	void AddMusic(const std::string& assetId, const std::string& path);
 	void AddFighter(const std::string& assetId, Fighter fighter);
 	void AddMotion(const std::string& assetId, FightMotion motion);
+	void AddInputMap(const std::string& assetId, InputMap map);
 
 
 	SDL_Texture* GetTexture(const std::string& assetId) const;
@@ -43,7 +44,7 @@ public:
 	std::unique_ptr<SpriteSheet>& GetSpriteSheet(const std::string& assetId);
 	std::unique_ptr<Fighter>& GetFighter(const std::string& assetId);
 	std::unique_ptr<FightMotion>& GetFightMotion(const std::string& assetId);
-
+	std::unique_ptr<InputMap>& GetInputMap(const std::string& assetId);
 
 	AssetStore();
 	~AssetStore();

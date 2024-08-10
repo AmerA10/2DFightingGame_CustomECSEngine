@@ -3,15 +3,16 @@
 #include <map>
 #include "../FighterCore/FighterCore.h"
 #include "../Components/BoxColliderComponent.h"
+#include <memory>
 
 enum FighterState
 {
-	IDLE = 0, MOVING = 1, ATTACK = 2, DAMAGE = 3
+	IDLE = 0, MOVING = 1, ATTACKING = 2, HURT = 3
 };
 
 struct FighterComponent
 {
-	std::string figther_id;
+	std::string fighterId;
 	std::string currentMotionId;
 
 	//Where are we in the current motion that we are doing
@@ -25,12 +26,43 @@ struct FighterComponent
 	FightMotion currentMotion;
 	FighterState currentState;
 
-	std::unordered_map<std::string, FightMotion> motions;
+	//action to motion map
+	std::unordered_map<std::string, std::string> actionToMotions;
 
-	//need to store a way to access the actions
-	void TryChangeMotion()
+public:
+	FighterComponent(const std::string& fighterId = "")
+	{
+		this->fighterId = fighterId;
+		this->currentActionFrame = 0;
+		this->currentActionFrameCount = 0;
+		this->currentActionVelocity = 0;
+		this->currentMotion = {};
+		currentState = FighterState::IDLE;
+	}
+
+	//how do we change our motion? what is the driving mechanis that changes our actions that we are doing
+	//Well two things, input, other events from other actions
+	void TryChangeMotion(const std::string& newAction)
+	{
+		if (currentMotion.canCancel)
+		{
+
+		}
+	}
+
+	void TryTakingDamage()
 	{
 
+	}
+
+	void SetupMotion(std::unique_ptr<FightMotion>& motionToAdd)
+	{
+		
+		//I can do this instead since I have created a copy constructor but that is horrible practice
+		//this->actionToMotions.emplace(motionToAdd->motionAction, FightMotion(*motionToAdd.get());
+
+
+		this->actionToMotions.emplace(motionToAdd->motionAction, motionToAdd->motionId);
 	}
 };
 

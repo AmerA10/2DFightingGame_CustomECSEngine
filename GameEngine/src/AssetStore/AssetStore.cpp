@@ -170,3 +170,13 @@ std::unique_ptr<FightMotion>& AssetStore::GetFightMotion(const std::string& asse
 }
 
 //Input Map assets
+
+void AssetStore::AddInputMap(const std::string& assetId, InputMap map)
+{
+	inputMaps.emplace(assetId, std::make_unique<InputMap>(map));
+}
+
+std::unique_ptr<InputMap>& AssetStore::GetInputMap(const std::string& assetId) 
+{
+	return inputMaps.at(assetId);
+}

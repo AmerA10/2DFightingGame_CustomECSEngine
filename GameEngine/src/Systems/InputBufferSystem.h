@@ -6,6 +6,7 @@
 #include "../Events/InputActionEvent.h"
 #include "../Input/Input.h"
 #include "../Components/InputBufferReceiverComponent.h"
+#include "../AssetStore/AssetStore.h"
 
 class InputBufferSystem : public System
 {
@@ -28,6 +29,12 @@ public:
 	void Update(std::unique_ptr<EventBus>& eventBus, SDL_Keycode& keyCode)
 	{
 		//here we can define our actions per say
+
+		for (auto entity : GetSystemEntities())
+		{
+			entity.GetComponent<InputBufferReceiverComponent>().UpdateKeys(keys);
+		}
+
 		if (inputActionMapping.find(keyCode) != inputActionMapping.end())
 		{
 			eventBus->EmitEvent<InputActionEvent>(inputActionMapping.at(keyCode));
@@ -38,6 +45,41 @@ public:
 	{
 		InputAction actiontoAdd = { actionName, scale };
 		inputActionMapping.emplace(keycode, actiontoAdd);
+	}
+	void AddKey(SDL_Keycode& keycode)
+	{
+		auto it = std::find(keys.begin(), keys.end(), keycode);
+		//found it
+		if (it != keys.end())
+		{
+			return;
+		}
+		keys.push_back(keycode);
+		Logger::Log("Adding key: " + std::to_string(keycode));
+	}
+	void RemoveKey(SDL_Keycode& keycode)
+	{
+		auto it = std::find(keys.begin(), keys.end(), keycode);
+		//found it
+		if (it == keys.end())
+		{
+			return;
+		}
+		Logger::Log("Removing key: " + std::to_string(keycode));
+		keys.erase(it);
+	}
+
+	void SetupInputComps(std::unique_ptr<AssetStore>& assetStore)
+	{
+		for (auto entity : GetSystemEntities())
+		{
+		
+			InputBufferReceiverComponent& inputComp = entity.GetComponent<InputBufferReceiverComponent>();
+			inputComp.SetupInputMap(assetStore->GetInputMap(inputComp.inputMapId));
+
+
+		
+		}
 	}
 
 	//SDLK_SPACE -> FIRE
