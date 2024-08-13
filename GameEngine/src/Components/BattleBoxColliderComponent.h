@@ -26,6 +26,13 @@ struct BattleBoxColliderComponent {
 
 	}
 
+	//this whole thing is extremely expensive for no reason
+	void InsertNewBoxes(std::vector<BoxColliderComponent> newBoxes)
+	{
+		ClearBoxes();
+		boxes.insert(boxes.end(), newBoxes.begin(), newBoxes.end());
+	}
+
 	void ClearBoxes()
 	{
 		boxes.clear();

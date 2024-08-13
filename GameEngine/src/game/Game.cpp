@@ -165,8 +165,6 @@ void Game::Initialize()
 
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
-
-
 	//Initialize the imGUI context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -211,36 +209,41 @@ void Game::ProcessInput()
 		io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
 		io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
 
+
 		switch (sdlEvent.type)
 		{
-		case SDL_QUIT:
-			isRunning = false;
-			break;
-
-		case SDL_KEYDOWN:
-
-			registry->GetSystem<InputBufferSystem>().AddKey(sdlEvent.key.keysym.sym);
-
-			if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) 
-			{
+			case SDL_QUIT:
 				isRunning = false;
-			}
-			if (sdlEvent.key.keysym.sym == SDLK_k) 
-			{
-				drawDebug = !drawDebug;
-			}
-			break;
+				break;
 
-		case SDL_KEYUP:
+			case SDL_KEYDOWN:
 
-			registry->GetSystem<InputBufferSystem>().RemoveKey(sdlEvent.key.keysym.sym);
-			break;
+				registry->GetSystem<InputBufferSystem>().AddKey(sdlEvent.key.keysym.sym);
+
+				if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) 
+				{
+					isRunning = false;
+				}
+				if (sdlEvent.key.keysym.sym == SDLK_k) 
+				{
+					drawDebug = !drawDebug;
+				}
+
+				break;
+
+			case SDL_KEYUP:
+
+				registry->GetSystem<InputBufferSystem>().RemoveKey(sdlEvent.key.keysym.sym);
+				break;
+
+			default:
+				break;
 			
 		}
 		
-		registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
 		
 	}
+		registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
 }
 
 

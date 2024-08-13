@@ -35,7 +35,6 @@ public:
 				if (fighterComp.TryChangeMotion(currentRequestedAction.inputActionName))
 				{
 					animComp.PlayAnimClip(fighterComp.currentMotion.motionAnimClipId);
-					Logger::Log("Changing action to: " + currentRequestedAction.inputActionName);
 				}
 
 				if (currentRequestedAction.inputActionName == "NONE")
@@ -58,8 +57,8 @@ public:
 
 			}
 
+			boxComp.InsertNewBoxes(fighterComp.GetCurrentFrameBoxes());
 			fighterComp.currentActionFrame++;
-			//need to update boxes
 		}
 	}
 

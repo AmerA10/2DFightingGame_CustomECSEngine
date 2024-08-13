@@ -80,5 +80,26 @@ public:
 		
 		//this->actionToMotions.emplace(motionToAdd->motionAction, motionToAdd->motionId);
 	}
+
+	std::vector<BoxColliderComponent> GetCurrentFrameBoxes()
+	{
+		if (currentMotion.frameToBoxes.size() <= 0)
+		{
+			return {};
+		}
+		else
+		{
+			auto it = currentMotion.frameToBoxes.lower_bound(currentActionFrame);
+
+			if (it != currentMotion.frameToBoxes.begin())
+			{
+				--it;
+			}
+			if (currentActionFrame >= it->first)
+			{
+				return it->second;
+			}
+		}
+	}
 };
 
