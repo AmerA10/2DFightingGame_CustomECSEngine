@@ -243,7 +243,7 @@ void Game::ProcessInput()
 		
 		
 	}
-		registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
+	registry->GetSystem<InputBufferSystem>().Update(eventBus, sdlEvent.key.keysym.sym);
 }
 
 

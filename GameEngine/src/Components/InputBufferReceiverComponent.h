@@ -76,7 +76,12 @@ public:
 	{
 		//for now lets just return the tail
 		InputAction result = actionBuffer[this->head];
-		this->head = (this->head + 1) % MAX_BUFFER_ELEMENTS;
+		while (head != tail)
+		{
+			result = actionBuffer[this->head];
+			this->head = (this->head + 1) % MAX_BUFFER_ELEMENTS;
+
+		}
 		return result;
 
 		
@@ -95,7 +100,7 @@ public:
 		tail = (tail + 1) % MAX_BUFFER_ELEMENTS;
 		if (action.inputActionName != "NONE")
 		{
-			Logger::Log("Adding to buffer: " + action.inputActionName);
+			Logger::Log("Adding to buffer: " + action.inputActionName + " head: " + std::to_string(head) + " tail: " + std::to_string(tail));
 		}
 
 	}
