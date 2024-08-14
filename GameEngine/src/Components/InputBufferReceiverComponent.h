@@ -2,7 +2,8 @@
 #include <string>
 #include "../Input/InputMap.h"
 #include <SDL.h>
-const int MAX_BUFFER_ELEMENTS = 15;
+const int MAX_BUFFER_ELEMENTS = 20;
+const int MIN_BUFFER_DISTANCE = 10;
 struct InputBufferReceiverComponent
 {
 	std::string inputMapId;
@@ -76,10 +77,11 @@ public:
 	{
 		//for now lets just return the tail
 		InputAction result = actionBuffer[this->head];
-		while (head != tail)
+		int reader = head;
+		while (reader != tail)
 		{
-			result = actionBuffer[this->head];
-			this->head = (this->head + 1) % MAX_BUFFER_ELEMENTS;
+			result = actionBuffer[reader];
+			reader = (reader + 1) % MAX_BUFFER_ELEMENTS;
 
 		}
 		return result;
@@ -98,11 +100,30 @@ public:
 	{
 		actionBuffer[tail] = action;
 		tail = (tail + 1) % MAX_BUFFER_ELEMENTS;
+
+		int currentDistance = 0;
+		if (head > tail)
+		{
+			currentDistance = ((MAX_BUFFER_ELEMENTS + 1) - head) + tail;
+
+			if ((currentDistance - MIN_BUFFER_DISTANCE) > 0)
+			{
+				head = (head + (currentDistance - MIN_BUFFER_DISTANCE)) % MAX_BUFFER_ELEMENTS;
+			}
+		}
+		else if (tail > head)
+		{
+			currentDistance = (tail - head) + 1;
+			if ((currentDistance - MIN_BUFFER_DISTANCE) > 0)
+			{
+				head = head + (currentDistance - MIN_BUFFER_DISTANCE) % MAX_BUFFER_ELEMENTS;
+			}
+		}
+		 
 		if (action.inputActionName != "NONE")
 		{
 			Logger::Log("Adding to buffer: " + action.inputActionName + " head: " + std::to_string(head) + " tail: " + std::to_string(tail));
 		}
-
 	}
 
 };
