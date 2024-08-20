@@ -648,7 +648,8 @@ void LevelLoader::LoadLevel(sol::state& lua, const std::unique_ptr<Registry>& re
 			if (fighterComp != sol::nullopt)
 			{
 				newEntity.AddComponent<FighterComponent>(
-					entity["components"]["fighter"]["fighter_id"].get_or<std::string>("")
+					entity["components"]["fighter"]["fighter_id"].get_or<std::string>(""),
+					entity["components"]["fighter"]["is_facing_right"].get_or(true)
 					);
 			}
 			sol::optional<sol::table> inputComp = entity["components"]["input_receiver"];

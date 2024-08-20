@@ -28,29 +28,65 @@ struct FighterComponent
 	//action to motion map
 	std::unordered_map<std::string, FightMotion> actionToMotions;
 
+	bool isFacingRight;
+
 public:
-	FighterComponent(const std::string& fighterId = "")
+	FighterComponent(const std::string& fighterId = "", bool isFacingRight = true)
 	{
 		this->fighterId = fighterId;
 		this->currentActionFrame = 0;
 		this->currentActionFrameCount = 0;
 		this->currentActionVelocity = 0;
 		this->currentMotion = {};
+		this->isFacingRight = isFacingRight;
 		currentState = FighterState::IDLE;
 	}
 
 	//how do we change our motion? what is the driving mechanis that changes our actions that we are doing
 	//Well two things, input, other events from other actions
-	bool TryChangeMotion(const std::string& newAction)
+	bool TryChangeMotion(InputAction& newAction)
 	{
 
-		if (actionToMotions.find(newAction) == actionToMotions.end())
+		std::string& newActionName = newAction.inputActionName;
+		//Convert the MOVEY to MOVE_BCK or MOVE_FRWRD 
+		if (newActionName == "MOVEY")
+		{
+			// we want to move left
+			if (newAction.scale > 0)
+			{
+				//move back
+				if (isFacingRight)
+				{
+
+					newActionName = "MOVE_BCK";
+				}
+				else
+				{
+					newActionName = "MOVE_FRWRD";
+				}
+			}
+			//want to move right
+			else
+			{
+				//move forward
+				if (isFacingRight)
+				{
+					newActionName = "MOVE_FRWRD";
+				}
+				else
+				{
+					newActionName = "MOVE_BCK";
+				}
+			}
+		}
+
+		if (actionToMotions.find(newActionName) == actionToMotions.end())
 		{
 			return false;
 		}
 
 
-		const FightMotion& newMotion = actionToMotions.at(newAction);
+		const FightMotion& newMotion = actionToMotions.at(newActionName);
 		if (currentMotion.motionId == newMotion.motionId && currentActionFrame < currentActionFrameCount)
 		{
 			return false;

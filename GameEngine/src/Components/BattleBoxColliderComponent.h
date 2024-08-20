@@ -6,10 +6,12 @@
 struct BattleBoxColliderComponent {
 
 	std::vector<BoxColliderComponent> boxes;
+	bool isFacingRight;
 
-	BattleBoxColliderComponent(std::vector<BoxColliderComponent> boxes = {})
+	BattleBoxColliderComponent(std::vector<BoxColliderComponent> boxes = {}, bool isFacingRight = true)
 	{
 		this->boxes = boxes;
+		this->isFacingRight = isFacingRight;
 	}
 
 	void AddHitBox(int width = 0, int height = 0, glm::vec2 scale = glm::vec2(1, 1), glm::vec2 offset = glm::vec2(0))
@@ -30,16 +32,14 @@ struct BattleBoxColliderComponent {
 	void InsertNewBoxes(std::vector<BoxColliderComponent> newBoxes)
 	{
 		ClearBoxes();
-		boxes.insert(boxes.end(), newBoxes.begin(), newBoxes.end());
+		this->boxes.insert(boxes.end(), newBoxes.begin(), newBoxes.end());
 	}
 
 	void ClearBoxes()
 	{
-		boxes.clear();
+		this->boxes.clear();
 
 	}
-
-
 
 
 };

@@ -24,11 +24,11 @@ public:
 		{
 			const TransformComponent& transform = entity.GetComponent<TransformComponent>();
 			const BattleBoxColliderComponent& boxCollider = entity.GetComponent<BattleBoxColliderComponent>();
-
+			int isFacingRight = boxCollider.isFacingRight == true ? 1 : -1;
 			for (auto box = boxCollider.boxes.begin(); box != boxCollider.boxes.end(); box++)
 			{
 				SDL_Rect collisionRect = {
-					static_cast<int>(transform.position.x + box->offset.x - camera.x),
+					static_cast<int>(transform.position.x + (box->offset.x * isFacingRight) - camera.x),
 					static_cast<int>(transform.position.y + box->offset.y - camera.y),
 					static_cast<int>(box->width),
 					static_cast<int>(box->height)

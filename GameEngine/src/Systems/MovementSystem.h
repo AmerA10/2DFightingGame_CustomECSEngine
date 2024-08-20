@@ -7,6 +7,7 @@
 #include "../Components/TransformComponent.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
+#include "../Components/FighterComponent.h"
 #include "../Events/CollisionEvent.h"
 #include "../EventBus/EventBus.h"
 #include <memory>
@@ -18,6 +19,7 @@ public:
 		//We need to grab entities that the system is interested in
 		RequireComponent<TransformComponent>();
 		RequireComponent<RigidBodyComponent>();
+		RequireComponent<FighterComponent>();
 		//
 
 	}
@@ -33,10 +35,11 @@ public:
 			
 			TransformComponent& transform = entity.GetComponent<TransformComponent>();
 			const RigidBodyComponent& rigidBody = entity.GetComponent <RigidBodyComponent>();
+			const FighterComponent& fighter = entity.GetComponent<FighterComponent>();
 			
 			//Need delta time
-			transform.position.x += rigidBody.velocity.x * deltaTime;
-			transform.position.y += rigidBody.velocity.y * deltaTime;
+			transform.position.x += fighter.currentActionVelocity * deltaTime;
+			
 
 			bool isEntityOutSideMap =	transform.position.x < 0 ||
 										transform.position.x > Game::mapWidth ||

@@ -284,7 +284,7 @@ void Game::Update()
 	//Update the registry to process the entities that are waiting to be created/deleted
 	registry->Update();
 
-	registry->GetSystem<FighterSystem>().Update();
+	registry->GetSystem<FighterSystem>().Update(assetStore);
 	registry->GetSystem<CollisionSystem>().Update(eventBus);
 	registry->GetSystem<BattleCollisionSystem>().Update(eventBus);
 	registry->GetSystem<MovementSystem>().Update(registry, deltaTime);
