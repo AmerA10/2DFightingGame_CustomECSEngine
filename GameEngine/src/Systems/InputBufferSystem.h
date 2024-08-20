@@ -55,7 +55,7 @@ public:
 			return;
 		}
 		keys.push_back(keycode);
-		Logger::Log("Adding key: " + std::to_string(keycode));
+		//Logger::Log("Adding key: " + std::to_string(keycode));
 	}
 	void RemoveKey(SDL_Keycode& keycode)
 	{
@@ -65,7 +65,7 @@ public:
 		{
 			return;
 		}
-		Logger::Log("Removing key: " + std::to_string(keycode));
+		//Logger::Log("Removing key: " + std::to_string(keycode));
 		keys.erase(it);
 	}
 
@@ -76,8 +76,6 @@ public:
 		
 			InputBufferReceiverComponent& inputComp = entity.GetComponent<InputBufferReceiverComponent>();
 			inputComp.SetupInputMap(assetStore->GetInputMap(inputComp.inputMapId));
-
-
 		
 		}
 	}

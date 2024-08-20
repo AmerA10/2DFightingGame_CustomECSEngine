@@ -27,8 +27,9 @@ public:
 			int isFacingRight = boxCollider.isFacingRight == true ? 1 : -1;
 			for (auto box = boxCollider.boxes.begin(); box != boxCollider.boxes.end(); box++)
 			{
+				int flipOffset = isFacingRight == true ? 0 : box->width;
 				SDL_Rect collisionRect = {
-					static_cast<int>(transform.position.x + (box->offset.x * isFacingRight) - camera.x),
+					static_cast<int>((transform.position.x + ((flipOffset + box->offset.x) * isFacingRight))  - camera.x),
 					static_cast<int>(transform.position.y + box->offset.y - camera.y),
 					static_cast<int>(box->width),
 					static_cast<int>(box->height)
@@ -48,11 +49,18 @@ public:
 					SDL_SetRenderDrawColor(renderer, 200, 200, 200, 1);
 
 				}
-				else {
-
-				}
 
 				SDL_RenderDrawRect(renderer, &collisionRect);
+
+				SDL_SetRenderDrawColor(renderer, 250, 250, 250, 1);
+				
+				SDL_Rect center = {
+						static_cast<int>(transform.position.x - camera.x),
+						static_cast<int>(transform.position.y - camera.y),
+						20,
+						20 
+				};
+				SDL_RenderDrawRect(renderer, &center);
 			}
 
 

@@ -67,14 +67,18 @@ public:
 			SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();
 
 			//Set the source rectangle of our original sprite texture
+			int dstRectX = static_cast<int>(transform.position.x - (sprite.isFixed ? 0 : camera.x));
 
+			if (sprite.flip == SDL_FLIP_HORIZONTAL)
+			{
+				dstRectX -= static_cast<int>(sprite.width * transform.scale.x);
+			}
 			SDL_Rect srcRect = sprite.srcRect;
 			SDL_Rect dstRect = { 
-				static_cast<int>(transform.position.x - (sprite.isFixed ? 0 : camera.x)),
+				dstRectX,
 				static_cast<int>(transform.position.y - (sprite.isFixed ? 0 : camera.y)),
 				static_cast<int>(sprite.width * transform.scale.x),
 				static_cast<int>(sprite.height * transform.scale.y)};
-
 			
 			//Draw the png texture based on sprite ID
 			//SDL_RenderCopy(renderer, assetStore->GetTexture(sprite.assetId), &srcRect, &dstRect);

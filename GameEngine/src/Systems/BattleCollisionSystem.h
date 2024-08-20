@@ -41,7 +41,6 @@ public:
 			collidersAToCheck = entityA.GetComponent<BattleBoxColliderComponent>().boxes;
 			const TransformComponent& transA = entityA.GetComponent<TransformComponent>();
 			int isAFacingRight = entityA.GetComponent<BattleBoxColliderComponent>().isFacingRight == true? 1 : -1;
-
 			//Make sure we start where i starts otherwise we collide few times too many
 			for (auto j = i; j != entities.end(); j++) {
 
@@ -58,13 +57,17 @@ public:
 				int isBFacingRight = entityB.GetComponent<BattleBoxColliderComponent>().isFacingRight == true? 1: -1;
 				for (auto boxA = collidersAToCheck.begin(); boxA != collidersAToCheck.end(); boxA++)
 				{
+					int flipOffsetA = isAFacingRight == true ? 0 : boxA->width;
+
 					for (auto boxB = collidersBToCheck.begin(); boxB != collidersBToCheck.end(); boxB++)
 					{
 						if ((boxA->layer & boxB->mask).any() == false)
 						{
 							continue;
 						}
-						bool didCollision = checkAABBCollision(transA.position.x + (boxA->offset.x * isAFacingRight), transA.position.y + boxA->offset.y, boxA->width, boxA->height, transB.position.x + (boxB->offset.x * isBFacingRight), transB.position.y + boxB->offset.y, boxB->width, boxB->height);
+						int flipOffsetB = isBFacingRight == true ? 0 : boxB->width;
+
+						bool didCollision = checkAABBCollision(transA.position.x + ((flipOffsetA + boxA->offset.x) * isAFacingRight), transA.position.y + boxA->offset.y, boxA->width, boxA->height, transB.position.x + ((flipOffsetB + boxB->offset.x) * isBFacingRight), transB.position.y + boxB->offset.y, boxB->width, boxB->height);
 
 						if (didCollision)
 						{
@@ -73,7 +76,7 @@ public:
 
 							//Emmit an event 
 							eventBus->EmitEvent<BattleCollisionEvent>(entityA, entityB, *boxA,*boxB);
-
+							Logger::Log("Battle collision");
 
 						}
 					}
